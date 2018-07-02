@@ -4,9 +4,9 @@ ext {
             compileSdkVersion: 27,
             buildToolsVersion: "27.0.0",
             minSdkVersion    : 19,
-            targetSdkVersion : 26,
-            versionCode      : 210,
-            versionName      : "2.1"
+            targetSdkVersion : 27,
+            versionCode      : 1,
+            versionName      : "1.0"
     ]
 
     dependVersion = [
@@ -17,9 +17,8 @@ ext {
             rxAndroid               : "2.0.1"
     ]
     url = [
-//            "debug"  : "http://modiwu.com/app1/",
-"debug"  : "https://app.modiwu.com/",
-"release": "https://app.modiwu.com/",
+            "debug"  : "https://app.modiwu.com/",
+            "release": "https://app.modiwu.com/",
     ]
     supportDeps = [
             //--------  support  -------
@@ -29,7 +28,8 @@ ext {
             design     : "com.android.support:design:$dependVersion.androidSupportSdkVersion",
             annotations: "com.android.support:support-annotations:$dependVersion.androidSupportSdkVersion",
             constraint : "com.android.support.constraint:constraint-layout:1.0.2",
-            palette    : "com.android.support:palette-v7:$dependVersion.androidSupportSdkVersion"
+            palette    : "com.android.support:palette-v7:$dependVersion.androidSupportSdkVersion",
+            multidex   : "com.android.support:multidex:1.0.2"
     ]
 
 
@@ -61,6 +61,7 @@ ext {
     smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     //特殊头部，看情况添加
     smartrefresh_heard = 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
+    //本地数据库
     greendao = 'org.greenrobot:greendao:3.2.2'
     //自定义Toast
     toasty = 'com.github.GrenderG:Toasty:1.1.4'
@@ -76,7 +77,9 @@ ext {
     qcode = 'cn.yipianfengye.android:zxing-library:2.1'
     //多边形图+图片滤镜
     polygon = 'com.kingja.magicmirror:magicmirror:1.2.0'
+    //仿微信滑动返回
     swipebacklayout = 'cn.bingoogolapple:bga-swipebacklayout:1.1.8@aar'
+
     glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
     glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
     glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$dependVersion.glideSdkVersion"
