@@ -26,7 +26,6 @@ public class BackgroundService extends Service {
         Observable.interval(100, TimeUnit.MILLISECONDS).subscribe(LogUtil::e);
         super.onCreate();
     }
-
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
