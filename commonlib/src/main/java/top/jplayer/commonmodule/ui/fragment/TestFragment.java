@@ -1,10 +1,11 @@
-package top.jplayer.baseprolibrary.ui.Fragment;
+package top.jplayer.commonmodule.ui.fragment;
 
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
 import top.jplayer.baseprolibrary.R;
+import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 
 import static top.jplayer.baseprolibrary.utils.StringUtils.getRandColorCode;

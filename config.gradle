@@ -20,6 +20,10 @@ ext {
             "debug"  : "https://app.modiwu.com/",
             "release": "https://app.modiwu.com/",
     ]
+    key_rong = [
+            "debug"  : "x18ywvqfxndcc",
+            "release": "x18ywvqfxndcc"
+    ]
     supportDeps = [
             //--------  support  -------
             supportv4  : "com.android.support:support-v4:$dependVersion.androidSupportSdkVersion",
