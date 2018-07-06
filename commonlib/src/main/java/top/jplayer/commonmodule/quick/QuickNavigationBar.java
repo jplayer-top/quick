@@ -56,6 +56,10 @@ public class QuickNavigationBar {
     }
 
     public void create(NavigationTabBar bar) {
+        if (this.rootId == 0 || this.dataList == null) {
+            // ex : quickNavigationBar.dataList(xxx).idRes(xxx).create(xxx);
+            throw new RuntimeException("你需要设置根布局或底部栏数据");
+        }
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         for (int i = 0; i < dataList.size(); i++) {
             models.add(new NavigationTabBar.Model.Builder(

@@ -32,7 +32,7 @@ public class BaseInitApplication {
     private static BaseInitApplication mInit;
     public static WeakReference<Application> mWeakReference;
     public static Map<String, String> mUrlMap;
-    public static final String urlHeardHost = "url_heard_host";
+    public static final String urlHeardHost = "url_header_host";
     public static final Long TIME_OUT = 30L;
     public static List<Activity> sActivityList;
 
@@ -87,25 +87,31 @@ public class BaseInitApplication {
      * 初始化retrofit
      */
     public BaseInitApplication retrofit() {
-        RetrofitManager.init().client(mWeakReference.get()).build(BuildConfig.HOST);
+        retrofit(BuildConfig.HOST);
         return this;
     }
 
-    /**
-     * 初始化retrofit
-     */
-    public BaseInitApplication zxing() {
-        ZXingLibrary.initDisplayOpinion(getContext());
+    public BaseInitApplication retrofit(String urlDefHost) {
+        RetrofitManager.init().client(mWeakReference.get()).build(urlDefHost);
         return this;
     }
 
     public BaseInitApplication retrofit(Interceptor... interceptors) {
+        retrofit(BuildConfig.HOST, interceptors);
+        return this;
+    }
+
+
+    public BaseInitApplication retrofit(String urlDefHost, Interceptor... interceptors) {
         RetrofitManager.init().client(mWeakReference.get(), Arrays.asList(interceptors)).build(BuildConfig.HOST);
         return this;
     }
 
+
     /**
      * 添加单个url
+     * key :设置的Header 值，value 设定的需要修改的 host
+     * 使用：在注解上添加 @Header("url_heard_host:key")
      */
     public BaseInitApplication addUrl(String key, String value) {
         mUrlMap.put(key, value);
@@ -117,6 +123,14 @@ public class BaseInitApplication {
      */
     public BaseInitApplication urlMap(Map<String, String> map) {
         mUrlMap.putAll(map);
+        return this;
+    }
+
+    /**
+     * 初始化zxing
+     */
+    public BaseInitApplication zxing() {
+        ZXingLibrary.initDisplayOpinion(getContext());
         return this;
     }
 

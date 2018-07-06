@@ -23,7 +23,7 @@
             android:contentDescription="@string/app_name"
             android:foreground="?attr/controlBackground"
             android:scaleType="center"
-            android:src="@drawable/go_back"
+            android:src="@drawable/back"
             android:visibility="gone"
             tools:ignore="PrivateResource"/>
 

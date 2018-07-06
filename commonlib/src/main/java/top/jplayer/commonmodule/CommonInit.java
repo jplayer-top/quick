@@ -14,6 +14,7 @@ import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
  * top.jplayer.commonmodule
  * call me : jplayer_top@163.com
  * github : https://github.com/oblivion0001
+ * 自主扩展 BaseInitApplication 以外的功能，如初始化融云，地图的等等
  */
 
 public class CommonInit {
@@ -40,8 +41,11 @@ public class CommonInit {
         return mInit;
     }
 
-    public CommonInit init() {
-        BaseInitApplication.with(mWeakReference.get()).retrofit().zxing().swipeBack();
-        return mInit;
+    public void init() {
+        BaseInitApplication.with(mWeakReference.get())
+                .addUrl("test_json", "http://www.wanandroid.com/")
+                .retrofit()
+                .zxing()
+                .swipeBack();
     }
 }
