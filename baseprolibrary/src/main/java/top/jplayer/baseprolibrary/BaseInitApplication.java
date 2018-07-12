@@ -19,7 +19,7 @@ import java.util.Map;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import okhttp3.Interceptor;
 import top.jplayer.baseprolibrary.listener.SampleApplicationLifecycleCallbacks;
-import top.jplayer.baseprolibrary.net.RetrofitManager;
+import top.jplayer.baseprolibrary.net.retrofit.RetrofitManager;
 
 /**
  * Created by Obl on 2018/1/9.

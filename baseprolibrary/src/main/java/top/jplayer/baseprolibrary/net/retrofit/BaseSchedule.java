@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.net;
+package top.jplayer.baseprolibrary.net.retrofit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;

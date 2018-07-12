@@ -9,9 +9,9 @@ import android.text.TextUtils;
 
 public class BaseBean {
     private static final String SUCCESS_CODE = "000";
+    private static final String NO_LOGIN_CODE = "401";
     public String code;
     public String msg;
-    public String kfuid;
 
     public String getCode() {
         return code;
@@ -19,5 +19,9 @@ public class BaseBean {
 
     public boolean isSuccess() {
         return TextUtils.equals(getCode(), SUCCESS_CODE);
+    }
+
+    public boolean isNoLogin() {
+        return TextUtils.equals(getCode(), NO_LOGIN_CODE);
     }
 }

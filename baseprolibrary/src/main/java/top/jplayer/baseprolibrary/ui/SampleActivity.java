@@ -1,17 +1,14 @@
 package top.jplayer.baseprolibrary.ui;
 
-import android.graphics.Color;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,7 +28,7 @@ import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.mvp.contract.SampleContract;
 import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
 import top.jplayer.baseprolibrary.mvp.presenter.SamplePresenter;
-import top.jplayer.baseprolibrary.net.IoMainSchedule;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.ui.adapter.SampleAdapter;
 import top.jplayer.baseprolibrary.utils.DateUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;

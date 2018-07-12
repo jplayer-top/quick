@@ -8,9 +8,9 @@ import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.mvp.model.bean.GradBean;
 import top.jplayer.baseprolibrary.mvp.model.bean.LoginBean;
 import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
-import top.jplayer.baseprolibrary.net.ApiService;
-import top.jplayer.baseprolibrary.net.IoMainSchedule;
-import top.jplayer.baseprolibrary.net.RetrofitManager;
+import top.jplayer.baseprolibrary.net.retrofit.ApiService;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
+import top.jplayer.baseprolibrary.net.retrofit.RetrofitManager;
 
 /**
  * Created by Obl on 2018/1/13.

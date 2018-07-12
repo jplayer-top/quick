@@ -1,10 +1,12 @@
 package top.jplayer.quick_test.mvp.presenter;
 
-import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.net.progress.PostProgressImpl;
+import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.construct.HomeConstruct;
 import top.jplayer.quick_test.mvp.model.HomeModel;
+import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 
 /**
  * Created by Obl on 2018/7/6.
@@ -24,7 +26,19 @@ public class HomePresenter extends BasePresenter<top.jplayer.quick_test.ui.fragm
 
     @Override
     public void requestHome() {
-        Disposable subscribe = mHomeModel.requestHome().subscribe();
-        addSubscription(subscribe);
+        NetCallBackObserver<HomeBean> observer = new NetCallBackObserver<HomeBean>(new
+                PostProgressImpl(mIView.getContext())) {
+            @Override
+            public void responseFail(HomeBean bean) {
+
+            }
+
+            @Override
+            public void responseSuccess(HomeBean bean) {
+
+            }
+        };
+        mHomeModel.requestHome().subscribe(observer);
+        addSubscription(observer.getDisposable());
     }
 }

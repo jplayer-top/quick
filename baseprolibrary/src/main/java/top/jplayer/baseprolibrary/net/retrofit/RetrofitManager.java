@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.net;
+package top.jplayer.baseprolibrary.net.retrofit;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

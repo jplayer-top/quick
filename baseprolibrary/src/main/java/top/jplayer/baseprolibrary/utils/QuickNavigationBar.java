@@ -1,4 +1,4 @@
-package top.jplayer.commonmodule.quick;
+package top.jplayer.baseprolibrary.utils;
 
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;

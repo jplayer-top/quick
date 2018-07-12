@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.net;
+package top.jplayer.baseprolibrary.net.retrofit;
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;

@@ -2,7 +2,7 @@ package top.jplayer.quick_test.mvp.model;
 
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
-import top.jplayer.baseprolibrary.net.IoMainSchedule;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 

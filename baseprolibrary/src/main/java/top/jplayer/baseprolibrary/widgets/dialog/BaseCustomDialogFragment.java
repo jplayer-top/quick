@@ -78,7 +78,7 @@ public abstract class BaseCustomDialogFragment extends DialogFragment {
         return 0.5f;
     }
 
-    private int setWidth() {
+    public int setWidth() {
         return ViewGroup.LayoutParams.MATCH_PARENT;
     }
 

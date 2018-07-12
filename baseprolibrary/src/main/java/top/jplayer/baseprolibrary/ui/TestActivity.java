@@ -1,4 +1,4 @@
-package top.jplayer.commonmodule.ui.activity;
+package top.jplayer.baseprolibrary.ui;
 
 import android.animation.Animator;
 import android.os.Build;
@@ -6,8 +6,6 @@ import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
-
-import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
 
 /**
  * Created by Obl on 2018/1/18.

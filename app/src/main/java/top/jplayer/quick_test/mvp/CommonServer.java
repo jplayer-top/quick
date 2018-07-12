@@ -3,6 +3,7 @@ package top.jplayer.quick_test.mvp;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 
 /**
@@ -13,8 +14,9 @@ import top.jplayer.quick_test.mvp.model.bean.HomeBean;
  */
 
 public interface CommonServer {
+    String TEST_JSON = BaseInitApplication.urlHeardHost + ":test_json";
 
-    @Headers("url_header_host:test_json")
+    @Headers(TEST_JSON)
     @GET("tools/mockapi/2247/home")
     Observable<HomeBean> home();
 }

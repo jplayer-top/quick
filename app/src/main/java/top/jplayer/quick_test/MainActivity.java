@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import devlight.io.library.ntb.NavigationTabBar;
+import top.jplayer.baseprolibrary.ui.Fragment.TestFragment;
 import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
-import top.jplayer.commonmodule.quick.QuickNavigationBar;
-import top.jplayer.commonmodule.ui.fragment.TestFragment;
+import top.jplayer.baseprolibrary.utils.QuickNavigationBar;
 import top.jplayer.quick_test.ui.fragment.HomeFragment;
 
 public class MainActivity extends SuperBaseActivity {

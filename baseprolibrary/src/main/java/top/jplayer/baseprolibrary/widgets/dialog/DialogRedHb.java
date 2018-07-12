@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.R;
-import top.jplayer.baseprolibrary.net.IoMainSchedule;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 
 
 /**

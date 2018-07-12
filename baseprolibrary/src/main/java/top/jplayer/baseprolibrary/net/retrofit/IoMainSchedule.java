@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.net;
+package top.jplayer.baseprolibrary.net.retrofit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
