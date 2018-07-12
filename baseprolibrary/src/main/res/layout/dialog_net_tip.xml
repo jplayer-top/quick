@@ -6,8 +6,8 @@
               android:gravity="center"
               android:orientation="vertical"
               android:paddingBottom="18dp"
-              android:paddingLeft="6dp"
-              android:paddingRight="6dp"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp"
               android:paddingTop="18dp">
 
 

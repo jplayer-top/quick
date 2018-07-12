@@ -1,12 +1,13 @@
 package top.jplayer.quick_test.mvp.presenter;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
-import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
+import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.construct.HomeConstruct;
 import top.jplayer.quick_test.mvp.model.HomeModel;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
+import top.jplayer.quick_test.ui.fragment.HomeFragment;
 
 /**
  * Created by Obl on 2018/7/6.
@@ -15,11 +16,11 @@ import top.jplayer.quick_test.mvp.model.bean.HomeBean;
  * github : https://github.com/oblivion0001
  */
 
-public class HomePresenter extends BasePresenter<top.jplayer.quick_test.ui.fragment.HomeFragment> implements HomeConstruct.HomeIPresenter {
+public class HomePresenter extends BasePresenter<HomeFragment> implements HomeConstruct.HomeIPresenter {
 
     private final HomeModel mHomeModel;
 
-    public HomePresenter(top.jplayer.quick_test.ui.fragment.HomeFragment iView) {
+    public HomePresenter(HomeFragment iView) {
         super(iView);
         mHomeModel = new HomeModel(CommonServer.class);
     }
@@ -27,15 +28,14 @@ public class HomePresenter extends BasePresenter<top.jplayer.quick_test.ui.fragm
     @Override
     public void requestHome() {
         NetCallBackObserver<HomeBean> observer = new NetCallBackObserver<HomeBean>(new
-                PostImplTip(mIView.getContext())) {
+                GetImplTip(mIView.getContext())) {
             @Override
             public void responseFail(HomeBean bean) {
-
             }
 
             @Override
             public void responseSuccess(HomeBean bean) {
-
+                mIView.responseHome(bean);
             }
         };
         mHomeModel.requestHome().subscribe(observer);

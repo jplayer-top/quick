@@ -23,6 +23,7 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
 
     private VirtualLayoutManager mManager;
     private DelegateAdapter mDelegateAdapter;
+    private HomePresenter mPresenter;
 
     @Override
     protected void initData(View rootView) {
@@ -40,7 +41,8 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         pool.setMaxRecycledViews(0, 10);
         mRecyclerView.setRecycledViewPool(pool);
         mDelegateAdapter = new DelegateAdapter(mManager, true);
-        new HomePresenter(this).requestHome();
+        mPresenter = new HomePresenter(this);
+        mPresenter.requestHome();
     }
 
     @Override
@@ -52,6 +54,20 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
     @Override
     public int initLayout() {
         return R.layout.fragment_home;
+    }
+
+    @Override
+    public void refreshStart() {
+        super.refreshStart();
+        mPresenter.requestHome();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
     }
 
     @Override
