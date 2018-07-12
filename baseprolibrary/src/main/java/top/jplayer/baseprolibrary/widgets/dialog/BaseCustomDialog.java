@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -55,6 +56,7 @@ public abstract class BaseCustomDialog extends AlertDialog {
         lp.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         lp.dimAmount = setAlpha();
         lp.width = setWidth(7);
+        lp.height = setHeight();
         window.setGravity(setGravity());
         window.setWindowAnimations(setAnim());
         window.setAttributes(lp);
@@ -77,6 +79,10 @@ public abstract class BaseCustomDialog extends AlertDialog {
 
     public int setWidth(int i) {
         return ScreenUtils.getScreenWidth() / 10 * i;
+    }
+
+    public int setHeight() {
+        return ViewGroup.LayoutParams.WRAP_CONTENT;
     }
 
     public void show(@IdRes int ids) {

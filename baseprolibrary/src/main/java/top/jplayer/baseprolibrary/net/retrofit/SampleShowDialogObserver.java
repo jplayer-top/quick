@@ -16,7 +16,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
-import top.jplayer.baseprolibrary.widgets.dialog.DialogLoading;
+import top.jplayer.baseprolibrary.net.progress.DialogLoading;
 
 /**
  * Created by Obl on 2018/1/17.

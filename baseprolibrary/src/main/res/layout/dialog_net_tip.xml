@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/aa_dialog_bg"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:paddingBottom="18dp"
+              android:paddingLeft="6dp"
+              android:paddingRight="6dp"
+              android:paddingTop="18dp">
+
+
+    <ImageView
+        android:id="@+id/ivTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:src="@drawable/dialog_error"/>
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="网络连接失败"
+        android:textColor="@color/red"
+        android:textSize="14sp"/>
+
+</LinearLayout>

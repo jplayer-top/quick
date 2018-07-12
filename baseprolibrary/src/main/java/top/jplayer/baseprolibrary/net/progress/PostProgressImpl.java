@@ -3,12 +3,8 @@ package top.jplayer.baseprolibrary.net.progress;
 import android.content.Context;
 
 import java.lang.ref.WeakReference;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
-import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
-import top.jplayer.baseprolibrary.widgets.dialog.DialogLoading;
+import top.jplayer.baseprolibrary.R;
 
 /**
  * Created by Obl on 2018/7/12.
@@ -20,8 +16,7 @@ import top.jplayer.baseprolibrary.widgets.dialog.DialogLoading;
 public class PostProgressImpl implements IProgress {
     private Context mContext;
     public DialogLoading mLoading;
-    private Date mDate;
-    private long mPreTime;
+
 
     public PostProgressImpl(Context cxt) {
         WeakReference<Context> weakReference = new WeakReference<>(cxt);
@@ -31,25 +26,13 @@ public class PostProgressImpl implements IProgress {
     @Override
     public void tipStart() {
         mLoading = new DialogLoading(mContext);
-        if (!mLoading.isShowing()) {
-            mDate = new Date();
-            mLoading.show();
-            mPreTime = mDate.getTime();
-        }
+        mLoading.show();
     }
 
     @Override
     public void tipEnd() {
-        if (mLoading != null && mLoading.isShowing()) {
-            long aftTime = mDate.getTime();
-            long l = aftTime - mPreTime;
-            Observable.timer(l < 1000 ? 1000 - l : 0, TimeUnit.MILLISECONDS)
-                    .compose(new IoMainSchedule<>())
-                    .subscribe(aLong -> {
-                        if (mLoading != null && mLoading.isShowing()) {
-                            mLoading.dismiss();
-                        }
-                    });
+        if (mLoading != null) {
+            mLoading.dismiss();
         }
     }
 
@@ -60,16 +43,24 @@ public class PostProgressImpl implements IProgress {
 
     @Override
     public void tipSuccess(String msg) {
-
+        new DialogNetTipShort(mContext)
+                .color(mContext.getResources().getColor(R.color.colorPrimary))
+                .text(msg)
+                .res(R.drawable.dialog_success)
+                .show();
     }
 
     @Override
     public void tipFail(String code, String msg) {
-
+        new DialogNetTipShort(mContext)
+                .color(mContext.getResources().getColor(R.color.tomato))
+                .text(msg)
+                .res(R.drawable.dialog_warn)
+                .show();
     }
 
     @Override
     public void tipError(Throwable t) {
-
+        new DialogNetTipShort(mContext).show();
     }
 }
