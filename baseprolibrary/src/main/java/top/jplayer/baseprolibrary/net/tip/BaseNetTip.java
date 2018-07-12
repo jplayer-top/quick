@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.net.progress;
+package top.jplayer.baseprolibrary.net.tip;
 
 import android.content.Context;
 
@@ -13,12 +13,11 @@ import top.jplayer.baseprolibrary.R;
  * github : https://github.com/oblivion0001
  */
 
-public class PostProgressImpl implements IProgress {
+public abstract class BaseNetTip implements INetTip {
     private Context mContext;
     public DialogLoading mLoading;
 
-
-    public PostProgressImpl(Context cxt) {
+    public BaseNetTip(Context cxt) {
         WeakReference<Context> weakReference = new WeakReference<>(cxt);
         this.mContext = weakReference.get();
     }
@@ -43,7 +42,7 @@ public class PostProgressImpl implements IProgress {
 
     @Override
     public void tipSuccess(String msg) {
-        new DialogNetTipShort(mContext)
+        new DialogShortNetTip(mContext)
                 .color(mContext.getResources().getColor(R.color.colorPrimary))
                 .text(msg)
                 .res(R.drawable.dialog_success)
@@ -52,7 +51,7 @@ public class PostProgressImpl implements IProgress {
 
     @Override
     public void tipFail(String code, String msg) {
-        new DialogNetTipShort(mContext)
+        new DialogShortNetTip(mContext)
                 .color(mContext.getResources().getColor(R.color.tomato))
                 .text(msg)
                 .res(R.drawable.dialog_warn)
@@ -61,6 +60,6 @@ public class PostProgressImpl implements IProgress {
 
     @Override
     public void tipError(Throwable t) {
-        new DialogNetTipShort(mContext).show();
+        new DialogShortNetTip(mContext).show();
     }
 }

@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.net.progress;
+package top.jplayer.baseprolibrary.net.tip;
 
 import android.content.Context;
 import android.support.annotation.ColorInt;
@@ -20,12 +20,12 @@ import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
  * github : https://github.com/oblivion0001
  */
 
-public class DialogNetTipShort extends BaseCustomDialog {
+public class DialogShortNetTip extends BaseCustomDialog {
 
     private TextView mTvTip;
     private ImageView mIvTip;
 
-    public DialogNetTipShort(Context context) {
+    public DialogShortNetTip(Context context) {
         super(context);
     }
 
@@ -35,17 +35,17 @@ public class DialogNetTipShort extends BaseCustomDialog {
         mIvTip = view.findViewById(R.id.ivTip);
     }
 
-    public DialogNetTipShort text(String msg) {
+    public DialogShortNetTip text(String msg) {
         mTvTip.setText(msg);
         return this;
     }
 
-    public DialogNetTipShort color(@ColorInt int color) {
+    public DialogShortNetTip color(@ColorInt int color) {
         mTvTip.setTextColor(color);
         return this;
     }
 
-    public DialogNetTipShort res(@DrawableRes int res) {
+    public DialogShortNetTip res(@DrawableRes int res) {
         mIvTip.setImageResource(res);
         return this;
     }

@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.net.progress;
+package top.jplayer.baseprolibrary.net.tip;
 
 import android.content.Context;
 import android.view.View;

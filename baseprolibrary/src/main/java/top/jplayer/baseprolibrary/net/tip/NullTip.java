@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.net.progress;
+package top.jplayer.baseprolibrary.net.tip;
 
 /**
  * Created by Obl on 2018/7/12.
@@ -7,7 +7,7 @@ package top.jplayer.baseprolibrary.net.progress;
  * github : https://github.com/oblivion0001
  */
 
-public class NullProgressImpl implements IProgress {
+public class NullTip implements INetTip {
     @Override
     public void tipStart() {
 

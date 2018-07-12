@@ -1,7 +1,7 @@
 package top.jplayer.quick_test.mvp.presenter;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
-import top.jplayer.baseprolibrary.net.progress.PostProgressImpl;
+import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.construct.HomeConstruct;
@@ -27,7 +27,7 @@ public class HomePresenter extends BasePresenter<top.jplayer.quick_test.ui.fragm
     @Override
     public void requestHome() {
         NetCallBackObserver<HomeBean> observer = new NetCallBackObserver<HomeBean>(new
-                PostProgressImpl(mIView.getContext())) {
+                PostImplTip(mIView.getContext())) {
             @Override
             public void responseFail(HomeBean bean) {
 

@@ -1,10 +1,10 @@
-package top.jplayer.baseprolibrary.net.progress;
+package top.jplayer.baseprolibrary.net.tip;
 
 /**
  * Created by PEO on 2017/4/10.
  */
 
-public interface IProgress {
+public interface INetTip {
     void tipStart();
 
     void tipEnd();

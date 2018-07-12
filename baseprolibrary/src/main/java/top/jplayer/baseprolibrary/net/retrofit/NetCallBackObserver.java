@@ -3,8 +3,8 @@ package top.jplayer.baseprolibrary.net.retrofit;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
-import top.jplayer.baseprolibrary.net.progress.IProgress;
-import top.jplayer.baseprolibrary.net.progress.NullProgressImpl;
+import top.jplayer.baseprolibrary.net.tip.INetTip;
+import top.jplayer.baseprolibrary.net.tip.NullTip;
 
 /**
  * Created by Obl on 2018/7/12.
@@ -14,17 +14,17 @@ import top.jplayer.baseprolibrary.net.progress.NullProgressImpl;
  */
 
 public abstract class NetCallBackObserver<T extends BaseBean> implements Observer<T> {
-    private IProgress mProgress;
+    private INetTip mProgress;
     private Disposable mDisposable;
 
     public Disposable getDisposable() {
         return mDisposable;
     }
 
-    public NetCallBackObserver(IProgress progress) {
+    public NetCallBackObserver(INetTip progress) {
         this.mProgress = progress;
         if (mProgress == null) {
-            mProgress = new NullProgressImpl();
+            mProgress = new NullTip();
         }
     }
 
@@ -43,6 +43,7 @@ public abstract class NetCallBackObserver<T extends BaseBean> implements Observe
 
     @Override
     public void onError(Throwable e) {
+        mProgress.tipEnd();
         if (e.getMessage().contains("401")) {
             errorLogin();
         } else {
