@@ -27,15 +27,22 @@ public class HomePresenter extends BasePresenter<HomeFragment> implements HomeCo
 
     @Override
     public void requestHome() {
+        mIView.showLoading();
         NetCallBackObserver<HomeBean> observer = new NetCallBackObserver<HomeBean>(new
                 GetImplTip(mIView.getContext())) {
             @Override
             public void responseFail(HomeBean bean) {
+                mIView.showError();
             }
 
             @Override
             public void responseSuccess(HomeBean bean) {
-                mIView.responseHome(bean);
+                if (bean.response == null) {
+                    mIView.showEmpty();
+                } else {
+                    mIView.responseSuccess();
+                    mIView.responseHome(bean);
+                }
             }
         };
         mHomeModel.requestHome().subscribe(observer);

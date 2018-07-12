@@ -4,11 +4,13 @@
     android:id="@+id/smartRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:srlEnableHeaderTranslationContent="false"
     app:srlEnablePreviewInEditMode="true"
     app:srlPrimaryColor="@color/white">
 
-    <com.scwang.smartrefresh.header.MaterialHeader
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"/>
 
     <top.jplayer.baseprolibrary.widgets.MultipleStatusView

@@ -83,9 +83,9 @@ public abstract class SuperBaseFragment extends Fragment implements IContract.IV
 
     }
 
+    public abstract int initLayout();
     protected abstract void initData(View rootView);
 
-    public abstract int initLayout();
 
     /**
      * 刷新+多状态

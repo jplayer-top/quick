@@ -5,12 +5,18 @@ import android.view.View;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.construct.HomeConstruct;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.presenter.HomePresenter;
+import top.jplayer.quick_test.ui.adapter.AdapterHomeBanner;
 
 /**
  * Created by Obl on 2018/7/5.
@@ -24,6 +30,11 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
     private VirtualLayoutManager mManager;
     private DelegateAdapter mDelegateAdapter;
     private HomePresenter mPresenter;
+
+    @Override
+    public int initLayout() {
+        return R.layout.fragment_home;
+    }
 
     @Override
     protected void initData(View rootView) {
@@ -51,10 +62,6 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         mImmersionBar.titleBar(R.id.toolbar).init();
     }
 
-    @Override
-    public int initLayout() {
-        return R.layout.fragment_home;
-    }
 
     @Override
     public void refreshStart() {
@@ -72,6 +79,23 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
 
     @Override
     public void responseHome(HomeBean bean) {
+        responseSuccess();
+        List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
+        /**
+         * banner 数据
+         *
+         */
+        List<String> banner = bean.response.banner;
 
+        if (banner != null && banner.size() > 0) {
+            AdapterHomeBanner heardLayoutAdapter = new AdapterHomeBanner(getContext(), new LinearLayoutHelper(), 1, HomeBean
+                    .BANNER);
+            heardLayoutAdapter.setBanner(banner);
+            adapters.add(heardLayoutAdapter);
+        }
+
+        mDelegateAdapter.clear();
+        mDelegateAdapter.setAdapters(adapters);
+        mRecyclerView.setAdapter(mDelegateAdapter);
     }
 }

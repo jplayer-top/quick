@@ -42,9 +42,10 @@ public abstract class VLayoutAdapter<VH extends RecyclerView.ViewHolder> extends
     }
 
     protected VH customCreateViewHolder(ViewGroup parent, int viewType) {
-        return (VH) new RecyclerView.ViewHolder(LayoutInflater.from(context).inflate(addHolderLayout(parent, viewType),
+        RecyclerView.ViewHolder holder = new RecyclerView.ViewHolder(LayoutInflater.from(context).inflate(addHolderLayout(parent, viewType),
                 parent, false)) {
         };
+        return (VH) holder;
     }
 
     protected abstract int addHolderLayout(ViewGroup parent, int viewType);

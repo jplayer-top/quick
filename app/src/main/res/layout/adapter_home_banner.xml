@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<cn.bingoogolapple.bgabanner.BGABanner
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bga="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bgaBanner"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    bga:banner_indicatorGravity="bottom"
+    bga:banner_pointAutoPlayAble="true"
+    bga:banner_pointContainerBackground="@color/trans"
+    bga:banner_pointDrawable="@drawable/selector_banner_point_bar"/>

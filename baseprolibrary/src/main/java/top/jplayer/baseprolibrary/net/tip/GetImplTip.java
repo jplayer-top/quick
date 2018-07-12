@@ -24,4 +24,8 @@ public class GetImplTip extends BaseNetTip {
     public void tipEnd() {
     }
 
+    @Override
+    public void tipSuccess(String msg) {
+
+    }
 }
