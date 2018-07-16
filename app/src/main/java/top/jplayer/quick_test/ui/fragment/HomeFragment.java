@@ -6,7 +6,6 @@ import android.view.View;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -41,6 +40,12 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         initRefreshStatusView(rootView);
         initImmersionBar();
         initVLayoutRecyclerView();
+
+    }
+
+    @Override
+    public void initRefreshStatusView(View view) {
+        super.initRefreshStatusView(view);
     }
 
     /**
@@ -54,6 +59,7 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         mDelegateAdapter = new DelegateAdapter(mManager, true);
         mPresenter = new HomePresenter(this);
         mPresenter.requestHome();
+        showLoading();
     }
 
     @Override
