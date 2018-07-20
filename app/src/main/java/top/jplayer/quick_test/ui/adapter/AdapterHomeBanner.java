@@ -52,9 +52,7 @@ public class AdapterHomeBanner extends VLayoutAdapter<RecyclerView.ViewHolder> {
     }
 
     public void setBanner(List<String> banner) {
-        {
-            mBanner = banner;
-        }
+        mBanner = banner;
     }
 
     @Override
