@@ -1,6 +1,7 @@
 package top.jplayer.quick_test.ui.fragment;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -16,6 +17,7 @@ import top.jplayer.quick_test.mvp.construct.HomeConstruct;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.presenter.HomePresenter;
 import top.jplayer.quick_test.ui.adapter.AdapterHomeBanner;
+import top.jplayer.quick_test.ui.adapter.AdapterHomeType;
 
 /**
  * Created by Obl on 2018/7/5.
@@ -40,6 +42,9 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         initRefreshStatusView(rootView);
         initImmersionBar();
         initVLayoutRecyclerView();
+        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.trans));
+        toolbar.setAlpha(0.5f);
 
     }
 
@@ -99,7 +104,13 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
             heardLayoutAdapter.setBanner(banner);
             adapters.add(heardLayoutAdapter);
         }
+        List<HomeBean.ResponseBean.TypeBean> typeBeans = bean.response.type;
+        if (typeBeans != null && typeBeans.size() > 0) {
+            AdapterHomeType adapterHomeType = new AdapterHomeType(getContext(), new LinearLayoutHelper(), 1, HomeBean.TYPE);
+            adapterHomeType.setBanner(typeBeans);
+            adapters.add(adapterHomeType);
 
+        }
         mDelegateAdapter.clear();
         mDelegateAdapter.setAdapters(adapters);
         mRecyclerView.setAdapter(mDelegateAdapter);

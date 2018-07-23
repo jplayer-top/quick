@@ -2,6 +2,7 @@ package top.jplayer.baseprolibrary.listener;
 
 import android.support.v7.widget.RecyclerView;
 
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SizeUtils;
 
 /**
@@ -9,16 +10,26 @@ import top.jplayer.baseprolibrary.utils.SizeUtils;
  * top.jplayer.baseprolibrary.listener
  * call me : jplayer_top@163.com
  * github : https://github.com/oblivion0001
+ * 滚动RecyclerView 实现ToolBar 渐变
  */
 
 public class ToolBarChangeScrollListener extends RecyclerView.OnScrollListener {
     private int mDistance;
     private int maxHeight;
+    private int percent = 1;
 
-    public ToolBarChangeScrollListener() {
+    public ToolBarChangeScrollListener(int percent) {
+        this.percent = percent;
+        init();
+    }
+
+    private void init() {
         mDistance = 0;
         maxHeight = SizeUtils.dp2px(100);
+    }
 
+    public ToolBarChangeScrollListener() {
+        init();
     }
 
     @Override
@@ -26,11 +37,12 @@ public class ToolBarChangeScrollListener extends RecyclerView.OnScrollListener {
         super.onScrolled(recyclerView, dx, dy);
         mDistance += dy;
         float percent = mDistance * 1f / maxHeight;//百分比
-        if (percent > 1) {
-            percent = 1;
+        if (percent > this.percent) {
+            percent = this.percent;
         }
         int alpha = (int) (percent * 255);
         changeMethod(alpha, percent);
+        LogUtil.e(percent);
     }
 
     public void changeMethod(int alpha, float percent) {

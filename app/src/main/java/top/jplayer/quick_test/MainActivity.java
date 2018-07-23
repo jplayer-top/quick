@@ -30,7 +30,6 @@ public class MainActivity extends SuperBaseActivity {
                 .create(navigationBar);
     }
 
-
     /**
      * 设置底部栏数据图片
      *
