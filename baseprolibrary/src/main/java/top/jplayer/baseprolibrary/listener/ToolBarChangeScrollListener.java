@@ -16,16 +16,16 @@ import top.jplayer.baseprolibrary.utils.SizeUtils;
 public class ToolBarChangeScrollListener extends RecyclerView.OnScrollListener {
     private int mDistance;
     private int maxHeight;
-    private int percent = 1;
+    private float percent = 1;
 
-    public ToolBarChangeScrollListener(int percent) {
+    public ToolBarChangeScrollListener(float percent) {
         this.percent = percent;
         init();
     }
 
     private void init() {
         mDistance = 0;
-        maxHeight = SizeUtils.dp2px(100);
+        maxHeight = SizeUtils.dp2px(50);
     }
 
     public ToolBarChangeScrollListener() {
@@ -41,11 +41,11 @@ public class ToolBarChangeScrollListener extends RecyclerView.OnScrollListener {
             percent = this.percent;
         }
         int alpha = (int) (percent * 255);
-        changeMethod(alpha, percent);
+        changeMethod(alpha, percent, maxHeight > mDistance);
         LogUtil.e(percent);
     }
 
-    public void changeMethod(int alpha, float percent) {
+    public void changeMethod(int alpha, float percent, boolean b) {
 //        tvBarTitle.setAlpha(percent);
 //        if (maxHeight > mDistance) {
 //            mToolbar.setBackgroundColor(Color.argb(alpha, 35, 159, 132));

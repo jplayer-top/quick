@@ -105,7 +105,7 @@ public abstract class SuperBaseFragment extends Fragment implements IContract.IV
 
     }
 
-    private void initRootRecyclerView() {
+    public void initRootRecyclerView() {
         if (mRecyclerView != null) {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         }

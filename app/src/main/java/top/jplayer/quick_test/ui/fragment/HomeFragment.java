@@ -1,22 +1,30 @@
 package top.jplayer.quick_test.ui.fragment;
 
+import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.RefreshState;
+import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import top.jplayer.baseprolibrary.listener.ToolBarChangeScrollListener;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.construct.HomeConstruct;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.presenter.HomePresenter;
 import top.jplayer.quick_test.ui.adapter.AdapterHomeBanner;
+import top.jplayer.quick_test.ui.adapter.AdapterHomeSingle;
 import top.jplayer.quick_test.ui.adapter.AdapterHomeType;
 
 /**
@@ -44,8 +52,21 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         initVLayoutRecyclerView();
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.trans));
-        toolbar.setAlpha(0.5f);
-
+        mRecyclerView.addOnScrollListener(new ToolBarChangeScrollListener(0.9f) {
+            @Override
+            public void changeMethod(int alpha, float percent, boolean b) {
+                super.changeMethod(alpha, percent, b);
+                toolbar.setAlpha(percent);
+                if (b)
+                    toolbar.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
+            }
+        });
+        mSmartRefreshLayout.setOnRefreshListener(new SimpleMultiPurposeListener(){
+            @Override
+            public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+                super.onStateChanged(refreshLayout, oldState, newState);
+            }
+        });
     }
 
     @Override
@@ -62,6 +83,7 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         pool.setMaxRecycledViews(0, 10);
         mRecyclerView.setRecycledViewPool(pool);
         mDelegateAdapter = new DelegateAdapter(mManager, true);
+        mRecyclerView.setLayoutManager(mManager);
         mPresenter = new HomePresenter(this);
         mPresenter.requestHome();
         showLoading();
@@ -104,12 +126,28 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
             heardLayoutAdapter.setBanner(banner);
             adapters.add(heardLayoutAdapter);
         }
+        /**
+         * 类型
+         *
+         */
         List<HomeBean.ResponseBean.TypeBean> typeBeans = bean.response.type;
         if (typeBeans != null && typeBeans.size() > 0) {
             AdapterHomeType adapterHomeType = new AdapterHomeType(getContext(), new LinearLayoutHelper(), 1, HomeBean.TYPE);
             adapterHomeType.setBanner(typeBeans);
             adapters.add(adapterHomeType);
+        }
 
+        /**
+         * 商品
+         *
+         */
+        List<HomeBean.ResponseBean.SingleBean> singleBeans = bean.response.single;
+        if (singleBeans != null && singleBeans.size() > 0) {
+            GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(2, singleBeans.size());
+            AdapterHomeSingle adapterHomeSingle = new AdapterHomeSingle(getContext(), gridLayoutHelper,
+                    singleBeans.size(), HomeBean.BODY_SINGLE);
+            adapterHomeSingle.setSingleBeans(singleBeans);
+            adapters.add(adapterHomeSingle);
         }
         mDelegateAdapter.clear();
         mDelegateAdapter.setAdapters(adapters);

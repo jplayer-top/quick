@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/llRoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="1dp">
+
+        <ImageView
+            android:id="@+id/ivSrc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder"/>
+
+        <TextView
+            android:id="@+id/tvTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="3dp"
+            android:lines="1"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"/>
+
+        <TextView
+            android:id="@+id/tvSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="3dp"
+            android:lines="1"
+            android:text="@string/app_name"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/sp_14"/>
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:lineSpacingExtra="3dp"
+            android:text="￥ 0.00"
+            android:textColor="@color/money_color"
+            android:textSize="@dimen/sp_14"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/whitesmoke"
+        app:layout_constraintEnd_toEndOf="@+id/llRoot"
+        app:layout_constraintStart_toStartOf="@+id/llRoot"
+        app:layout_constraintTop_toBottomOf="@+id/llRoot"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_gravity="end"
+        android:background="@color/whitesmoke"
+        app:layout_constraintBottom_toBottomOf="@+id/llRoot"
+        app:layout_constraintEnd_toEndOf="@+id/llRoot"
+        app:layout_constraintTop_toTopOf="@+id/llRoot"/>
+</android.support.constraint.ConstraintLayout>

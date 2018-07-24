@@ -30,8 +30,8 @@ public class AdapterHomeTypeItem extends BaseQuickAdapter<HomeBean.ResponseBean.
     protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
         BaseViewHolder baseViewHolder = super.onCreateDefViewHolder(parent, viewType);
         View ivSrc = baseViewHolder.itemView.findViewById(R.id.ivSrc);
-        ivSrc.getLayoutParams().width = ScreenUtils.getScreenWidth() / 4 ;
-        ivSrc.getLayoutParams().height = ScreenUtils.getScreenWidth() / 4 - ScreenUtils.dp2px(5);
+        ivSrc.getLayoutParams().width = ScreenUtils.getScreenWidth() / 5;
+        ivSrc.getLayoutParams().height = ScreenUtils.getScreenWidth() / 5 - ScreenUtils.dp2px(5);
         return baseViewHolder;
     }
 
