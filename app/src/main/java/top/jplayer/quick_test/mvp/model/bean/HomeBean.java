@@ -16,6 +16,7 @@ public class HomeBean extends BaseBean {
     public static final int BANNER = 0;
     public static final int BODY_SINGLE = 1;
     public static final int TYPE = 2;
+    public static final int BODY_FOOTER = 3;
     public String type;
 
     public HomeBean(String type) {

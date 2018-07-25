@@ -1,7 +1,5 @@
 package top.jplayer.quick_test.ui.fragment;
 
-import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,20 +8,17 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.RefreshState;
-import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import top.jplayer.baseprolibrary.listener.ToolBarChangeScrollListener;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.construct.HomeConstruct;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.presenter.HomePresenter;
 import top.jplayer.quick_test.ui.adapter.AdapterHomeBanner;
+import top.jplayer.quick_test.ui.adapter.AdapterHomeFooter;
 import top.jplayer.quick_test.ui.adapter.AdapterHomeSingle;
 import top.jplayer.quick_test.ui.adapter.AdapterHomeType;
 
@@ -51,27 +46,7 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         initImmersionBar();
         initVLayoutRecyclerView();
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.trans));
-        mRecyclerView.addOnScrollListener(new ToolBarChangeScrollListener(0.9f) {
-            @Override
-            public void changeMethod(int alpha, float percent, boolean b) {
-                super.changeMethod(alpha, percent, b);
-                toolbar.setAlpha(percent);
-                if (b)
-                    toolbar.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
-            }
-        });
-        mSmartRefreshLayout.setOnRefreshListener(new SimpleMultiPurposeListener(){
-            @Override
-            public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
-                super.onStateChanged(refreshLayout, oldState, newState);
-            }
-        });
-    }
-
-    @Override
-    public void initRefreshStatusView(View view) {
-        super.initRefreshStatusView(view);
+        toolbar.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -148,6 +123,17 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
                     singleBeans.size(), HomeBean.BODY_SINGLE);
             adapterHomeSingle.setSingleBeans(singleBeans);
             adapters.add(adapterHomeSingle);
+        }
+        /**
+         * footer
+         *
+         */
+        List<HomeBean.ResponseBean.FooterBean> footerBeans = bean.response.footer;
+        if (footerBeans != null && footerBeans.size() > 0) {
+            AdapterHomeFooter homeFooter = new AdapterHomeFooter(getContext(), new LinearLayoutHelper(), footerBeans
+                    .size(), HomeBean.BODY_FOOTER);
+            homeFooter.setSingleBeans(footerBeans);
+            adapters.add(homeFooter);
         }
         mDelegateAdapter.clear();
         mDelegateAdapter.setAdapters(adapters);
