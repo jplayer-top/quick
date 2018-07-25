@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.live.service;
+package top.jplayer.baseprolibrary.alive.service;
 
 import android.app.Notification;
 import android.app.Service;
@@ -26,6 +26,7 @@ public class WhiteService extends Service {
         super.onCreate();
     }
 
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.e("WhiteService->onStartCommand");
@@ -33,7 +34,7 @@ public class WhiteService extends Service {
         Intent activityIntent = new Intent(BuildConfig.APPLICATION_ID + ".main.live");
         Notification notification = notificationUtil.pendingIntent(activityIntent, "白色服务", "服务运行中...");
         startForeground(FOREGROUND_ID, notification);
-        return super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     @Override

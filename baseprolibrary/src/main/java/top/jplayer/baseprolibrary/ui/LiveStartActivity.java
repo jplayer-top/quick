@@ -1,14 +1,10 @@
 package top.jplayer.baseprolibrary.ui;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.view.View;
 
-import top.jplayer.baseprolibrary.BuildConfig;
 import top.jplayer.baseprolibrary.R;
-import top.jplayer.baseprolibrary.live.service.GrayService;
-import top.jplayer.baseprolibrary.live.service.WhiteService;
+import top.jplayer.baseprolibrary.alive.service.WhiteService;
 import top.jplayer.baseprolibrary.utils.NotificationUtil;
 
 /**
@@ -27,10 +23,9 @@ public class LiveStartActivity extends SuperBaseActivity implements View.OnClick
     @Override
     public void initRootData(View view) {
         view.findViewById(R.id.btn_white).setOnClickListener(this);
-        view.findViewById(R.id.btn_gray).setOnClickListener(this);
-        view.findViewById(R.id.btn_black).setOnClickListener(this);
         view.findViewById(R.id.btn_back).setOnClickListener(this);
         view.findViewById(R.id.btn_notice).setOnClickListener(this);
+        view.findViewById(R.id.btn_send_notice).setOnClickListener(this);
 
     }
 
@@ -46,22 +41,12 @@ public class LiveStartActivity extends SuperBaseActivity implements View.OnClick
         if (viewId == R.id.btn_white) { //系统正常的前台Service，白色保活手段
             Intent whiteIntent = new Intent(getApplicationContext(), WhiteService.class);
             startService(whiteIntent);
-
-        } else if (viewId == R.id.btn_gray) {//利用系统漏洞，灰色保活手段（API < 18 和 API >= 18 两种情况）
-            Intent grayIntent = new Intent(getApplicationContext(), GrayService.class);
-            startService(grayIntent);
-
-        } else if (viewId == R.id.btn_back) {//利用系统漏洞，灰色保活手段（API < 18 和 API >= 18 两种情况）
+        } else if (viewId == R.id.btn_back) {// 定制rom 手机 开启手机管家，用户手动保活
             NotificationUtil.intentBackGround();
-        } else if (viewId == R.id.btn_notice) {//利用系统漏洞，灰色保活手段（API < 18 和 API >= 18 两种情况）
+        } else if (viewId == R.id.btn_notice) {// 开启通知 管理
             NotificationUtil.intentNotice();
-        } else if (viewId == R.id.btn_black) { //拉帮结派，黑色保活手段，利用广播唤醒队友
-            Intent blackIntent = new Intent();
-            blackIntent.setAction(BuildConfig.APPLICATION_ID);
-            sendBroadcast(blackIntent);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            PendingIntent operation = PendingIntent.getBroadcast(this, 123, blackIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmManager.set(AlarmManager.RTC, System.currentTimeMillis(), operation);
+        } else if (viewId == R.id.btn_send_notice) {// 发送通知
+            new NotificationUtil(this).sendNotification("通知", "适配8.0手机通知发送", NotificationUtil.id2);
         }
     }
 
