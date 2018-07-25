@@ -2,30 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/whitesmoke"
               android:orientation="vertical">
+
+    <include layout="@layout/layout_common_toolbar"/>
 
     <Button
         android:id="@+id/btn_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
         android:text="白色保活"/>
 
     <Button
         android:id="@+id/btn_gray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
         android:text="灰色保活"/>
 
     <Button
         android:id="@+id/btn_black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
         android:text="黑色保活（发广播）"/>
 
     <Button
-        android:id="@+id/btn_background_service"
+        android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="普通后台 Service 进程"/>
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        android:text="常驻后台"/>
+
+    <Button
+        android:id="@+id/btn_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        android:text="通知管理"/>
 
 </LinearLayout>

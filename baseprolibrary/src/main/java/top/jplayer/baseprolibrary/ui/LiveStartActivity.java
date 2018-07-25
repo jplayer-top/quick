@@ -1,14 +1,15 @@
-package top.jplayer.baseprolibrary.live;
+package top.jplayer.baseprolibrary.ui;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.view.View;
 
 import top.jplayer.baseprolibrary.BuildConfig;
 import top.jplayer.baseprolibrary.R;
-import top.jplayer.baseprolibrary.live.service.BackgroundService;
 import top.jplayer.baseprolibrary.live.service.GrayService;
 import top.jplayer.baseprolibrary.live.service.WhiteService;
-import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
+import top.jplayer.baseprolibrary.utils.NotificationUtil;
 
 /**
  * Created by Obl on 2018/4/3.
@@ -28,9 +29,15 @@ public class LiveStartActivity extends SuperBaseActivity implements View.OnClick
         view.findViewById(R.id.btn_white).setOnClickListener(this);
         view.findViewById(R.id.btn_gray).setOnClickListener(this);
         view.findViewById(R.id.btn_black).setOnClickListener(this);
-        view.findViewById(R.id.btn_background_service).setOnClickListener(this);
+        view.findViewById(R.id.btn_back).setOnClickListener(this);
+        view.findViewById(R.id.btn_notice).setOnClickListener(this);
 
+    }
 
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.titleBar(R.id.toolbar).init();
     }
 
     @Override
@@ -44,19 +51,17 @@ public class LiveStartActivity extends SuperBaseActivity implements View.OnClick
             Intent grayIntent = new Intent(getApplicationContext(), GrayService.class);
             startService(grayIntent);
 
+        } else if (viewId == R.id.btn_back) {//利用系统漏洞，灰色保活手段（API < 18 和 API >= 18 两种情况）
+            NotificationUtil.intentBackGround();
+        } else if (viewId == R.id.btn_notice) {//利用系统漏洞，灰色保活手段（API < 18 和 API >= 18 两种情况）
+            NotificationUtil.intentNotice();
         } else if (viewId == R.id.btn_black) { //拉帮结派，黑色保活手段，利用广播唤醒队友
             Intent blackIntent = new Intent();
             blackIntent.setAction(BuildConfig.APPLICATION_ID);
             sendBroadcast(blackIntent);
-
-            /*AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             PendingIntent operation = PendingIntent.getBroadcast(this, 123, blackIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmManager.set(AlarmManager.RTC, System.currentTimeMillis(), operation);*/
-
-        } else if (viewId == R.id.btn_background_service) {//普通的后台进程
-            Intent bgIntent = new Intent(getApplicationContext(), BackgroundService.class);
-            startService(bgIntent);
-
+            alarmManager.set(AlarmManager.RTC, System.currentTimeMillis(), operation);
         }
     }
 

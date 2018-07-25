@@ -35,7 +35,7 @@ public class ContactCityAdapter extends BaseMultiItemQuickAdapter<ModelContactCi
                 holder.setText(R.id.city_tip, letter);
             }
         } else {
-            holder.setText(R.id.tv_contact_name, item.name).setVisible(R.id.iv, true);
+            holder.setText(R.id.tv_contact_name, item.name);
         }
     }
 

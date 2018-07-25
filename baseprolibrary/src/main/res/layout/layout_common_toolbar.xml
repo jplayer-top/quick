@@ -19,6 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginEnd="?actionBarSize"
+            android:layout_marginStart="?actionBarSize"
             android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
@@ -30,8 +32,8 @@
 
             <ImageView
                 android:id="@+id/ivToolLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
                 android:padding="@dimen/dp_20"
                 android:src="@drawable/back"
                 android:tint="@color/white"/>

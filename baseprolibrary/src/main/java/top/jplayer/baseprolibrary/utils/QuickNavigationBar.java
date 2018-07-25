@@ -40,6 +40,7 @@ public class QuickNavigationBar {
     private SuperBaseActivity activity;
     private @IdRes
     int rootId;
+    private int index = 0;
 
     public QuickNavigationBar(SuperBaseActivity activity) {
         this.activity = activity;
@@ -52,6 +53,11 @@ public class QuickNavigationBar {
 
     public QuickNavigationBar idRes(@IdRes int rootId) {
         this.rootId = rootId;
+        return this;
+    }
+
+    public QuickNavigationBar index(int index) {
+        this.index = index;
         return this;
     }
 
@@ -91,6 +97,6 @@ public class QuickNavigationBar {
                 transaction.commitAllowingStateLoss();
             }
         });
-        bar.setModelIndex(0, true);
+        bar.setModelIndex(index, true);
     }
 }

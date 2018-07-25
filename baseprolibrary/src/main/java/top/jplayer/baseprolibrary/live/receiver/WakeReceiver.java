@@ -1,23 +1,16 @@
 package top.jplayer.baseprolibrary.live.receiver;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.BuildConfig;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 
 public class WakeReceiver extends BroadcastReceiver {
 
-    private final static String TAG = WakeReceiver.class.getSimpleName();
-    private final static int WAKE_SERVICE_ID = -1111;
 
     /**
      * 灰色保活手段唤醒广播的action
@@ -49,19 +42,13 @@ public class WakeReceiver extends BroadcastReceiver {
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
             LogUtil.e("WakeNotifyService->onStartCommand");
-            if (Build.VERSION.SDK_INT < 18) {
-                startForeground(WAKE_SERVICE_ID, new Notification());//API < 18 ，此方法能有效隐藏Notification上的图标
-            } else {
-                Intent innerIntent = new Intent(this, WakeGrayInnerService.class);
-                startService(innerIntent);
-                startForeground(WAKE_SERVICE_ID, new Notification());
-            }
+            Intent innerIntent = new Intent(this, WakeGrayInnerService.class);
+            startService(innerIntent);
             return START_STICKY;
         }
 
         @Override
         public IBinder onBind(Intent intent) {
-            // TODO: Return the communication channel to the service.
             throw new UnsupportedOperationException("Not yet implemented");
         }
 
@@ -80,22 +67,18 @@ public class WakeReceiver extends BroadcastReceiver {
         @Override
         public void onCreate() {
             LogUtil.e("InnerService -> onCreate");
-            Observable.interval(100, TimeUnit.MILLISECONDS).subscribe(LogUtil::e);
             super.onCreate();
         }
 
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
             LogUtil.e("InnerService -> onStartCommand");
-            startForeground(WAKE_SERVICE_ID, new Notification());
-            //stopForeground(true);
             stopSelf();
             return super.onStartCommand(intent, flags, startId);
         }
 
         @Override
         public IBinder onBind(Intent intent) {
-            // TODO: Return the communication channel to the service.
             throw new UnsupportedOperationException("Not yet implemented");
         }
 

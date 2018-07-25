@@ -1,7 +1,6 @@
 package top.jplayer.quick_test.ui.fragment;
 
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -12,9 +11,9 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import java.util.LinkedList;
 import java.util.List;
 
+import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 import top.jplayer.quick_test.R;
-import top.jplayer.quick_test.mvp.construct.HomeConstruct;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.presenter.HomePresenter;
 import top.jplayer.quick_test.ui.adapter.AdapterHomeBanner;
@@ -29,7 +28,7 @@ import top.jplayer.quick_test.ui.adapter.AdapterHomeType;
  * github : https://github.com/oblivion0001
  */
 
-public class HomeFragment extends SuperBaseFragment implements HomeConstruct.HomeIView {
+public class HomeFragment extends SuperBaseFragment implements IContract.IView {
 
     private VirtualLayoutManager mManager;
     private DelegateAdapter mDelegateAdapter;
@@ -45,8 +44,7 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         initRefreshStatusView(rootView);
         initImmersionBar();
         initVLayoutRecyclerView();
-        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
-        toolbar.setVisibility(View.INVISIBLE);
+        rootView.findViewById(R.id.toolbar).setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -85,9 +83,7 @@ public class HomeFragment extends SuperBaseFragment implements HomeConstruct.Hom
         }
     }
 
-    @Override
     public void responseHome(HomeBean bean) {
-        responseSuccess();
         List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
         /**
          * banner 数据

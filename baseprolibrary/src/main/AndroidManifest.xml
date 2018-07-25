@@ -12,12 +12,6 @@
 
     <application>
         <activity
-            android:name=".ui.SampleActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
             android:name=".ui.ContactActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
@@ -29,7 +23,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".live.LiveStartActivity"
+            android:name=".ui.LiveStartActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>

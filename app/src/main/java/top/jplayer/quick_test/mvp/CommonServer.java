@@ -3,7 +3,9 @@ package top.jplayer.quick_test.mvp;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Query;
 import top.jplayer.baseprolibrary.BaseInitApplication;
+import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 
 /**
@@ -19,4 +21,8 @@ public interface CommonServer {
     @Headers(TEST_JSON)
     @GET("tools/mockapi/2247/home")
     Observable<HomeBean> home();
+
+    @Headers(TEST_JSON)
+    @GET("tools/mockapi/2247/func")
+    Observable<FuncBean> func(@Query("test") String test);
 }
