@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.widgets.dialog;
+package top.jplayer.baseprolibrary.ui.dialog;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +9,7 @@ import android.view.View;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
 import top.jplayer.baseprolibrary.ui.adapter.AdapterDialogCart;
+import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialogFragment;
 
 /**
  * Created by Obl on 2018/3/15.
@@ -40,6 +41,9 @@ public class DialogFragmentOrder extends BaseCustomDialogFragment {
     @Override
     public void initData(View view) {
         Bundle bundle = getArguments();
+        if (bundle == null) {
+            throw new RuntimeException("传递的数据 不能为空");
+        }
         CartBean cartBean = bundle.getParcelable("cart");
         if (cartBean != null) {
             AdapterDialogCart adapter = new AdapterDialogCart(R.layout.adapter_sample_02, cartBean.attrs);

@@ -8,7 +8,7 @@ import java.util.List;
 
 import devlight.io.library.ntb.NavigationTabBar;
 import top.jplayer.baseprolibrary.ui.Fragment.TestFragment;
-import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
+import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.QuickNavigationBar;
 import top.jplayer.quick_test.ui.fragment.FuncFragment;
 import top.jplayer.quick_test.ui.fragment.HomeFragment;

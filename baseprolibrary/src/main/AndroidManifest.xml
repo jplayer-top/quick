@@ -12,18 +12,13 @@
 
     <application>
         <activity
-            android:name=".ui.ContactActivity"
+            android:name=".ui.activity.ContactActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name=".ui.WebFullScreenActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".ui.LiveStartActivity"
+            android:name=".ui.activity.WebFullScreenActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>

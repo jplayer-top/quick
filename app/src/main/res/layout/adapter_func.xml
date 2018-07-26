@@ -4,8 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="3dp"
+    android:layout_height="140dp"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:layout_marginEnd="@dimen/dp_20"
+    android:layout_marginStart="@dimen/dp_20"
+    android:layout_marginTop="@dimen/dp_10"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp">
 
@@ -13,7 +16,8 @@
         android:id="@+id/ivSrc"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_20"/>
 
     <TextView
         android:id="@+id/tvTip"

@@ -2,41 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/whitesmoke"
               android:orientation="vertical">
-
-    <include layout="@layout/layout_common_toolbar"/>
 
     <Button
         android:id="@+id/btn_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
         android:text="开启服务"/>
 
     <Button
         android:id="@+id/btn_send_notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
         android:text="8.0通知适配"/>
 
     <Button
         android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white"
-        android:text="常驻后台"/>
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="常驻后台管理"/>
 
     <Button
         android:id="@+id/btn_notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
         android:text="通知管理"/>
 
 </LinearLayout>

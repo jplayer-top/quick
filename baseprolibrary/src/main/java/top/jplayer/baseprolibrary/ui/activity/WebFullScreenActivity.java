@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.ui;
+package top.jplayer.baseprolibrary.ui.activity;
 
 import android.net.http.SslError;
 import android.os.Build;

@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.widgets.dialog;
+package top.jplayer.baseprolibrary.ui.dialog;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,7 @@ import java.util.List;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.mvp.model.bean.FilterBean;
 import top.jplayer.baseprolibrary.ui.adapter.AdapterDialogFilter;
+import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialogFragment;
 
 /**
  * Created by Obl on 2018/3/20.

@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_10"
+            android:gravity="center_vertical"
             android:text="修改密码"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"/>
@@ -30,6 +31,7 @@
             android:layout_marginEnd="@dimen/dp_10"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center_vertical"
             android:text="请输入大写+小写+数字密码组合"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
 

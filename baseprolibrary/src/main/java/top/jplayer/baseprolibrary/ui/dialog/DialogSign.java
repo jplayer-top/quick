@@ -1,10 +1,11 @@
-package top.jplayer.baseprolibrary.widgets.dialog;
+package top.jplayer.baseprolibrary.ui.dialog;
 
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 
 import top.jplayer.baseprolibrary.R;
+import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
 
 /**
  * Created by Obl on 2018/3/15.

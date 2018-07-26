@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="密码修改"/>
+
+        <Button
+            android:id="@+id/btn_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="输入框弹起"/>
+
+        <Button
+            android:id="@+id/btn_03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="样式选择"/>
+
+        <Button
+            android:id="@+id/btn_04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="加购物车"/>
+
+        <Button
+            android:id="@+id/btn_05"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="退出登录"/>
+
+        <Button
+            android:id="@+id/btn_06"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="新手礼包"/>
+
+        <Button
+            android:id="@+id/btn_07"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="抢红包"/>
+
+        <Button
+            android:id="@+id/btn_08"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="分享"/>
+
+        <Button
+            android:id="@+id/btn_09"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="签到"/>
+
+        <Button
+            android:id="@+id/btn_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="提交成功"/>
+
+        <Button
+            android:id="@+id/btn_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="时间选择器"/>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
+

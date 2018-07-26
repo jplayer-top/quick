@@ -12,7 +12,7 @@ import java.util.List;
 import devlight.io.library.ntb.NavigationTabBar;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
-import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
+import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 
 /**
  * Created by Obl on 2018/7/5.

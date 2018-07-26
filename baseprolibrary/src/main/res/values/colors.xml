@@ -13,6 +13,7 @@
     <color name="trans">#00ffffff</color><!--透明 -->
     <color name="black">#525252</color><!--黑色 -->
     <color name="white">#FFFFFF</color><!--白色-->
+    <color name="whiteF8">#F8F8F8</color><!--白色-->
     <color name="snow">#fffafa</color><!--雪白色 -->
     <color name="floralwhite">#fffaf0</color><!--花白色 -->
     <color name="blanchedalmond">#ffebcd</color><!--杏白色 -->

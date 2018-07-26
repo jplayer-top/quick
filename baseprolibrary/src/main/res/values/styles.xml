@@ -37,18 +37,26 @@
 
     </style>
 
+    <style name="OblAppTheme.Main" parent="OblAppTheme">
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
     <style name="OblAppTheme.AnimFade" parent="OblAppTheme">
         <!--<item name="android:windowIsTranslucent">false</item>-->
         <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
     </style>
 
-    <style name="FadeAnimationStyle" parent="@android:style/Animation.Activity">
+    <!--<style name="FadeAnimationStyle" parent="@android:style/Animation.Activity">-->
+        <!--<item name="android:activityOpenEnterAnimation">@anim/fade_in</item>-->
+        <!--<item name="android:activityOpenExitAnimation">@anim/fade_out</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/fade_in</item>-->
+        <!--<item name="android:activityCloseExitAnimation">@anim/fade_out</item>-->
+    <!--</style>-->
+
+    <style name="FadeAnimationStyle" parent="@android:style/Animation.Translucent">
         <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
         <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
     </style>
-
     <!--Activity 转场动画预设-->
     <style name="noAnimTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@null</item>

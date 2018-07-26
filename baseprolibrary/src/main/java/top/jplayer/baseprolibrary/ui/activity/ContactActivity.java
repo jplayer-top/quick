@@ -1,11 +1,10 @@
-package top.jplayer.baseprolibrary.ui;
+package top.jplayer.baseprolibrary.ui.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

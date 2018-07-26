@@ -10,11 +10,12 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
-import top.jplayer.baseprolibrary.ui.LiveStartActivity;
+import top.jplayer.quick_test.ui.activity.ALiveActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.presenter.FuncPresenter;
+import top.jplayer.quick_test.ui.activity.DialogActivity;
 import top.jplayer.quick_test.ui.adapter.AdapterFunc;
 
 /**
@@ -56,7 +57,9 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView {
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             if (position == 0) {
-                ActivityUtils.init().start(mActivity, LiveStartActivity.class);
+                ActivityUtils.init().start(mActivity, ALiveActivity.class, "保活");
+            } else if (position == 1) {
+                ActivityUtils.init().start(mActivity, DialogActivity.class, "常见弹窗");
             }
         });
 

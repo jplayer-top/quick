@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
+import top.jplayer.baseprolibrary.utils.StringUtils;
 
 
 /**
@@ -65,6 +67,14 @@ public abstract class BaseCustomDialog extends AlertDialog {
         super.setContentView(mContentView);
     }
 
+    public void bindText(String title, int id) {
+        if (StringUtils.init().isEmpty(title)) {
+            throw new RuntimeException("文本数据 不能为空");
+        }
+        TextView tv = mContentView.findViewById(id);
+        tv.setText(title);
+    }
+
     public float setAlpha() {
         return 0.5f;
     }
@@ -86,18 +96,30 @@ public abstract class BaseCustomDialog extends AlertDialog {
     }
 
     public void show(@IdRes int ids) {
-        show(ids, v -> cancel());
+        show(ids, view -> cancel());
     }
 
-    public void show(@IdRes int ids, View.OnClickListener listener) {
+    public void show(@IdRes int ids, SureListener listener) {
         show();
-        mContentView.findViewById(ids).setOnClickListener(listener);
+        mContentView.findViewById(ids).setOnClickListener(v -> {
+            if (listener != null) {
+                setSureListener(listener);
+            }
+        });
+    }
+
+    public void setSureListener(SureListener listener) {
+        listener.onSure(mContentView);
     }
 
     public int setSoftInputState() {
         return WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN;
     }
 
+    public interface SureListener {
+
+        void onSure(View view);
+    }
 
     @Override
     public void show() {

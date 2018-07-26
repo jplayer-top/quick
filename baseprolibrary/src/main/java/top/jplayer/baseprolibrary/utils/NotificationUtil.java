@@ -6,7 +6,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -14,8 +13,11 @@ import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 
+import java.lang.ref.WeakReference;
+
 import top.jplayer.baseprolibrary.BaseInitApplication;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
@@ -25,22 +27,31 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
  * github : https://github.com/oblivion0001
  */
 
-public class NotificationUtil extends ContextWrapper {
+public class NotificationUtil {
     private NotificationManager manager;
     public static final String id1 = "1";
     public static final String id2 = "2";
     public static final String name1 = "重要";
     public static final String name2 = "普通";
+    private static NotificationUtil mNotificationUtil;
+    private WeakReference<Context> mWeakReference;
 
-    public NotificationUtil(Context base) {
-        super(base);
+    public NotificationUtil(Context context) {
+        mWeakReference = new WeakReference<>(context);
     }
 
     private NotificationManager getManager() {
         if (manager == null) {
-            manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            manager = (NotificationManager) mWeakReference.get().getSystemService(NOTIFICATION_SERVICE);
         }
         return manager;
+    }
+
+    public static NotificationUtil init(Context context) {
+        if (mNotificationUtil == null) {
+            mNotificationUtil = new NotificationUtil(context);
+        }
+        return mNotificationUtil;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -54,7 +65,7 @@ public class NotificationUtil extends ContextWrapper {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Notification.Builder getNotification(String id, String title, String content) {
-        return new Notification.Builder(getApplicationContext(), id)
+        return new Notification.Builder(mWeakReference.get().getApplicationContext(), id)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setSmallIcon(android.R.drawable.stat_notify_chat)
@@ -64,7 +75,7 @@ public class NotificationUtil extends ContextWrapper {
 
 
     public NotificationCompat.Builder getNotification(String title, String content) {
-        return new NotificationCompat.Builder(getApplicationContext())
+        return new NotificationCompat.Builder(mWeakReference.get().getApplicationContext())
                 .setContentTitle(title)
                 .setContentText(content)
                 .setSmallIcon(android.R.drawable.stat_notify_chat)
@@ -77,7 +88,7 @@ public class NotificationUtil extends ContextWrapper {
     }
 
     public Notification pendingIntent(Intent intent, String title, String content, String id) {
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mWeakReference.get(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         if (Build.VERSION.SDK_INT >= 26) {
             Notification.Builder builder = getNotification(id, title, content);
             builder.setContentIntent(pendingIntent);

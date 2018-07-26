@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.widgets.dialog;
+package top.jplayer.baseprolibrary.ui.dialog;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
+import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
 
 
 /**
@@ -34,6 +35,11 @@ public class DialogRedHb extends BaseCustomDialog {
     @Override
     public int initLayout() {
         return R.layout.dialog_redhb;
+    }
+
+    @Override
+    public void setSureListener(SureListener listener) {
+        listener.onSure(mContentView.findViewById(R.id.ivOpen));
     }
 
     /**

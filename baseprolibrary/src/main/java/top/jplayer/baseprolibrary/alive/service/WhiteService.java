@@ -30,9 +30,8 @@ public class WhiteService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.e("WhiteService->onStartCommand");
-        NotificationUtil notificationUtil = new NotificationUtil(this);
         Intent activityIntent = new Intent(BuildConfig.APPLICATION_ID + ".main.live");
-        Notification notification = notificationUtil.pendingIntent(activityIntent, "白色服务", "服务运行中...");
+        Notification notification = NotificationUtil.init(this).pendingIntent(activityIntent, "白色服务", "服务运行中...");
         startForeground(FOREGROUND_ID, notification);
         return START_STICKY;
     }

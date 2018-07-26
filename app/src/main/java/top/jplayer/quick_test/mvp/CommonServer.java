@@ -5,6 +5,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import top.jplayer.baseprolibrary.BaseInitApplication;
+import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 
@@ -16,6 +17,9 @@ import top.jplayer.quick_test.mvp.model.bean.HomeBean;
  */
 
 public interface CommonServer {
+    /**
+     * 第三方链接需要配置 Headers,默认Host 不需要添加注解 Headers
+     */
     String TEST_JSON = BaseInitApplication.urlHeardHost + ":test_json";
 
     @Headers(TEST_JSON)
@@ -25,4 +29,8 @@ public interface CommonServer {
     @Headers(TEST_JSON)
     @GET("tools/mockapi/2247/func")
     Observable<FuncBean> func(@Query("test") String test);
+
+    @Headers(TEST_JSON)
+    @GET("tools/mockapi/2247/cart")
+    Observable<CartBean> cart();
 }
