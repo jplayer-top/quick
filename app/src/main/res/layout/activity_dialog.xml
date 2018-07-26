@@ -10,6 +10,14 @@
                   android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="类Toast提示"/>
+
+        <Button
             android:id="@+id/btn_01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

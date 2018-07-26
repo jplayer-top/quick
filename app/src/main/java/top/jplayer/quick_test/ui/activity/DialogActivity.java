@@ -14,6 +14,8 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
+import top.jplayer.baseprolibrary.net.tip.DialogShortNetTip;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarWhiteActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogEdit;
 import top.jplayer.baseprolibrary.ui.dialog.DialogEditBottom;
@@ -39,6 +41,8 @@ import top.jplayer.quick_test.mvp.presenter.DialogPresenter;
 
 public class DialogActivity extends CommonToolBarWhiteActivity implements IContract.IView {
 
+    @BindView(R.id.btn_00)
+    Button mBtn00;
     @BindView(R.id.btn_01)
     Button mBtn01;
     @BindView(R.id.btn_02)
@@ -72,6 +76,28 @@ public class DialogActivity extends CommonToolBarWhiteActivity implements IContr
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this, rootView);
+        mBtn00.setOnClickListener(v -> {
+            Observable.intervalRange(0, 3, 0, 2, TimeUnit.SECONDS)
+                    .compose(new IoMainSchedule<>())
+                    .subscribe(aLong -> {
+                        if (aLong == 0) {
+                            new DialogShortNetTip(this)
+                                    .color(getResources().getColor(top.jplayer.baseprolibrary.R.color.tomato))
+                                    .text("警告")
+                                    .res(top.jplayer.baseprolibrary.R.drawable.dialog_warn)
+                                    .show();
+                        } else if (aLong == 1) {
+                            new DialogShortNetTip(this)
+                                    .color(getResources().getColor(top.jplayer.baseprolibrary.R.color.colorPrimary))
+                                    .text("成功")
+                                    .res(top.jplayer.baseprolibrary.R.drawable.dialog_success)
+                                    .show();
+                        } else {
+                            new DialogShortNetTip(this).show();
+                        }
+                    });
+
+        });
         mBtn01.setOnClickListener(v -> {
             DialogEdit edit = new DialogEdit(this);
             edit.setTitle("密码修改")
