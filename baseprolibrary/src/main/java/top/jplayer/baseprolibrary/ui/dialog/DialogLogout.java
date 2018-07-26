@@ -23,6 +23,16 @@ public class DialogLogout extends BaseCustomDialog {
         view.findViewById(R.id.btnCancel).setOnClickListener(v -> cancel());
     }
 
+    public DialogLogout setTitle(String title) {
+        bindText(title, R.id.tvTitle);
+        return this;
+    }
+
+    public DialogLogout setSubTitle(String title) {
+        bindText(title, R.id.tvSubTitle);
+        return this;
+    }
+
     @Override
     public int setWidth(int i) {
         return super.setWidth(8);

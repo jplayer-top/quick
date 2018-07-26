@@ -4,8 +4,8 @@ import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
-import java.util.Arrays;
+import android.net.Uri;
+import android.util.Log;
 
 /**
  * Created by Obl on 2018/3/9.
@@ -15,26 +15,35 @@ import java.util.Arrays;
 public class DownloadByReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
 
-        if (DownloadManager.ACTION_NOTIFICATION_CLICKED.equals(action)) {
-            System.out.println("用户点击了通知");
+        if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(intent.getAction())) {
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            installApk(context, id);
+        } else if (DownloadManager.ACTION_NOTIFICATION_CLICKED.equals(intent.getAction())) {
+            // DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            //获取所有下载任务Ids组
+            //long[] ids = intent.getLongArrayExtra(DownloadManager.EXTRA_NOTIFICATION_CLICK_DOWNLOAD_IDS);
+            ////点击通知栏取消所有下载
+            //manager.remove(ids);
+            //Toast.makeText(context, "下载任务已取消", Toast.LENGTH_SHORT).show();
+            //处理 如果还未完成下载，用户点击Notification ，跳转到下载中心
+            Intent viewDownloadIntent = new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS);
+            viewDownloadIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(viewDownloadIntent);
+        }
+    }
 
-            // 点击下载进度通知时, 对应的下载ID以数组的方式传递
-            long[] ids = intent.getLongArrayExtra(DownloadManager.EXTRA_NOTIFICATION_CLICK_DOWNLOAD_IDS);
-            System.out.println("ids: " + Arrays.toString(ids));
-
-        } else if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
-            System.out.println("下载完成");
-
-            /*
-             * 获取下载完成对应的下载ID, 这里下载完成指的不是下载成功, 下载失败也算是下载完成,
-             * 所以接收到下载完成广播后, 还需要根据 id 手动查询对应下载请求的成功与失败.
-             */
-            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1L);
-            System.out.println("id: " + id);
-
-            // 根据获取到的ID，使用上面第3步的方法查询是否下载成功
+    private static void installApk(Context context, long downloadApkId) {
+        DownloadManager dManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Intent install = new Intent(Intent.ACTION_VIEW);
+        Uri downloadFileUri = dManager != null ? dManager.getUriForDownloadedFile(downloadApkId) : null;
+        if (downloadFileUri != null) {
+            Log.d("DownloadManager", downloadFileUri.toString());
+            install.setDataAndType(downloadFileUri, "application/vnd.android.package-archive");
+            install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(install);
+        } else {
+            Log.e("DownloadManager", "download error");
         }
     }
 }

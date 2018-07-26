@@ -20,8 +20,8 @@ import top.jplayer.baseprolibrary.R;
  * top.jplayer.baseprolibrary.net.download
  */
 
-public class DownloadByNotify {
-    public static void byNotify(Context context, Uri uri) {
+public class DownloadByManager {
+    public static void byManager(Context context, Uri uri) {
         WeakReference<Context> weakReference = new WeakReference<Context>(context);
 
         // 创建下载请求
@@ -51,11 +51,7 @@ public class DownloadByNotify {
 
         // 添加请求头
         // request.addRequestHeader("User-Agent", "Chrome Mozilla/5.0");
-
-        // 设置下载文件的保存位置
-        File saveFile = new File(Environment.getExternalStorageDirectory(), String.format(Locale.CHINA,"%s.apk",title));
-        request.setDestinationUri(Uri.fromFile(saveFile));
-
+        request.setDestinationInExternalFilesDir(weakReference.get(), Environment.DIRECTORY_DOWNLOADS, title);
         /*
          * 2. 获取下载管理器服务的实例, 添加下载任务
          */
@@ -86,7 +82,16 @@ public class DownloadByNotify {
             // 下载请求的状态
             int status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
             // 下载文件在本地保存的路径（Android 7.0 以后 COLUMN_LOCAL_FILENAME 字段被弃用, 需要用 COLUMN_LOCAL_URI 字段来获取本地文件路径的 Uri）
-            String localFilename = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+            String localFilename = "";
+            if (Build.VERSION.SDK_INT > 23) {
+                int fileUriIdx = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
+                String fileUri = cursor.getString(fileUriIdx);
+                if (fileUri != null) {
+                    localFilename = Uri.parse(fileUri).getPath();
+                }
+            } else {
+                localFilename = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+            }
             // 已下载的字节大小
             long downloadedSoFar = cursor.getLong(cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
             // 下载文件的总字节大小

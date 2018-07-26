@@ -3,6 +3,7 @@ package top.jplayer.quick_test;
 import android.support.multidex.MultiDexApplication;
 
 import top.jplayer.baseprolibrary.BaseInitApplication;
+import top.jplayer.quick_test.mvp.CommonServer;
 
 /**
  * Created by Obl on 2018/6/29.
@@ -16,7 +17,8 @@ public class QuickApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         BaseInitApplication.with(this)
-                .addUrl("test_json", "http://www.wanandroid.com/")
+                .addUrl(CommonServer.KEY_TEST, CommonServer.VALUE_TEST)
+                .addUrl(CommonServer.KEY_VERSION, CommonServer.VALUE_VERSION)
                 .retrofit()
                 .swipeBack()
                 .zxing()

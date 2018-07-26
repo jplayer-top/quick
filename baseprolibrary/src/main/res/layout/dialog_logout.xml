@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/trans"
-    app:cardBackgroundColor="@color/trans">
+    app:cardBackgroundColor="@color/trans"
+    app:cardElevation="0dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package top.jplayer.quick_test.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -76,6 +77,7 @@ public class DialogActivity extends CommonToolBarWhiteActivity implements IContr
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this, rootView);
+        mIvToolRight.setVisibility(View.INVISIBLE);
         mBtn00.setOnClickListener(v -> {
             Observable.intervalRange(0, 3, 0, 2, TimeUnit.SECONDS)
                     .compose(new IoMainSchedule<>())

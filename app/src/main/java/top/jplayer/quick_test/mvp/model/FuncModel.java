@@ -6,6 +6,7 @@ import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
+import top.jplayer.quick_test.mvp.model.bean.VersionBean;
 
 /**
  * Created by Obl on 2018/7/6.
@@ -26,6 +27,11 @@ public class FuncModel extends BaseModel<CommonServer> {
 
     public Observable<CartBean> requestCart() {
         return mServer.cart()
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<VersionBean> requestVersion() {
+        return mServer.version()
                 .compose(new IoMainSchedule<>());
     }
 }
