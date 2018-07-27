@@ -11,15 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/OblAppTheme">
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/OblAppTheme.Main">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity
             android:name="top.jplayer.quick_test.ui.activity.ALiveActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
@@ -34,6 +25,21 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/OblAppTheme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/OblAppTheme.Splash"/>
     </application>
 
 </manifest>

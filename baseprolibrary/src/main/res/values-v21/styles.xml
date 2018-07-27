@@ -10,10 +10,8 @@
         <item name="colorPrimaryDark">@color/colorBlackGold</item>
         <item name="colorAccent">@color/colorBlackGold</item>
         <item name="android:windowContentTransitions">true</item>
-
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-
         <item name="android:windowAnimationStyle">@style/Animation.Activity.Translucent.Style</item>
         <!--Button 去阴影-->
         <item name="android:textViewStyle">@style/OblAppTheme.TextView</item>
@@ -21,6 +19,5 @@
         <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
         <item name="toolbarStyle">@style/Obl.AppBarOverlay</item>
     </style>
-
 
 </resources>

@@ -23,22 +23,15 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <receiver android:name=".net.download.DownloadByReceiver">
-            <intent-filter>
-                <!-- 配置 点击通知 和 下载完成 两个 action -->
-                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
-            </intent-filter>
-        </receiver>
-        <!--<provider-->
-        <!--android:name="android.support.v4.content.FileProvider"-->
-        <!--android:authorities="top.jplayer.baseprolibrary.fileprovider"-->
-        <!--android:exported="false"-->
-        <!--android:grantUriPermissions="true">-->
-        <!--<meta-data-->
-        <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-        <!--android:resource="@xml/file_provider"/>-->
-        <!--</provider>-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="top.jplayer.baseprolibrary.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider"/>
+        </provider>
 
         <!--<meta-data-->
         <!--android:name="RONG_CLOUD_APP_KEY"-->

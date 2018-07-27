@@ -6,11 +6,8 @@
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/colorBlackGold</item>
         <item name="colorAccent">@color/colorBlackGold</item>
-
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-
-
         <item name="android:windowAnimationStyle">@style/Animation.Activity.Translucent.Style</item>
 
         <!--Button 去阴影-->
@@ -31,26 +28,17 @@
         <item name="contentInsetStart">0dp</item>
     </style>
 
-
-    <style name="SpecActivityTheme" parent="OblAppTheme">
-        <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
-
-    </style>
-
-    <style name="OblAppTheme.Main" parent="OblAppTheme">
-        <item name="android:windowIsTranslucent">false</item>
-    </style>
-
-    <style name="OblAppTheme.AnimFade" parent="OblAppTheme">
+    <style name="OblAppTheme.Splash" parent="OblAppTheme">
         <!--<item name="android:windowIsTranslucent">false</item>-->
+        <!--<item name="android:windowDisablePreview">true</item>-->
         <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
     </style>
 
     <!--<style name="FadeAnimationStyle" parent="@android:style/Animation.Activity">-->
-        <!--<item name="android:activityOpenEnterAnimation">@anim/fade_in</item>-->
-        <!--<item name="android:activityOpenExitAnimation">@anim/fade_out</item>-->
-        <!--<item name="android:activityCloseEnterAnimation">@anim/fade_in</item>-->
-        <!--<item name="android:activityCloseExitAnimation">@anim/fade_out</item>-->
+    <!--<item name="android:activityOpenEnterAnimation">@anim/fade_in</item>-->
+    <!--<item name="android:activityOpenExitAnimation">@anim/fade_out</item>-->
+    <!--<item name="android:activityCloseEnterAnimation">@anim/fade_in</item>-->
+    <!--<item name="android:activityCloseExitAnimation">@anim/fade_out</item>-->
     <!--</style>-->
 
     <style name="FadeAnimationStyle" parent="@android:style/Animation.Translucent">
