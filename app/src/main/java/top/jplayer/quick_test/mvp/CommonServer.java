@@ -1,11 +1,16 @@
 package top.jplayer.quick_test.mvp;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
+import top.jplayer.baseprolibrary.net.retrofit.DownLoadResponseBody;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.model.bean.VersionBean;
@@ -45,4 +50,8 @@ public interface CommonServer {
     @Headers(VERSION)
     @GET("v2/ver2")
     Observable<VersionBean> version();
+
+    @Streaming //IO 大文件下载处理
+    @GET
+    Observable<DownLoadResponseBody> apk(@Url String url);
 }

@@ -73,10 +73,6 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
      * @return the boolean
      */
     protected boolean isImmersionBarEnabled() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // TODO: 2018/7/27  : 8.0 问题 不适配 screenOrientation 与 windowIsTranslucent 公用
-            return false;
-        }
         return true;
     }
 
@@ -221,6 +217,10 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
      */
     @Override
     public boolean isSupportSwipeBack() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // TODO: 2018/7/27  : 8.0 问题 不适配 screenOrientation 与 windowIsTranslucent 公用
+            return false;
+        }
         return true;
     }
 

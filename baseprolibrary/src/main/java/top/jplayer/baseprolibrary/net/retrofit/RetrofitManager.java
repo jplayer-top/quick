@@ -21,6 +21,7 @@ import top.jplayer.baseprolibrary.net.interceptor.CommentHearderInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.CommentQueryInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.JsonFixInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.LoggerInterceptor;
+import top.jplayer.baseprolibrary.net.interceptor.ProgressInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.ResetUrlInterceptor;
 import top.jplayer.baseprolibrary.utils.GsonUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
@@ -97,6 +98,7 @@ public class RetrofitManager {
         list.add(new CommentHearderInterceptor());
         list.add(new ResetUrlInterceptor());
         list.add(new JsonFixInterceptor());
+        list.add(new ProgressInterceptor());
         list.add(new LoggerInterceptor(LogUtil::net, BuildConfig.DEBUG));
         return list;
     }

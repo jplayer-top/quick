@@ -3,6 +3,7 @@ package top.jplayer.quick_test.mvp.model;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
+import top.jplayer.baseprolibrary.net.retrofit.DownLoadResponseBody;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
@@ -32,6 +33,11 @@ public class FuncModel extends BaseModel<CommonServer> {
 
     public Observable<VersionBean> requestVersion() {
         return mServer.version()
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<DownLoadResponseBody> requestApk(String url) {
+        return mServer.apk(url)
                 .compose(new IoMainSchedule<>());
     }
 }

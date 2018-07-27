@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -13,6 +14,7 @@ import com.yanzhenjie.permission.Permission;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
 import top.jplayer.baseprolibrary.net.download.DownloadByManager;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarWhiteActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
@@ -35,9 +37,13 @@ public class UpdateActivity extends CommonToolBarWhiteActivity {
     Button mBtn01;
     @BindView(R.id.btn02)
     Button mBtn02;
+    @BindView(R.id.btn03)
+    Button mBtn03;
     private Unbinder mUnbinder;
     private DownloadByManager mDownloadByManager;
     private VersionBean.VerBean mVerBean;
+    private int vClick = 0;
+    private UpdatePresenter presenter;
 
     @Override
     public int initAddLayout() {
@@ -54,8 +60,22 @@ public class UpdateActivity extends CommonToolBarWhiteActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this, rootView);
-        mBtn01.setOnClickListener(v -> new UpdatePresenter(this).requestUpdate());
+        mBtn01.setOnClickListener(this::whoClick);
+        mBtn02.setOnClickListener(this::whoClick);
+        mBtn03.setOnClickListener(this::whoClick);
         mDownloadByManager = new DownloadByManager(this);
+    }
+
+    private void whoClick(View v) {
+        if (v == mBtn01) {
+            vClick = 0;
+        } else if (v == mBtn02) {
+            vClick = 1;
+        } else if (v == mBtn03) {
+            vClick = 2;
+        }
+        presenter = new UpdatePresenter(this);
+        presenter.requestUpdate();
     }
 
     @Override
@@ -74,19 +94,29 @@ public class UpdateActivity extends CommonToolBarWhiteActivity {
                 AndPermission.with(this)
                         .permission(Permission.WRITE_EXTERNAL_STORAGE)
                         .onGranted(permissions -> {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !getPackageManager()
-                                    .canRequestPackageInstalls()) {// 8.0  安装问题 是否允许外部安装
-                                Uri packageURI = Uri.parse("package:" + getPackageName());
-                                Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
-                                        packageURI);
-                                startActivityForResult(intent, 10000);
-                            } else {
-                                updateVersion(mVerBean);
+                            if (vClick == 0) {
+                                downloadByManager();
+                            } else if (vClick == 1) {
+                                DownloadByChrome.byChrome(this, Uri.parse(mVerBean.url));
+                            } else if (vClick == 2) {
+                                presenter.requestApk(mVerBean.url);
                             }
                         })
                         .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
                         .start();
             });
+        }
+    }
+
+    private void downloadByManager() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !getPackageManager()
+                .canRequestPackageInstalls()) {// 8.0  安装问题 是否允许外部安装
+            Uri packageURI = Uri.parse("package:" + getPackageName());
+            Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
+                    packageURI);
+            startActivityForResult(intent, 10000);
+        } else {
+            updateVersion(mVerBean);
         }
     }
 
