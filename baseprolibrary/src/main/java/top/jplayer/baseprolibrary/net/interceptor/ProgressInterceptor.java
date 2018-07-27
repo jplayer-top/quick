@@ -29,10 +29,11 @@ public class ProgressInterceptor implements Interceptor {
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
-        okhttp3.Response request = chain.proceed(chain.request());
-        List<String> headerValues = request.headers("download");
-        return request.newBuilder()
-                .body(new DownLoadResponseBody(request.body(), (progress, total, done) -> {
+        okhttp3.Response requestHeader = chain.proceed(chain.request());
+        okhttp3.Response requestBody = chain.proceed(chain.request());
+        List<String> headerValues = requestHeader.headers("download");
+        return requestBody.newBuilder()
+                .body(new DownLoadResponseBody(requestBody.body(), (progress, total, done) -> {
                     LogUtil.e("onProgress: " + "total ---->" + total + "done ---->" + progress);
                     if (headerValues != null && headerValues.contains("download")) {
                         Context context = BaseInitApplication.getContext();
@@ -40,7 +41,7 @@ public class ProgressInterceptor implements Interceptor {
                         intent.setAction(context.getPackageName() + ".download");
                         intent.putExtra("total", total);
                         intent.putExtra("progress", progress);
-                        Observable.interval(500, TimeUnit.MILLISECONDS)
+                        Observable.interval(300, TimeUnit.MILLISECONDS)
                                 .subscribe(aLong -> context.sendBroadcast(intent));
                     }
                 }))
