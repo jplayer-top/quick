@@ -51,6 +51,7 @@ public interface CommonServer {
     @GET("v2/ver2")
     Observable<VersionBean> version();
 
+    @Headers("download:download")
     @Streaming //IO 大文件下载处理
     @GET
     Observable<DownLoadResponseBody> apk(@Url String url);
