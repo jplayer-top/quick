@@ -1,7 +1,9 @@
 package top.jplayer.baseprolibrary.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,7 +23,7 @@ import top.jplayer.baseprolibrary.utils.StringUtils;
  */
 
 @SuppressLint("Registered")
-public abstract class CommonToolBarWhiteActivity extends SuperBaseActivity {
+public abstract class CommonToolBarActivity extends SuperBaseActivity {
 
     public Toolbar mToolBar;
     public TextView mTvToolTitle;
@@ -33,7 +35,7 @@ public abstract class CommonToolBarWhiteActivity extends SuperBaseActivity {
 
     @Override
     protected int initRootLayout() {
-        return R.layout.activity_common_toolbar_white;
+        return R.layout.activity_common_toolbar;
     }
 
     @Override
@@ -45,6 +47,17 @@ public abstract class CommonToolBarWhiteActivity extends SuperBaseActivity {
     @Override
     public void initRootData(View view) {
         super.initRootData(view);
+        initToolBar(view);
+        mRootView = view.findViewById(R.id.rootView);
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mRootView.getLayoutParams();
+        layoutParams.topMargin = toolMarginTop();
+        mRootView.removeAllViews();
+        mRootView.addView(View.inflate(this, initAddLayout(), null));
+        initAddView(mRootView);
+        initListener();
+    }
+
+    private void initToolBar(View view) {
         mToolBar = view.findViewById(R.id.toolbar);
         mIvToolLeft = view.findViewById(R.id.ivToolLeft);
         mIvToolRight = view.findViewById(R.id.ivToolRight);
@@ -52,23 +65,36 @@ public abstract class CommonToolBarWhiteActivity extends SuperBaseActivity {
         mTvToolTitle = view.findViewById(R.id.tvToolTitle);
         mTvToolTitle.setText(StringUtils.init().fixNullStr(getIntent().getStringExtra("title")));
         mIvToolRightLeft = view.findViewById(R.id.ivToolRightLeft);
-        mRootView = view.findViewById(R.id.rootView);
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mRootView.getLayoutParams();
-        layoutParams.topMargin = toMarginTop();
-        mRootView.removeAllViews();
-        mRootView.addView(View.inflate(this, initAddLayout(), null));
-        initAddView(mRootView);
-        initListener();
+        tooColor(false, color(R.color.whiteF8));
+    }
+
+    /**
+     * 定义 toolBar 的颜色
+     *
+     * @param backIsWhite 返回按钮是否是白色调
+     * @param barColor    toolBar 的颜色
+     */
+    public void tooColor(boolean backIsWhite, int barColor) {
+        mToolBar.setBackgroundColor(barColor);
+        if (backIsWhite) {
+            mIvToolLeft.setImageResource(R.drawable.white_left_arrow);
+            mTvToolTitle.setTextColor(color(R.color.whiteF8));
+            mTvToolRight.setTextColor(color(R.color.whiteF8));
+        } else {
+            mIvToolLeft.setImageResource(R.drawable.black_left_arrow);
+            mTvToolTitle.setTextColor(color(R.color.colorBlackGold));
+            mTvToolRight.setTextColor(color(R.color.colorBlackGold));
+        }
     }
 
     private void initListener() {
         mIvToolLeft.setOnClickListener(this::toolLeftBtn);
         mIvToolRight.setOnClickListener(this::toolRightBtn);
         mTvToolRight.setOnClickListener(this::toolRightBtn);
-        showRightLeft(View.GONE, null);
+        toolRightLeft(View.GONE, null);
     }
 
-    public void toolRightVisiable(View view, Object value) {
+    public void toolRightVisible(View view, Object value) {
         if (view instanceof TextView) {
             mTvToolRight.setVisibility(View.VISIBLE);
             mIvToolRight.setVisibility(View.GONE);
@@ -80,10 +106,19 @@ public abstract class CommonToolBarWhiteActivity extends SuperBaseActivity {
         }
     }
 
-    public void showRightLeft(int isVisible, View.OnClickListener listener) {
+
+    @LayoutRes
+    public abstract int initAddLayout();
+
+    public void initAddView(FrameLayout rootView) {
+        initRefreshStatusView(rootView);
+    }
+
+    public void toolRightLeft(int isVisible, View.OnClickListener listener) {
         mIvToolRightLeft.setVisibility(isVisible);
         mIvToolRightLeft.setOnClickListener(listener);
     }
+
 
     public void toolRightBtn(View v) {
     }
@@ -93,14 +128,15 @@ public abstract class CommonToolBarWhiteActivity extends SuperBaseActivity {
         finish();
     }
 
-    public int toMarginTop() {
+    public int toolMarginTop() {
         return SizeUtils.dp2px(56) + ScreenUtils.getStatusBar(this);
     }
 
-    @LayoutRes
-    public abstract int initAddLayout();
+    public int color(@ColorRes int idRes) {
+        return getResources().getColor(idRes);
+    }
 
-    public void initAddView(FrameLayout rootView) {
-        initRefreshStatusView(rootView);
+    public String string(@StringRes int idRes) {
+        return getResources().getString(idRes);
     }
 }

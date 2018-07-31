@@ -8,7 +8,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.alive.service.WhiteService;
-import top.jplayer.baseprolibrary.ui.activity.CommonToolBarWhiteActivity;
+import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.NotificationUtil;
 import top.jplayer.quick_test.R;
 
@@ -19,7 +19,7 @@ import top.jplayer.quick_test.R;
  * github : https://github.com/oblivion0001
  */
 
-public class ALiveActivity extends CommonToolBarWhiteActivity {
+public class ALiveActivity extends CommonToolBarActivity {
 
 
     @BindView(R.id.btn_white)

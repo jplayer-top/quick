@@ -35,8 +35,7 @@
                 android:layout_width="?actionBarSize"
                 android:layout_height="?actionBarSize"
                 android:padding="@dimen/dp_20"
-                android:src="@drawable/back"
-                android:tint="@color/colorBlackGold"/>
+                android:src="@drawable/black_left_arrow"/>
 
             <View
                 android:layout_width="0dp"
@@ -48,7 +47,6 @@
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
                 android:padding="@dimen/dp_20"
-                android:tint="@color/colorBlackGold"
                 android:visibility="gone"/>
 
             <ImageView
@@ -57,7 +55,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:padding="@dimen/dp_20"
                 android:src="@drawable/message"
-                android:tint="@color/colorBlackGold"/>
+                android:visibility="gone"/>
 
 
             <TextView

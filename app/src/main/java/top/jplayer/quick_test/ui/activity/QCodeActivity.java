@@ -10,7 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.ui.activity.ActivityCustomCapture;
-import top.jplayer.baseprolibrary.ui.activity.CommonToolBarWhiteActivity;
+import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.quick_test.R;
 
@@ -21,7 +21,7 @@ import top.jplayer.quick_test.R;
  * github : https://github.com/oblivion0001
  */
 
-public class QCodeActivity extends CommonToolBarWhiteActivity {
+public class QCodeActivity extends CommonToolBarActivity {
     @BindView(R.id.btnOpen)
     Button mBtnOpen;
     private Unbinder mUnbinder;
@@ -36,13 +36,15 @@ public class QCodeActivity extends CommonToolBarWhiteActivity {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this, rootView);
         mBtnOpen.setOnClickListener(v -> {
+            startCamera();
         });
     }
 
     private void startCamera() {
         AndPermission.with(this)
                 .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE)
-                .onGranted(permissions -> ActivityUtils.init().startForResult(this, ActivityCustomCapture.class))
+                .onGranted(permissions -> ActivityUtils.init().startForResult(this, ActivityCustomCapture.class,
+                        "扫一扫"))
                 .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
                 .start();
 

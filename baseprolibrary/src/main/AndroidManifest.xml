@@ -22,6 +22,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".ui.activity.ActivityCustomCapture"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -37,7 +41,6 @@
         <!--android:name="RONG_CLOUD_APP_KEY"-->
         <!--android:value="${RONG_KEY}"-->
         <!--tools:replace="android:value"/>-->
-
 
         <!-- start -->
 

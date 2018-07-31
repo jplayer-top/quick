@@ -8,11 +8,11 @@
 
     <View
         android:id="@+id/fixBar"
-        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"/>
 
-    <include layout="@layout/layout_common_toolbar"/>
+    <include layout="@layout/layout_toolbar_common"/>
 
     <include layout="@layout/layout_refresh_white_nofoot"/>
 

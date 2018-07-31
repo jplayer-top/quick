@@ -9,6 +9,6 @@
 
     <include layout="@layout/layout_refresh_white_nofoot"/>
 
-    <include layout="@layout/layout_common_toolbar"/>
+    <include layout="@layout/layout_toolbar_common"/>
 
 </FrameLayout>

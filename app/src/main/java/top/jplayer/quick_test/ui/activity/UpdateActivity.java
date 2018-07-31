@@ -7,11 +7,9 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -21,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
 import top.jplayer.baseprolibrary.net.download.DownloadByManager;
-import top.jplayer.baseprolibrary.ui.activity.CommonToolBarWhiteActivity;
+import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.quick_test.BuildConfig;
@@ -36,7 +34,7 @@ import top.jplayer.quick_test.mvp.presenter.UpdatePresenter;
  * github : https://github.com/oblivion0001
  */
 
-public class UpdateActivity extends CommonToolBarWhiteActivity {
+public class UpdateActivity extends CommonToolBarActivity {
 
 
     @BindView(R.id.btn01)

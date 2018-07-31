@@ -17,7 +17,7 @@ import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.tip.DialogShortNetTip;
-import top.jplayer.baseprolibrary.ui.activity.CommonToolBarWhiteActivity;
+import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogEdit;
 import top.jplayer.baseprolibrary.ui.dialog.DialogEditBottom;
 import top.jplayer.baseprolibrary.ui.dialog.DialogFragmentFilter;
@@ -40,7 +40,7 @@ import top.jplayer.quick_test.mvp.presenter.DialogPresenter;
  * github : https://github.com/oblivion0001
  */
 
-public class DialogActivity extends CommonToolBarWhiteActivity implements IContract.IView {
+public class DialogActivity extends CommonToolBarActivity implements IContract.IView {
 
     @BindView(R.id.btn_00)
     Button mBtn00;

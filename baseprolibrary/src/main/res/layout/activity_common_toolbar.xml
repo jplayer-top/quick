@@ -11,5 +11,5 @@
         android:layout_height="match_parent"
         android:background="@color/whitesmoke"/>
 
-    <include layout="@layout/layout_common_toolbar_white"/>
+    <include layout="@layout/layout_toolbar_common"/>
 </FrameLayout>

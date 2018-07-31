@@ -1,23 +1,22 @@
 package top.jplayer.baseprolibrary.ui.activity;
 
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.net.tip.DialogLoading;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
@@ -27,36 +26,38 @@ import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/3/27.
- * com.ilanchuang.xiaoi.ui.family
  * call me : jplayer_top@163.com
  * github : https://github.com/oblivion0001
  */
 
-public class ActivityCustomCapture extends SuperBaseActivity {
-
-    private AsyncTask<Bitmap, Void, String> asyncTask = null;
+public class ActivityCustomCapture extends CommonToolBarActivity {
 
     @Override
-    protected int initRootLayout() {
-        return R.layout.custom_camera;
+    public int initAddLayout() {
+        return R.layout.activity_custom_camera;
     }
 
     @Override
-    public void initRootData(View view) {
-        view.findViewById(R.id.tvCameraLocal).setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType("image/*");
-            startActivityForResult(intent, 1);
-        });
-        view.findViewById(R.id.ivBack).setOnClickListener(v -> finish());
-        refresh();
+    public void initAddView(FrameLayout rootView) {
+        super.initAddView(rootView);
+        toolRightVisible(mTvToolRight, "相册");
+//        mRootView.setBackgroundColor(color(R.color.trans));
+        tooColor(true, R.color.trans);
+        Observable.timer(100, TimeUnit.MILLISECONDS).subscribe(aLong -> refresh());
     }
 
     @Override
-    protected void initImmersionBar() {
-        super.initImmersionBar();
-        mImmersionBar.titleBar(superRootView.findViewById(R.id.toolbar)).init();
+    public void toolRightBtn(View v) {
+        super.toolRightBtn(v);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public int toolMarginTop() {
+        return 0;
     }
 
     /**
@@ -67,6 +68,7 @@ public class ActivityCustomCapture extends SuperBaseActivity {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
             ToastUtils.init().showQuickToast(result);
+            refresh();
         }
 
         @Override
@@ -75,8 +77,6 @@ public class ActivityCustomCapture extends SuperBaseActivity {
             refresh();
         }
     };
-    private MyAsyncTask mAsyncTask;
-
 
     private void refresh() {
         try {
@@ -89,48 +89,7 @@ public class ActivityCustomCapture extends SuperBaseActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (asyncTask != null) {
-            asyncTask.cancel(true);
-            asyncTask = null;
-        }
-    }
-
-    private class MyAsyncTask extends AsyncTask<Bitmap, Void, String> {
-
-        private DialogLoading mDialogLoading;
-
-        MyAsyncTask(Activity activity) {
-            mDialogLoading = new DialogLoading(activity);
-            mDialogLoading.show();
-
-        }
-
-        @Override
-        protected String doInBackground(Bitmap... bitmaps) {
-            return QRCodeDecoderUtils.syncDecodeQRCode(bitmaps[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            mDialogLoading.dismiss();
-            if (TextUtils.isEmpty(result)) {
-                ToastUtils.init().showInfoToast(mActivity, "未发现二维码");
-                refresh();
-            } else {
-                ToastUtils.init().showQuickToast(result);
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-            mDialogLoading.dismiss();
-            refresh();
-        }
-    }
+    private DialogLoading mDialogLoading;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -139,11 +98,48 @@ public class ActivityCustomCapture extends SuperBaseActivity {
             if (data != null) {
                 Uri uri = data.getData();
                 try {
-                    asyncTask = new MyAsyncTask(this);
                     String path = StringUtils.getRealFilePath(mActivity, uri);
                     Bitmap bitmap = BitmapUtil.getDecodeAbleBitmap(path);
-//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                    asyncTask.execute(bitmap);
+                    if (bitmap != null) {
+                        Observable.just(bitmap)
+                                .subscribeOn(Schedulers.io())
+                                .map(QRCodeDecoderUtils::syncDecodeQRCode)
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Observer<String>() {
+                                    @Override
+                                    public void onSubscribe(Disposable d) {
+                                        if (!d.isDisposed()) {
+                                            mDialogLoading = new DialogLoading(mActivity);
+                                            mDialogLoading.show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNext(String result) {
+                                        if (mDialogLoading != null) {
+                                            mDialogLoading.dismiss();
+                                        }
+                                        if (TextUtils.isEmpty(result)) {
+                                            ToastUtils.init().showInfoToast(mActivity, "未发现二维码");
+                                            refresh();
+                                        } else {
+                                            ToastUtils.init().showQuickToast(result);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        if (mDialogLoading != null) {
+                                            mDialogLoading.dismiss();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onComplete() {
+
+                                    }
+                                });
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

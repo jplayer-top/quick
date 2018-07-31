@@ -1,6 +1,7 @@
 package top.jplayer.quick_test.ui.fragment;
 
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.presenter.FuncPresenter;
 import top.jplayer.quick_test.ui.activity.DialogActivity;
+import top.jplayer.quick_test.ui.activity.QCodeActivity;
 import top.jplayer.quick_test.ui.activity.UpdateActivity;
 import top.jplayer.quick_test.ui.adapter.AdapterFunc;
 
@@ -28,6 +30,8 @@ import top.jplayer.quick_test.ui.adapter.AdapterFunc;
 public class FuncFragment extends SuperBaseFragment implements IContract.IView {
     @BindView(R.id.tvToolTitle)
     TextView mTvToolTitle;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.ivToolLeft)
     ImageView mIvToolLeft;
     @BindView(R.id.ivToolRight)
@@ -49,9 +53,9 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView {
 
         mUnbinder = ButterKnife.bind(this, rootView);
         mIvToolLeft.setVisibility(View.INVISIBLE);
-        mIvToolRight.setVisibility(View.INVISIBLE);
         mTvToolTitle.setText("发现");
-
+        mTvToolTitle.setTextColor(getResources().getColor(R.color.white));
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         mAdapter = new AdapterFunc(null);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -63,6 +67,8 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView {
                 ActivityUtils.init().start(mActivity, DialogActivity.class, "常见弹窗");
             } else if (position == 2) {
                 ActivityUtils.init().start(mActivity, UpdateActivity.class, "应用更新");
+            } else if (position == 3) {
+                ActivityUtils.init().start(mActivity, QCodeActivity.class, "二维码");
             }
         });
 
