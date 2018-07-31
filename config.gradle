@@ -78,7 +78,7 @@ ext {
     //权限申请
     permission = 'com.yanzhenjie:permission:2.0.0-rc4'
     //二维码
-    qcode = 'cn.yipianfengye.android:zxing-library:2.1'
+    qcode = 'cn.yipianfengye.android:zxing-library:2.2'
     //多边形图+图片滤镜
     polygon = 'com.kingja.magicmirror:magicmirror:1.2.0'
     //仿微信滑动返回
@@ -86,13 +86,11 @@ ext {
     //毛玻璃效果
     realtimeblurview = 'com.github.mmin18:realtimeblurview:1.1.2'
     /** to use need
-     * android {
-     *  buildToolsVersion '24.0.2'                 // Use 23.0.3 or higher
+     * android {*  buildToolsVersion '24.0.2'                 // Use 23.0.3 or higher
      *  defaultConfig {minSdkVersion 15
      *  renderscriptTargetApi 19
      *  renderscriptSupportModeEnabled true    // Enable RS support
-     *  }
-     */
+     *}*/
     glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
     glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
     glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$dependVersion.glideSdkVersion"
@@ -101,8 +99,19 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
-    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard, viewanimator, toasty, pickerview, flowlayout,
-                 permission, spinkit, qcode, polygon, swipebacklayout]
+    otherLibs = [barlibrary,
+                 glide,
+                 smartrefresh,
+                 smartrefresh_heard,
+                 viewanimator,
+                 toasty,
+                 pickerview,
+                 flowlayout,
+                 permission,
+                 spinkit,
+                 qcode,
+                 polygon,
+                 swipebacklayout]
     annotationProcessorLibs = [glideCompiler]
 
 }

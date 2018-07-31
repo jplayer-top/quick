@@ -5,6 +5,14 @@
               android:orientation="vertical">
 
     <Button
+        android:id="@+id/btnDefOpen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="默认扫一扫"/>
+
+    <Button
         android:id="@+id/btnOpen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,28 +20,27 @@
         android:background="@drawable/select_btn_rect_5_white"
         android:text="扫一扫"/>
 
+
     <Button
-        android:id="@+id/btn_send_notice"
+        android:id="@+id/btnCreate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/select_btn_rect_5_white"
-        android:text="8.0通知适配"/>
+        android:text="生成二维码"/>
 
     <Button
-        android:id="@+id/btn_back"
+        android:id="@+id/btnFlash"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/select_btn_rect_5_white"
-        android:text="常驻后台管理"/>
+        android:text="闪光灯"/>
 
-    <Button
-        android:id="@+id/btn_notice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/select_btn_rect_5_white"
-        android:text="通知管理"/>
-
+    <ImageView
+        android:id="@+id/ivSrc"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_20"/>
 </LinearLayout>
