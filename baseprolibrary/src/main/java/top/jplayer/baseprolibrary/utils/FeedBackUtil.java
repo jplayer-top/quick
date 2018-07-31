@@ -132,7 +132,7 @@ public class FeedBackUtil {
     public List<Integer> playSoundPool(List<Integer> integers) {
         List<Integer> streamIdList = new ArrayList<>();
         Observable.fromIterable(integers).subscribe(integer -> {
-            int play = sp.play(integer, 0.8f, 0.8f, integer, 1, 1f);
+            int play = sp.play(integer, 0.5f, 0.5f, integer, 1, 1f);
             streamIdList.add(play);
         });
         return streamIdList;

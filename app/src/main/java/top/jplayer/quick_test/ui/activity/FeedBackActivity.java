@@ -1,6 +1,5 @@
 package top.jplayer.quick_test.ui.activity;
 
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -41,6 +40,7 @@ public class FeedBackActivity extends CommonToolBarActivity {
     Button mBtnPoolCancel;
     private Unbinder mUnbinder;
     private List<Integer> mIntegersStream;
+    private List<Integer> mIntegers;
 
     @Override
     public int initAddLayout() {
@@ -60,17 +60,15 @@ public class FeedBackActivity extends CommonToolBarActivity {
         mBtnVibratorCancel.setOnClickListener(v -> FeedBackUtil.init(this).stopVibrator());
         mBtnRing.setOnClickListener(v -> FeedBackUtil.init(this).playRing());
         mBtnBeep.setOnClickListener(v -> FeedBackUtil.init(this).playBeep(com.uuzuche.lib_zxing.R.raw.beep));
-        mBtnPool.setOnClickListener(v -> {
-            ArrayList<Integer> list = new ArrayList<>();
-            list.add(com.uuzuche.lib_zxing.R.raw.beep);
-            list.add(com.uuzuche.lib_zxing.R.raw.beep);
-            //load  需要时间
-            List<Integer> integers = FeedBackUtil.init(this).loadSoundPool(list);
-            mIntegersStream = FeedBackUtil.init(this).playSoundPool(integers);
-        });
+
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(R.raw.wl1);
+        list.add(R.raw.wl2);
+        //load  需要时间
+        mIntegers = FeedBackUtil.init(this).loadSoundPool(list);
+        mBtnPool.setOnClickListener(v -> mIntegersStream = FeedBackUtil.init(this).playSoundPool(mIntegers));
         mBtnPoolCancel.setOnClickListener(v -> {
             Observable.fromIterable(mIntegersStream).subscribe(integer -> FeedBackUtil.init(this).stopSoundPool(integer));
-            ;
         });
         mBtnMediaCancel.setOnClickListener(v -> FeedBackUtil.init(this).stopMedia());
     }
