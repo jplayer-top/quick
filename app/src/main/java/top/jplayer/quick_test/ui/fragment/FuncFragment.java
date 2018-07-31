@@ -17,6 +17,7 @@ import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.presenter.FuncPresenter;
 import top.jplayer.quick_test.ui.activity.DialogActivity;
+import top.jplayer.quick_test.ui.activity.FeedBackActivity;
 import top.jplayer.quick_test.ui.activity.QCodeActivity;
 import top.jplayer.quick_test.ui.activity.UpdateActivity;
 import top.jplayer.quick_test.ui.adapter.AdapterFunc;
@@ -69,6 +70,8 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView {
                 ActivityUtils.init().start(mActivity, UpdateActivity.class, "应用更新");
             } else if (position == 3) {
                 ActivityUtils.init().start(mActivity, QCodeActivity.class, "二维码");
+            } else if (position == 4) {
+                ActivityUtils.init().start(mActivity, FeedBackActivity.class, "音震反馈");
             }
         });
 
