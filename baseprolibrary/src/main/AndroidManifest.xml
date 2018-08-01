@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
     <application>
         <activity
             android:name=".ui.activity.ContactActivity"
@@ -17,14 +18,14 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.WebFullScreenActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name=".ui.activity.ActivityCustomCapture"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <!--android:configChanges="orientation"-->
+        <activity
+            android:name=".ui.activity.WebViewActivity"
+            android:launchMode="singleTop">
+        </activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

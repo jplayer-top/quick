@@ -65,7 +65,6 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
             FuncBean.ResponseBean.TypeBean typeBean = mAdapter.getData().get(position);
             ActivityUtils.init(mActivity).start(typeBean.typeClass, typeBean.typeTitle);
         });
-
         mPresenter = new FuncPresenter(this);
         mPresenter.requestFunc("111");
         showLoading();

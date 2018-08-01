@@ -18,6 +18,7 @@ public class QuickApplication extends MultiDexApplication {
         super.onCreate();
         BaseInitApplication.with(this)
                 .addUrl(CommonServer.KEY_TEST, CommonServer.VALUE_TEST)
+                .addUrl(CommonServer.KEY_TOP, CommonServer.VALUE_TOP)
                 .addUrl(CommonServer.KEY_VERSION, CommonServer.VALUE_VERSION)
                 .retrofit()
                 .swipeBack()

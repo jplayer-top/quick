@@ -1,8 +1,6 @@
 package top.jplayer.quick_test.mvp;
 
 import io.reactivex.Observable;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
@@ -35,12 +33,16 @@ public interface CommonServer {
     String VALUE_VERSION = "https://app.xiaoyi99.com/";
     String VERSION = BaseInitApplication.urlHeardHost + ":" + KEY_VERSION;
 
+    String KEY_TOP = "top";
+    String VALUE_TOP = "http://www.jplayer.top/";
+    String TOP = BaseInitApplication.urlHeardHost + ":" + KEY_TOP;
+
     @Headers(TEST)
     @GET("tools/mockapi/2247/home")
     Observable<HomeBean> home();
 
-    @Headers(TEST)
-    @GET("tools/mockapi/2247/func")
+    @Headers(TOP)
+    @GET("func.json")
     Observable<FuncBean> func(@Query("test") String test);
 
     @Headers(TEST)
