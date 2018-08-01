@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:enabled="false"
+        android:text="Event Bus "/>
+
+    <Button
+        android:id="@+id/btnBroad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="广播"/>
+
+    <Button
+        android:id="@+id/btnObserver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="观察者"/>
+
+</LinearLayout>

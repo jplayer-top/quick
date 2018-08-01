@@ -19,6 +19,7 @@ import java.util.Map;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import okhttp3.Interceptor;
 import top.jplayer.baseprolibrary.listener.SampleApplicationLifecycleCallbacks;
+import top.jplayer.baseprolibrary.listener.observer.CustomObserver;
 import top.jplayer.baseprolibrary.net.retrofit.RetrofitManager;
 
 /**
@@ -35,11 +36,13 @@ public class BaseInitApplication {
     public static final String urlHeardHost = "url_header_host";
     public static final Long TIME_OUT = 30L;
     public static List<Activity> sActivityList;
+    public static Map<String, CustomObserver> mObserverMap;
 
     private BaseInitApplication(Application application) {
         mWeakReference = new WeakReference<>(application);
         mUrlMap = new ArrayMap<>();
         sActivityList = new LinkedList<>();
+        mObserverMap = new ArrayMap<>();
     }
 
     public synchronized static BaseInitApplication with(Application application) {

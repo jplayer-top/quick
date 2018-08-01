@@ -9,26 +9,26 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.BaseInitApplication;
+import top.jplayer.baseprolibrary.listener.observer.CustomObservable;
+import top.jplayer.baseprolibrary.listener.observer.CustomObserver;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
-import top.jplayer.quick_test.ui.activity.ALiveActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
+import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.presenter.FuncPresenter;
-import top.jplayer.quick_test.ui.activity.DialogActivity;
-import top.jplayer.quick_test.ui.activity.FeedBackActivity;
-import top.jplayer.quick_test.ui.activity.QCodeActivity;
-import top.jplayer.quick_test.ui.activity.UpdateActivity;
 import top.jplayer.quick_test.ui.adapter.AdapterFunc;
 
 /**
  * Created by Obl on 2018/7/25.
- * top.jplayer.quick_test.ui.fragment
  * call me : jplayer_top@163.com
  * github : https://github.com/oblivion0001
  */
-public class FuncFragment extends SuperBaseFragment implements IContract.IView {
+public class FuncFragment extends SuperBaseFragment implements IContract.IView, CustomObserver {
     @BindView(R.id.tvToolTitle)
     TextView mTvToolTitle;
     @BindView(R.id.toolbar)
@@ -51,7 +51,7 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView {
     protected void initData(View rootView) {
         initImmersionBar();
         initRefreshStatusView(rootView);
-
+        BaseInitApplication.mObserverMap.put("func", this);
         mUnbinder = ButterKnife.bind(this, rootView);
         mIvToolLeft.setVisibility(View.INVISIBLE);
         mTvToolTitle.setText("发现");
@@ -62,17 +62,8 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView {
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            if (position == 0) {
-                ActivityUtils.init().start(mActivity, ALiveActivity.class, "后台保活");
-            } else if (position == 1) {
-                ActivityUtils.init().start(mActivity, DialogActivity.class, "常见弹窗");
-            } else if (position == 2) {
-                ActivityUtils.init().start(mActivity, UpdateActivity.class, "应用更新");
-            } else if (position == 3) {
-                ActivityUtils.init().start(mActivity, QCodeActivity.class, "二维码");
-            } else if (position == 4) {
-                ActivityUtils.init().start(mActivity, FeedBackActivity.class, "音震反馈");
-            }
+            FuncBean.ResponseBean.TypeBean typeBean = mAdapter.getData().get(position);
+            ActivityUtils.init(mActivity).start(typeBean.typeClass, typeBean.typeTitle);
         });
 
         mPresenter = new FuncPresenter(this);
@@ -96,10 +87,18 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView {
     public void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        BaseInitApplication.mObserverMap.remove("func");
     }
 
 
     public void responseFunc(FuncBean bean) {
         mAdapter.setNewData(bean.response.type);
+    }
+
+    @Override
+    public void update(CustomObservable o, Object arg) {
+        LogUtil.e(arg);
+        HomeBean.ResponseBean.TypeBean bean = (HomeBean.ResponseBean.TypeBean) arg;
+        ToastUtils.init().showQuickToast(bean.typeUrl);
     }
 }

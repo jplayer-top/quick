@@ -30,6 +30,7 @@ public class FuncBean extends BaseBean {
 
             public String typeTitle;
             public String typeUrl;
+            public String typeClass;
         }
     }
 }

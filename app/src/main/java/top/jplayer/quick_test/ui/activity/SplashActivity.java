@@ -29,7 +29,7 @@ public class SplashActivity extends SuperBaseActivity {
                 .fadeOut()
                 .duration(1500)
                 .onStop(() -> {
-                    ActivityUtils.init().start(this, MainActivity.class);
+                    ActivityUtils.init(this).start(MainActivity.class);
                     finish();
                 })
                 .start();
