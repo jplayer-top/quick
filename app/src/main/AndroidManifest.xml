@@ -42,15 +42,19 @@
             android:theme="@style/OblAppTheme.Splash"/>
         <activity
             android:name=".ui.activity.QCodeActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.FeedBackActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.EventActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.RetrofitActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
     </application>
 
