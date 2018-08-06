@@ -287,9 +287,6 @@ public abstract class DownloadByManager {
         intent.setAction(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
-        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) { // 6.0 - 7.0
-            uri = Uri.fromFile(apk);
-            intent.setDataAndType(uri, "application/vnd.android.package-archive");
         } else {//Android7.0之后获取uri要用contentProvider
             uri = FileProvider.getUriForFile(context, "top.jplayer.baseprolibrary.fileprovider", apk);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);

@@ -59,8 +59,6 @@ public class UpdatePresenter extends BasePresenter<UpdateActivity> {
         mLoading = new DialogLoading(mIView);
         mModel.requestApk(url).subscribe(new Observer<DownLoadResponseBody>() {
 
-            private File mFile;
-
             @Override
             public void onSubscribe(Disposable d) {
                 if (!d.isDisposed() && !mLoading.isShowing()) {
@@ -70,10 +68,10 @@ public class UpdatePresenter extends BasePresenter<UpdateActivity> {
 
             @Override
             public void onNext(DownLoadResponseBody downLoadResponseBody) {
-                mLoading.dismiss();
                 try {
+                    mLoading.dismiss();
                     InputStream is = downLoadResponseBody.byteStream();
-                    mFile = new File(Environment.getExternalStorageDirectory(), "aaa.apk");
+                    File mFile = new File(Environment.getExternalStorageDirectory(), "aaa.apk");
                     FileOutputStream fos = new FileOutputStream(mFile);
                     BufferedInputStream bis = new BufferedInputStream(is);
                     byte[] buffer = new byte[1024];
@@ -85,10 +83,10 @@ public class UpdatePresenter extends BasePresenter<UpdateActivity> {
                     fos.close();
                     bis.close();
                     is.close();
+                    mIView.downloadSuccess(mFile);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                mIView.downloadSuccess(mFile);
             }
 
             @Override
