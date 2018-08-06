@@ -11,4 +11,20 @@
         android:layout_margin="10dp"
         android:background="@drawable/select_btn_rect_5_white"
         android:text="Get 请求"/>
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="Post 请求"/>
+
+    <Button
+        android:id="@+id/btnFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="File 上传"/>
 </LinearLayout>

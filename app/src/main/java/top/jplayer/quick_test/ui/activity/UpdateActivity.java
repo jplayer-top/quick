@@ -67,7 +67,12 @@ public class UpdateActivity extends CommonToolBarActivity {
         mBtn01.setOnClickListener(this::whoClick);
         mBtn02.setOnClickListener(this::whoClick);
         mBtn03.setOnClickListener(this::whoClick);
-        mDownloadByManager = new DownloadByManager(this);
+        mDownloadByManager = new DownloadByManager(this) {
+            @Override
+            public void onProgressListener(long progress, long total) {
+                ToastUtils.init().showQuickToast(progress + "/" + total);
+            }
+        };
     }
 
     private void whoClick(View v) {
@@ -138,33 +143,4 @@ public class UpdateActivity extends CommonToolBarActivity {
             updateVersion(mVerBean);
         }
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver(dynamicReceiver, new IntentFilter(getPackageName() + ".download"));
-        if (mDownloadByManager != null)
-            mDownloadByManager.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(dynamicReceiver);
-        if (mDownloadByManager != null)
-            mDownloadByManager.onPause();
-    }
-
-    private BroadcastReceiver dynamicReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if ((context.getPackageName() + ".download").equals(intent.getAction())) {
-                long progress = intent.getLongExtra("progress", 0L);
-                long total = intent.getLongExtra("total", 0L);
-                ToastUtils.init().showQuickToast(context, progress + "/" + total);
-            }
-        }
-    };
-
 }

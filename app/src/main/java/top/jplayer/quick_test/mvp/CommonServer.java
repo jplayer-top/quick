@@ -1,16 +1,26 @@
 package top.jplayer.quick_test.mvp;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 import top.jplayer.baseprolibrary.BaseInitApplication;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
 import top.jplayer.baseprolibrary.net.retrofit.DownLoadResponseBody;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
+import top.jplayer.quick_test.mvp.model.bean.RetrofitPostBean;
 import top.jplayer.quick_test.mvp.model.bean.VersionBean;
 
 /**
@@ -52,6 +62,23 @@ public interface CommonServer {
     @Headers(VERSION)
     @GET("v2/ver2")
     Observable<VersionBean> version();
+
+    @Headers(TOP)
+    @FormUrlEncoded
+    @POST("request/{type}.php")
+    Observable<RetrofitPostBean> retrofitPost(@Path("type") String type,
+                                              @Field("tel") String tel,
+                                              @Field("pwd") String pwd);
+
+    @Headers(TOP)
+    @GET("request/get.php")
+    Observable<BaseBean> retrofitGet(@Query("test") String tel);
+
+    @Headers(TOP)
+    @Multipart
+    @POST("request/file.php")
+    Observable<BaseBean> retrofitFile(@Part("uid") RequestBody uid, @Part() MultipartBody.Part file);
+
 
     @Headers("download:download")
     @Streaming //IO 大文件下载处理

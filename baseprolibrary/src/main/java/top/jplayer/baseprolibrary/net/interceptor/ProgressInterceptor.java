@@ -2,19 +2,11 @@ package top.jplayer.baseprolibrary.net.interceptor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -41,32 +33,9 @@ public class ProgressInterceptor implements Interceptor {
                         Context context = BaseInitApplication.getContext();
                         Intent intent = new Intent();
                         intent.setAction(context.getPackageName() + ".download");
-                        intent.putExtra("total", total);
-                        intent.putExtra("progress", progress);
-                        Observable.interval(300, TimeUnit.MILLISECONDS)
-                                .subscribe(new Observer<Long>() {
-                                    @Override
-                                    public void onSubscribe(Disposable d) {
-                                        if (total <= progress && !d.isDisposed()) {
-                                            d.dispose();
-                                        }
-
-                                    }
-
-                                    @Override
-                                    public void onNext(Long aLong) {
-                                        context.sendBroadcast(intent);
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-
-                                    }
-
-                                    @Override
-                                    public void onComplete() {
-                                    }
-                                });
+                        intent.putExtra("total", total / 1024 / 1024);
+                        intent.putExtra("progress", progress / 1024 / 1024);
+                        context.sendBroadcast(intent);
                     }
                 }))
                 .build();

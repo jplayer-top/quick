@@ -32,7 +32,7 @@ import top.jplayer.baseprolibrary.utils.ToastUtils;
  * github : https://github.com/oblivion0001
  */
 
-public class DownloadByManager {
+public abstract class DownloadByManager {
 
     private WeakReference<Activity> weakReference;
     private DownloadManager mDownloadManager;
@@ -46,6 +46,7 @@ public class DownloadByManager {
     private String verUrl;
     private static DownloadByManager dManager;
     private String mApkName;
+    private final ProgressReceiver mProgressReceiver;
 
     public DownloadByManager(Activity activity) {
         weakReference = new WeakReference<>(activity);
@@ -53,6 +54,7 @@ public class DownloadByManager {
         mDownLoadChangeObserver = new DownloadChangeObserver(new Handler());
         mDownloadReceiver = new DownloadReceiver();
         mClickReceiver = new NotificationClickReceiver();
+        mProgressReceiver = new ProgressReceiver();
         mReqId = (long) SharePreUtil.getData(weakReference.get(), "DownloadId", -1L);
     }
 
@@ -61,13 +63,6 @@ public class DownloadByManager {
         this.verDesc = verDesc;
         this.verUrl = verUrl;
         return this;
-    }
-
-    public static DownloadByManager init(Activity activity) {
-        if (dManager == null) {
-            dManager = new DownloadByManager(activity);
-        }
-        return dManager;
     }
 
 
@@ -134,9 +129,10 @@ public class DownloadByManager {
         //设置监听Uri.parse("content://downloads/my_downloads")
         weakReference.get().getContentResolver().registerContentObserver(Uri.parse("content://downloads/my_downloads"), true,
                 mDownLoadChangeObserver);
-        // 注册广播，监听APK是否下载完成
+        // 注册广播，监听APK下载
         weakReference.get().registerReceiver(mDownloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         weakReference.get().registerReceiver(mClickReceiver, new IntentFilter(DownloadManager.ACTION_NOTIFICATION_CLICKED));
+        weakReference.get().registerReceiver(mProgressReceiver, new IntentFilter(weakReference.get().getPackageName() + ".download"));
     }
 
     /**
@@ -146,6 +142,7 @@ public class DownloadByManager {
         weakReference.get().getContentResolver().unregisterContentObserver(mDownLoadChangeObserver);
         weakReference.get().unregisterReceiver(mDownloadReceiver);
         weakReference.get().unregisterReceiver(mClickReceiver);
+        weakReference.get().unregisterReceiver(mProgressReceiver);
     }
 
     private void updateView() {
@@ -190,6 +187,22 @@ public class DownloadByManager {
             updateView();
         }
     }
+
+    public class ProgressReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if ((context.getPackageName() + ".download").equals(intent.getAction())) {
+                {
+                    long progress = intent.getLongExtra("progress", 0L);
+                    long total = intent.getLongExtra("total", 0L);
+                    onProgressListener(progress, total);
+                }
+            }
+        }
+    }
+
+    public abstract void onProgressListener(long progress, long total);
 
     public class DownloadReceiver extends BroadcastReceiver {
 
