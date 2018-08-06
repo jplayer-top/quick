@@ -1,9 +1,6 @@
 package top.jplayer.quick_test.ui.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
@@ -13,6 +10,8 @@ import android.widget.FrameLayout;
 
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -142,5 +141,23 @@ public class UpdateActivity extends CommonToolBarActivity {
         if (resultCode == RESULT_OK && requestCode == 10000 && mVerBean != null) {
             updateVersion(mVerBean);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mDownloadByManager != null)
+            mDownloadByManager.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mDownloadByManager != null)
+            mDownloadByManager.onPause();
+    }
+
+    public void downloadSuccess(File file) {
+        mDownloadByManager.installApk(this, file);
     }
 }

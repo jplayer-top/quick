@@ -13,8 +13,8 @@ import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.net.retrofit.DownLoadResponseBody;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
+import top.jplayer.baseprolibrary.net.tip.DialogLoading;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.model.FuncModel;
 import top.jplayer.quick_test.mvp.model.bean.VersionBean;
@@ -30,6 +30,7 @@ import top.jplayer.quick_test.ui.activity.UpdateActivity;
 public class UpdatePresenter extends BasePresenter<UpdateActivity> {
 
     private final FuncModel mModel;
+    private DialogLoading mLoading;
 
     public UpdatePresenter(UpdateActivity iView) {
         super(iView);
@@ -55,18 +56,25 @@ public class UpdatePresenter extends BasePresenter<UpdateActivity> {
     }
 
     public void requestApk(String url) {
+        mLoading = new DialogLoading(mIView);
         mModel.requestApk(url).subscribe(new Observer<DownLoadResponseBody>() {
+
+            private File mFile;
+
             @Override
             public void onSubscribe(Disposable d) {
-
+                if (!d.isDisposed() && !mLoading.isShowing()) {
+                    mLoading.show();
+                }
             }
 
             @Override
             public void onNext(DownLoadResponseBody downLoadResponseBody) {
+                mLoading.dismiss();
                 try {
                     InputStream is = downLoadResponseBody.byteStream();
-                    File file = new File(Environment.getExternalStorageDirectory(), "aaa.apk");
-                    FileOutputStream fos = new FileOutputStream(file);
+                    mFile = new File(Environment.getExternalStorageDirectory(), "aaa.apk");
+                    FileOutputStream fos = new FileOutputStream(mFile);
                     BufferedInputStream bis = new BufferedInputStream(is);
                     byte[] buffer = new byte[1024];
                     int len;
@@ -80,17 +88,16 @@ public class UpdatePresenter extends BasePresenter<UpdateActivity> {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                LogUtil.e("success");
+                mIView.downloadSuccess(mFile);
             }
 
             @Override
             public void onError(Throwable e) {
-
+                mLoading.dismiss();
             }
 
             @Override
             public void onComplete() {
-
             }
         });
     }

@@ -78,6 +78,7 @@ public abstract class NetCallBackObserver<T extends BaseBean> implements Observe
             responseFail(t);
         }
     }
+
     public abstract void responseSuccess(T t);
 
     public abstract void responseFail(T t);

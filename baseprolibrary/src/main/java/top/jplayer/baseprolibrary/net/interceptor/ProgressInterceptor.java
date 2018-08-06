@@ -28,7 +28,7 @@ public class ProgressInterceptor implements Interceptor {
         List<String> headerValues = requestHeader.headers("download");
         return requestBody.newBuilder()
                 .body(new DownLoadResponseBody(requestBody.body(), (progress, total, done) -> {
-                    LogUtil.e("onProgress: " + "total ---->" + total + "done ---->" + progress);
+                    LogUtil.e("onProgress: " + "total ---->" + total + "--- done ---->" + progress);
                     if (headerValues != null && headerValues.contains("download")) {
                         Context context = BaseInitApplication.getContext();
                         Intent intent = new Intent();

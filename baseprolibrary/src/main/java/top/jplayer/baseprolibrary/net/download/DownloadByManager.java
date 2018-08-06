@@ -280,17 +280,21 @@ public abstract class DownloadByManager {
     /**
      * 安装应用
      */
-    private void installApk(Context context, File apk) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+    public void installApk(Context context, File apk) {
+        Uri uri;
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) { // 6.0 - 7.0
+            uri = Uri.fromFile(apk);
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
         } else {//Android7.0之后获取uri要用contentProvider
-            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), mApkName);
-            Uri uri = FileProvider.getUriForFile(context, "top.jplayer.baseprolibrary.fileprovider", file);
+            uri = FileProvider.getUriForFile(context, "top.jplayer.baseprolibrary.fileprovider", apk);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
         }
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
