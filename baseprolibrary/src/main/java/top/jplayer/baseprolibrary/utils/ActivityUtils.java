@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 
-import java.lang.ref.SoftReference;
-
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 
 /**
@@ -19,53 +17,48 @@ import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 
 public class ActivityUtils {
     private static ActivityUtils activityUtils;
-    private SoftReference<Activity> weakReference;
 
-    public ActivityUtils(Activity activity) {
-        this.weakReference = new SoftReference<>(activity);
-    }
-
-    public static synchronized ActivityUtils init(Activity activity) {
+    public static synchronized ActivityUtils init() {
         if (activityUtils == null) {
             synchronized (ActivityUtils.class) {
                 if (activityUtils == null) {
-                    activityUtils = new ActivityUtils(activity);
+                    activityUtils = new ActivityUtils();
                 }
             }
         }
         return activityUtils;
     }
 
-    public void start(Class tClass, MotionEvent event) {
-        Intent i = new Intent(weakReference.get(), tClass);
+    public void start(Activity activity, Class tClass, MotionEvent event) {
+        Intent i = new Intent(activity, tClass);
         i.putExtra("x", (int) event.getX());
         i.putExtra("y", (int) event.getY());
-        weakReference.get().startActivity(i);
+        activity.startActivity(i);
     }
 
-    public void start(String tClass, String title) {
-        start(tClass, title, null);
+    public void start(Activity activity, String tClass, String title) {
+        start(activity, tClass, title, null);
     }
 
-    public void start(String tClass, String title, String bundle) {
+    public void start(Activity activity, String tClass, String title, String bundle) {
         try {
-            ComponentName cn = new ComponentName(weakReference.get(), tClass);
+            ComponentName cn = new ComponentName(activity, tClass);
             Intent i = new Intent();
             i.setComponent(cn);
             if (title != null) i.putExtra("title", title);
             if (bundle != null) i.putExtra("bundle", bundle);
-            weakReference.get().startActivity(i);
+            activity.startActivity(i);
         } catch (Exception e) {
             e.printStackTrace();
             ToastUtils.init().showQuickToast("无法查找Activity");
         }
     }
 
-    public void start(Class tClass, String title, Bundle bundle) {
-        Intent i = new Intent(weakReference.get(), tClass);
+    public void start(Activity activity, Class tClass, String title, Bundle bundle) {
+        Intent i = new Intent(activity, tClass);
         if (title != null) i.putExtra("title", title);
         if (bundle != null) i.putExtra("bundle", bundle);
-        weakReference.get().startActivity(i);
+        activity.startActivity(i);
     }
 
     /**
@@ -76,44 +69,44 @@ public class ActivityUtils {
      * @param type
      * @param mFid
      */
-    public void startConversion(Class clazz, String title, String type, String mFid) {
-        Intent intent = new Intent(weakReference.get(), clazz);
+    public void startConversion(Activity activity, Class clazz, String title, String type, String mFid) {
+        Intent intent = new Intent(activity, clazz);
         intent.putExtra("title", title);
         intent.putExtra("fid", mFid.substring(2));
         intent.setAction("android.groupIntent.action.VIEW");
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setData(Uri.parse("rong://com.ilanchuang.xiaoi/conversation/" + type + "/?targetId=" + mFid));
-        weakReference.get().startActivity(intent);
+        activity.startActivity(intent);
     }
 
-    public void start(Class tClass) {
-        start(tClass, null, null);
+    public void start(Activity activity, Class tClass) {
+        start(activity, tClass, null, null);
     }
 
-    public void start(Class tClass, String title) {
-        start(tClass, title, null);
+    public void start(Activity activity, Class tClass, String title) {
+        start(activity, tClass, title, null);
     }
 
-    public void startForResult(Class tClass, String title, Bundle bundle, int requestCode) {
-        Intent i = new Intent(weakReference.get(), tClass);
+    public void startForResult(Activity activity, Class tClass, String title, Bundle bundle, int requestCode) {
+        Intent i = new Intent(activity, tClass);
         if (title != null) i.putExtra("title", title);
         if (bundle != null) i.putExtra("bundle", bundle);
-        (weakReference.get()).startActivityForResult(i, requestCode);
+        activity.startActivityForResult(i, requestCode);
     }
 
-    public void startForResult(Class tClass, String title, int requestCode) {
-        startForResult(tClass, title, null, requestCode);
+    public void startForResult(Activity activity, Class tClass, String title, int requestCode) {
+        startForResult(activity, tClass, title, null, requestCode);
     }
 
-    public void startForResult(Class tClass, int requestCode) {
-        startForResult(tClass, null, null, requestCode);
+    public void startForResult(Activity activity, Class tClass, int requestCode) {
+        startForResult(activity, tClass, null, null, requestCode);
     }
 
     /**
      * 默认为 requestCode = 1
      */
-    public void startForResult(Class tClass, String title) {
-        startForResult(tClass, title, null, 1);
+    public void startForResult(Activity activity, Class tClass, String title) {
+        startForResult(activity, tClass, title, null, 1);
     }
 
     public void startFragmentForResult(SuperBaseFragment fragment, Class tClass, String title, int requestCode) {
@@ -130,7 +123,7 @@ public class ActivityUtils {
     /**
      * 默认为 requestCode = 1
      */
-    public void startForResult(Class tClass) {
-        startForResult(tClass, null, null, 1);
+    public void startForResult(Activity activity, Class tClass) {
+        startForResult(activity, tClass, null, null, 1);
     }
 }

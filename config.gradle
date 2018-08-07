@@ -39,10 +39,12 @@ ext {
 
     retrofit = [
             //------ retrofit和RxJava ---------
-            retrofit                : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",
-            retrofitConverterGson   : "com.squareup.retrofit2:converter-gson:$dependVersion.retrofitSdkVersion",
-            retrofitAdapterRxjava2  : "com.squareup.retrofit2:adapter-rxjava2:$dependVersion.retrofitSdkVersion",
-            okhttp3LoggerInterceptor: 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+            retrofit                 : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",
+            retrofitConverterGson    : "com.squareup.retrofit2:converter-gson:$dependVersion.retrofitSdkVersion",
+            retrofitConverterProtobuf: "com.squareup.retrofit2:converter-protobuf:$dependVersion.retrofitSdkVersion",
+            retrofitConverterScalars : "com.squareup.retrofit2:converter-scalars:$dependVersion.retrofitSdkVersion",
+            retrofitAdapterRxjava2   : "com.squareup.retrofit2:adapter-rxjava2:$dependVersion.retrofitSdkVersion",
+            okhttp3LoggerInterceptor : 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     ]
 
     rxJava = [

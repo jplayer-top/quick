@@ -37,10 +37,12 @@ public class JsonFixInterceptor implements Interceptor {
                 source.request(Long.MAX_VALUE); // Buffer the entire body.
                 Buffer buffer = source.buffer();
                 MediaType contentType = body.contentType();
-                String string = buffer.clone().readString(UTF8);
-                String bodyString = getJsonBody(string);
-                ResponseBody responseBody = ResponseBody.create(contentType, bodyString);
-                response = response.newBuilder().body(responseBody).build();
+                if (contentType != null && contentType.type().contains("json")) {//判断是否是json类型
+                    String string = buffer.clone().readString(UTF8);
+                    String bodyString = getJsonBody(string);
+                    ResponseBody responseBody = ResponseBody.create(contentType, bodyString);
+                    response = response.newBuilder().body(responseBody).build();
+                }
             }
             return response;
         }

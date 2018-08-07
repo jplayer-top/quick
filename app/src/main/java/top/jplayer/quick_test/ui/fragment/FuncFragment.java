@@ -63,7 +63,7 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             FuncBean.ResponseBean.TypeBean typeBean = mAdapter.getData().get(position);
-            ActivityUtils.init(mActivity).start(typeBean.typeClass, typeBean.typeTitle);
+            ActivityUtils.init().start(mActivity, typeBean.typeClass, typeBean.typeTitle);
         });
         mPresenter = new FuncPresenter(this);
         mPresenter.requestFunc("111");

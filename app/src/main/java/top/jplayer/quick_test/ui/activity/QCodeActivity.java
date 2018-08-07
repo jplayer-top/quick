@@ -74,7 +74,7 @@ public class QCodeActivity extends CommonToolBarActivity {
     private void startCamera(Class clazz) {
         AndPermission.with(this)
                 .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE)
-                .onGranted(permissions -> ActivityUtils.init(mActivity).startForResult(clazz,
+                .onGranted(permissions -> ActivityUtils.init().startForResult(mActivity, clazz,
                         "扫一扫"))
                 .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
                 .start();
