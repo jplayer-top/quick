@@ -23,6 +23,7 @@ public class QuickApplication extends MultiDexApplication {
                 .retrofit()
                 .swipeBack()
                 .zxing()
+                .skin()
                 .fixFileProvide();
     }
 }

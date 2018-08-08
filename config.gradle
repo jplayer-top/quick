@@ -51,6 +51,13 @@ ext {
             rxJava   : "io.reactivex.rxjava2:rxjava:$dependVersion.rxJava",
             rxAndroid: "io.reactivex.rxjava2:rxandroid:$dependVersion.rxAndroid"
     ]
+    //夜间模式皮肤
+    skin = [
+            skinBase            : 'skin.support:skin-support:3.1.0-beta1',                  // skin-support 基础控件支持
+            skinDesign          : 'skin.support:skin-support-design:3.1.0-beta1',        // skin-support-design material[可选]
+            skinCardview        : 'skin.support:skin-support-cardview:3.1.0-beta1',       // skin-support-cardview   [可选]
+            skinConstraintLayout: 'skin.support:skin-support-constraint-layout:3.1.0-beta1' // skin-support-constraint-layout
+    ]
     //RecyclerView 适配器
     baserecyclerviewadapterhelper = 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.3'
     //V-layout
@@ -101,6 +108,7 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
+    skinLibs = skin.values()
     otherLibs = [barlibrary,
                  glide,
                  smartrefresh,

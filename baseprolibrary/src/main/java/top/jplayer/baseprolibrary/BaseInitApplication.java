@@ -18,6 +18,10 @@ import java.util.Map;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import okhttp3.Interceptor;
+import skin.support.SkinCompatManager;
+import skin.support.app.SkinCardViewInflater;
+import skin.support.constraint.app.SkinConstraintViewInflater;
+import skin.support.design.app.SkinMaterialViewInflater;
 import top.jplayer.baseprolibrary.listener.SampleApplicationLifecycleCallbacks;
 import top.jplayer.baseprolibrary.listener.observer.CustomObserver;
 import top.jplayer.baseprolibrary.net.retrofit.RetrofitManager;
@@ -134,6 +138,17 @@ public class BaseInitApplication {
      */
     public BaseInitApplication zxing() {
         ZXingLibrary.initDisplayOpinion(getContext());
+        return this;
+    }
+
+    public BaseInitApplication skin() {
+        SkinCompatManager.withoutActivity(this.getApplication())                         // 基础控件换肤初始化
+                .addInflater(new SkinMaterialViewInflater())            // material design 控件换肤初始化[可选]
+                .addInflater(new SkinConstraintViewInflater())          // ConstraintLayout 控件换肤初始化[可选]
+                .addInflater(new SkinCardViewInflater())                // CardView v7 控件换肤初始化[可选]
+                .setSkinStatusBarColorEnable(true)                     // 关闭状态栏换肤，默认打开[可选]
+                .setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
+                .loadSkin();
         return this;
     }
 

@@ -77,6 +77,8 @@ dependencies {
     api rootProject.ext.networkLibs
     //RX
     api rootProject.ext.rxJavaLibs
+    //皮肤修改
+    api rootProject.ext.skinLibs
 
     //RecyclerView Help
     api rootProject.ext.baserecyclerviewadapterhelper

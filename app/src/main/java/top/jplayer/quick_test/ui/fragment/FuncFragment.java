@@ -9,6 +9,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import skin.support.SkinCompatManager;
 import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.listener.observer.CustomObservable;
 import top.jplayer.baseprolibrary.listener.observer.CustomObserver;
@@ -40,6 +41,7 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
     private Unbinder mUnbinder;
     private AdapterFunc mAdapter;
     private FuncPresenter mPresenter;
+    private boolean isNight = false;
 
     @Override
     public int initLayout() {
@@ -63,7 +65,16 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             FuncBean.ResponseBean.TypeBean typeBean = mAdapter.getData().get(position);
-            ActivityUtils.init().start(mActivity, typeBean.typeClass, typeBean.typeTitle);
+            if (typeBean.typeTitle.equals("夜间模式")) {
+                isNight = !isNight;
+                if (isNight) {
+                    SkinCompatManager.getInstance().loadSkin("night", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN); // 后缀加载
+                } else {
+                    SkinCompatManager.getInstance().restoreDefaultTheme();
+                }
+            } else {
+                ActivityUtils.init().start(mActivity, typeBean.typeClass, typeBean.typeTitle);
+            }
         });
         mPresenter = new FuncPresenter(this);
         mPresenter.requestFunc("111");
