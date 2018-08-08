@@ -21,10 +21,18 @@
         android:text="Post 请求"/>
 
     <Button
-        android:id="@+id/btnFile"
+        android:id="@+id/btnFileUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/select_btn_rect_5_white"
-        android:text="File 上传"/>
+        android:text="文件 上传(进度)"/>
+
+    <Button
+        android:id="@+id/btnFileDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="文件 下载(进度)"/>
 </LinearLayout>

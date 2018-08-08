@@ -6,6 +6,7 @@ import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
@@ -45,5 +46,10 @@ public class RetrofitModel extends BaseModel<CommonServer> {
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), uid);
 
         return mServer.retrofitFile(description, body).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<ResponseBody> requestApk(String url) {
+        return mServer.apk(url)
+                .compose(new IoMainSchedule<>());
     }
 }

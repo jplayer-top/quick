@@ -16,6 +16,7 @@ import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.net.tip.DialogLoading;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.StringUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.presenter.RetrofitPresenter;
 
@@ -31,8 +32,10 @@ public class RetrofitActivity extends CommonToolBarActivity {
     Button mBtnGet;
     @BindView(R.id.btnPost)
     Button mBtnPost;
-    @BindView(R.id.btnFile)
-    Button mBtnFile;
+    @BindView(R.id.btnFileUp)
+    Button mBtnFileUp;
+    @BindView(R.id.btnFileDown)
+    Button mBtnFileDown;
     private Unbinder mUnbinder;
     private RetrofitPresenter mPresenter;
 
@@ -48,7 +51,8 @@ public class RetrofitActivity extends CommonToolBarActivity {
         mPresenter = new RetrofitPresenter(this);
         mBtnGet.setOnClickListener(v -> mPresenter.requestGet("rerwer"));
         mBtnPost.setOnClickListener(v -> mPresenter.requestPost("17600001111", "123456"));
-        mBtnFile.setOnClickListener(v -> {
+        mBtnFileDown.setOnClickListener(v -> mPresenter.requestFileDown("123456"));
+        mBtnFileUp.setOnClickListener(v -> {
             AndPermission.with(this)
                     .permission(Permission.WRITE_EXTERNAL_STORAGE)
                     .onGranted(permissions -> {
@@ -89,4 +93,7 @@ public class RetrofitActivity extends CommonToolBarActivity {
         mUnbinder.unbind();
     }
 
+    public void downloadSuccess(File file) {
+        ToastUtils.init().showQuickToast("文件地址" + file.getAbsolutePath());
+    }
 }

@@ -7,6 +7,8 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.net.tip.PostImplTip;
+import top.jplayer.baseprolibrary.utils.FileUtil;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.model.RetrofitModel;
 import top.jplayer.quick_test.mvp.model.bean.RetrofitPostBean;
@@ -77,6 +79,15 @@ public class RetrofitPresenter extends BasePresenter<RetrofitActivity> {
         };
         mModel.file(uid, file, key).subscribe(observer);
         addSubscription(observer.getDisposable());
+    }
+
+    public void requestFileDown(String url) {
+        url = "http://www.jplayer.top/app-release.apk";
+        String fileName = url.substring(url.lastIndexOf("/") + 1);
+        mModel.requestApk(url).subscribe(responseBody -> {
+            File file = FileUtil.saveFile(responseBody.byteStream(), fileName);
+            mIView.downloadSuccess(file);
+        }, throwable -> LogUtil.net(throwable.getMessage()));
     }
 
 }

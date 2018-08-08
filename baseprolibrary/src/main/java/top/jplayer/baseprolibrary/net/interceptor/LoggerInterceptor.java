@@ -1,5 +1,7 @@
 package top.jplayer.baseprolibrary.net.interceptor;
 
+import android.support.annotation.NonNull;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -130,7 +132,7 @@ public class LoggerInterceptor implements Interceptor {
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         LoggerInterceptor.Level level = this.level;
 
         Request request = chain.request();
@@ -146,7 +148,6 @@ public class LoggerInterceptor implements Interceptor {
 
         RequestBody requestBody = request.body();
         boolean hasRequestBody = requestBody != null;
-
         Connection connection = chain.connection();
         Protocol protocol = connection != null ? connection.protocol() : Protocol.HTTP_1_1;
         String requestStartMessage = "--> " + request.method() + ' ' + request.url() + ' ' + protocol;
