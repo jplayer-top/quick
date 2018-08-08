@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#229f83</color>
     <color name="colorPrimary_night">#313335</color>
+    <color name="colorPrimary_orange">#ffa500</color>
 
     <color name="colorPrimaryDark">#087a60</color>
     <color name="colorAccent">#229f83</color>
@@ -18,9 +19,11 @@
 
     <color name="white">#FFFFFF</color><!--白色-->
     <color name="white_night">#313335</color><!--白色-->
+    <color name="white_orange">#ffa500</color><!--白色-->
 
     <color name="whiteF8">#F8F8F8</color><!--白色-->
     <color name="whiteF8_night">#313335</color><!--白色-->
+    <color name="whiteF8_orange">#ffa500</color><!--白色-->
 
     <color name="snow">#fffafa</color><!--雪白色 -->
     <color name="floralwhite">#fffaf0</color><!--花白色 -->
@@ -29,6 +32,7 @@
 
     <color name="whitesmoke">#f5f5f5</color><!--烟白色 -->
     <color name="whitesmoke_night">#313335</color><!--烟白色 -->
+    <color name="whitesmoke_orange">#ffa500</color><!--烟白色 -->
 
     <color name="antiquewhite">#faebd7</color><!--古董白 -->
     <color name="navajowhite">#ffdead</color><!--纳瓦白 -->

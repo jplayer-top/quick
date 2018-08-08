@@ -41,7 +41,7 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
     private Unbinder mUnbinder;
     private AdapterFunc mAdapter;
     private FuncPresenter mPresenter;
-    private boolean isNight = false;
+    private int theme = 0;
 
     @Override
     public int initLayout() {
@@ -65,10 +65,18 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             FuncBean.ResponseBean.TypeBean typeBean = mAdapter.getData().get(position);
-            if (typeBean.typeTitle.equals("夜间模式")) {
-                isNight = !isNight;
-                if (isNight) {
-                    SkinCompatManager.getInstance().loadSkin("night", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN); // 后缀加载
+            if (typeBean.typeTitle.equals("主题切换")) {
+                theme += 1;
+                if (theme > 2) {
+                    theme = 0;
+                }
+                //只需在color 文件中配置 主题颜色
+                if (theme == 1) {
+                    SkinCompatManager.getInstance().loadSkin("night",
+                            SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN); // 后缀加载
+                } else if (theme == 2) {
+                    SkinCompatManager.getInstance().loadSkin("orange",
+                            SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN); // 后缀加载
                 } else {
                     SkinCompatManager.getInstance().restoreDefaultTheme();
                 }
