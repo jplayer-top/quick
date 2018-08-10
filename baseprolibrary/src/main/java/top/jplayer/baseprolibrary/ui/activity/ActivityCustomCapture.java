@@ -68,6 +68,7 @@ public class ActivityCustomCapture extends CommonToolBarActivity {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
             ToastUtils.init().showQuickToast(result);
+            StringUtils.init().copyString(mActivity, result);
             refresh();
         }
 
@@ -121,8 +122,8 @@ public class ActivityCustomCapture extends CommonToolBarActivity {
                                         }
                                         if (TextUtils.isEmpty(result)) {
                                             ToastUtils.init().showInfoToast(mActivity, "未发现二维码");
-                                            refresh();
                                         } else {
+                                            StringUtils.init().copyString(mActivity, result);
                                             ToastUtils.init().showQuickToast(result);
                                         }
                                     }
@@ -136,7 +137,7 @@ public class ActivityCustomCapture extends CommonToolBarActivity {
 
                                     @Override
                                     public void onComplete() {
-
+                                        refresh();
                                     }
                                 });
                     }

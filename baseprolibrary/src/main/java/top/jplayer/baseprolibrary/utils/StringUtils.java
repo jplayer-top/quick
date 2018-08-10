@@ -1,5 +1,7 @@
 package top.jplayer.baseprolibrary.utils;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -113,6 +115,17 @@ public class StringUtils {
             ToastUtils.init().showQuickToast(msg);
             edit.setText(s.subSequence(0, maxLen));
             edit.setSelection(edit.getText().length());
+        }
+    }
+
+    public void copyString(Context context, String copy) {
+        //获取剪贴板管理器：
+        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        // 创建普通字符型ClipData
+        ClipData mClipData = ClipData.newPlainText("Label", copy);
+        // 将ClipData内容放到系统剪贴板里。
+        if (cm != null) {
+            cm.setPrimaryClip(mClipData);
         }
     }
 

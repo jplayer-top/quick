@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.ui.Fragment;
+package top.jplayer.baseprolibrary.ui.fragment;
 
 import android.graphics.Color;
 import android.view.View;

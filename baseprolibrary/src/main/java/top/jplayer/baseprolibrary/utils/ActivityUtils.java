@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 
-import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 
 /**
  * Created by Obl on 2018/1/18.

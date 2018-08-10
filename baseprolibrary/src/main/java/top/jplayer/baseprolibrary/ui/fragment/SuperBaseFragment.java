@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.ui.Fragment;
+package top.jplayer.baseprolibrary.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

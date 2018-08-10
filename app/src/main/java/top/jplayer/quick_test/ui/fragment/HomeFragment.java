@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
-import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.presenter.HomePresenter;

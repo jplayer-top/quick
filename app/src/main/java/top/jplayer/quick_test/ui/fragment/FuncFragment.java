@@ -14,7 +14,7 @@ import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.listener.observer.CustomObservable;
 import top.jplayer.baseprolibrary.listener.observer.CustomObserver;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
-import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
