@@ -72,6 +72,11 @@
             android:name=".ui.activity.PopupActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.LoginGuideActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/OblAppTheme.Splash"/>
     </application>
 
 </manifest>
