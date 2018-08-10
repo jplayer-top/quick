@@ -18,6 +18,8 @@ import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.quick_test.R;
+import top.jplayer.quick_test.mvp.model.UserDaoModel;
+import top.jplayer.quick_test.mvp.model.bean.UserBean;
 import top.jplayer.quick_test.mvp.presenter.RetrofitPresenter;
 
 /**
@@ -36,6 +38,8 @@ public class RetrofitActivity extends CommonToolBarActivity {
     Button mBtnFileUp;
     @BindView(R.id.btnFileDown)
     Button mBtnFileDown;
+    @BindView(R.id.btnGreen)
+    Button mBtnGreen;
     private Unbinder mUnbinder;
     private RetrofitPresenter mPresenter;
 
@@ -63,6 +67,12 @@ public class RetrofitActivity extends CommonToolBarActivity {
                     })
                     .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
                     .start();
+        });
+        mBtnGreen.setOnClickListener(v -> {
+            UserDaoModel model = new UserDaoModel(this);
+            UserBean userBean = new UserBean(null, "Obl", 25);
+            model.insertUser(userBean);
+            ToastUtils.init().showQuickToast("插入成功");
         });
     }
 

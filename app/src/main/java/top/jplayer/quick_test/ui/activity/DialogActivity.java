@@ -28,6 +28,7 @@ import top.jplayer.baseprolibrary.ui.dialog.DialogRedHb;
 import top.jplayer.baseprolibrary.ui.dialog.DialogShare;
 import top.jplayer.baseprolibrary.ui.dialog.DialogSign;
 import top.jplayer.baseprolibrary.ui.dialog.DialogSubmitSure;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.PickerUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.quick_test.R;
@@ -66,6 +67,8 @@ public class DialogActivity extends CommonToolBarActivity implements IContract.I
     Button mBtn10;
     @BindView(R.id.btn_11)
     Button mBtn11;
+    @BindView(R.id.btn_12)
+    Button mBtn12;
     private Unbinder mUnbinder;
 
     @Override
@@ -131,6 +134,7 @@ public class DialogActivity extends CommonToolBarActivity implements IContract.I
         mBtn08.setOnClickListener(v -> new DialogShare(this).show());
         mBtn09.setOnClickListener(v -> new DialogSign(this).show());
         mBtn10.setOnClickListener(v -> new DialogSubmitSure(this).show());
+        mBtn12.setOnClickListener(v -> ActivityUtils.init().start(this, PopupActivity.class,"Popup"));
         mBtn11.setOnClickListener(v -> {
             //具体使用请查看：https://github.com/Bigkoo/Android-PickerView
             PickerUtils pickerUtils = new PickerUtils();

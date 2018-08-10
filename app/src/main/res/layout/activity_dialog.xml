@@ -107,6 +107,15 @@
             android:background="@drawable/select_btn_rect_5_white"
             android:text="时间选择器"/>
 
+        <Button
+            android:id="@+id/btn_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/select_btn_rect_5_white"
+            android:text="Popup"/>
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
 
