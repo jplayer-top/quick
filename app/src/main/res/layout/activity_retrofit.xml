@@ -30,6 +30,14 @@
         android:text="Green Dao数据库"/>
 
     <Button
+        android:id="@+id/btnLookDB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="浏览器查看数据库"/>
+
+    <Button
         android:id="@+id/btnFileUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

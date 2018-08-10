@@ -90,6 +90,8 @@ ext {
     qcode = 'cn.yipianfengye.android:zxing-library:2.2'
     //多边形图+图片滤镜
     polygon = 'com.kingja.magicmirror:magicmirror:1.2.0'
+    //数据库 实时增删改查
+    debugDB  = 'com.amitshekhar.android:debug-db:1.0.4'
     //仿微信滑动返回
     swipebacklayout = 'cn.bingoogolapple:bga-swipebacklayout:1.1.8@aar'
     //毛玻璃效果

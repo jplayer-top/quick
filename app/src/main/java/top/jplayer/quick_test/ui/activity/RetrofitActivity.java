@@ -40,6 +40,8 @@ public class RetrofitActivity extends CommonToolBarActivity {
     Button mBtnFileDown;
     @BindView(R.id.btnGreen)
     Button mBtnGreen;
+    @BindView(R.id.btnLookDB)
+    Button mBtnLookDB;
     private Unbinder mUnbinder;
     private RetrofitPresenter mPresenter;
 
@@ -56,6 +58,7 @@ public class RetrofitActivity extends CommonToolBarActivity {
         mBtnGet.setOnClickListener(v -> mPresenter.requestGet("rerwer"));
         mBtnPost.setOnClickListener(v -> mPresenter.requestPost("17600001111", "123456"));
         mBtnFileDown.setOnClickListener(v -> mPresenter.requestFileDown("123456"));
+        mBtnLookDB.setOnClickListener(v -> ToastUtils.init().showQuickToast("浏览器 打开当前手机IP:9898"));
         mBtnFileUp.setOnClickListener(v -> {
             AndPermission.with(this)
                     .permission(Permission.WRITE_EXTERNAL_STORAGE)
