@@ -1,37 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<top.jplayer.baseprolibrary.widgets.PullZoomView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:pzv_isParallax="true"
+    app:pzv_isZoomEnable="true"
+    app:pzv_sensitive="1.5"
+    app:pzv_zoomTime="500">
 
-    <!--<Button-->
-    <!--android:id="@+id/btn01"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_margin="10dp"-->
-    <!--android:background="@drawable/select_btn_rect_5_white"-->
-    <!--android:text="引导页"/>-->
-
-    <com.robinhood.ticker.TickerView
-        android:id="@+id/ticker"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        app:ticker_animationDuration="500"
-        app:ticker_defaultCharacterList="number"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvNum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="0.00"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"/>
-</LinearLayout>
+        <!--<Button-->
+        <!--android:id="@+id/btn01"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:background="@drawable/select_btn_rect_5_white"-->
+        <!--android:text="引导页"/>-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:tag="header">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:tag="zoom1"
+                android:background="@drawable/two_level_pic"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:tag="zoom"
+                android:text="我是固定的"
+                android:textColor="@color/white"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:tag="content">
+
+            <com.robinhood.ticker.TickerView
+                android:id="@+id/ticker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                app:ticker_animationDuration="500"
+                app:ticker_defaultCharacterList="number"/>
+
+            <TextView
+                android:id="@+id/tvNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="0.00"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</top.jplayer.baseprolibrary.widgets.PullZoomView>
