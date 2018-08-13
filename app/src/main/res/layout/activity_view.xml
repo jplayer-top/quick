@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <!--<Button-->
+    <!--android:id="@+id/btn01"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:background="@drawable/select_btn_rect_5_white"-->
+    <!--android:text="引导页"/>-->
+
+    <com.robinhood.ticker.TickerView
+        android:id="@+id/ticker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:ticker_animationDuration="500"
+        app:ticker_defaultCharacterList="number"/>
+
+    <TextView
+        android:id="@+id/tvNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="0.00"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"/>
+</LinearLayout>
