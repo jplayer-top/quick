@@ -130,7 +130,6 @@ public class LoginActivity extends SuperBaseActivity implements TextWatcher, ICo
         mMap = new HashMap<>();
         mLlWxBindIssue.setVisibility(View.INVISIBLE);
         isCheckKeyboard = true;
-        isOpenDoubleBack = true;
     }
 
     @Override

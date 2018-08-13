@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.quick_test.ui.activity.LoginActivity;
 
 /**
@@ -22,31 +23,31 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
     }
 
     public void verifySms(String phone, String smCode) {
-        Observable.timer(2000, TimeUnit.MILLISECONDS).subscribe(aLong -> {
+        Observable.timer(2000, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
             mIView.verifySms();
         });
     }
 
     public void sendSms(Map<String, String> map, Button rtnCode) {
-        Observable.timer(2000, TimeUnit.MILLISECONDS).subscribe(aLong -> {
+        Observable.timer(2000, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
             mIView.smsSend(rtnCode);
         });
     }
 
     public void forget(Map<String, String> map) {
-        Observable.timer(2000, TimeUnit.MILLISECONDS).subscribe(aLong -> {
+        Observable.timer(2000, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
             mIView.forget();
         });
     }
 
     public void login(String phone, String password) {
-        Observable.timer(2000, TimeUnit.MILLISECONDS).subscribe(aLong -> {
+        Observable.timer(2000, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
             mIView.login();
         });
     }
 
     public void register(Map<String, String> map) {
-        Observable.timer(2000, TimeUnit.MILLISECONDS).subscribe(aLong -> {
+        Observable.timer(2000, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
             login(map.get("phone"), map.get("password"));
         });
     }
