@@ -73,7 +73,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.activity.LoginGuideActivity"
+            android:name=".ui.activity.GuideActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/OblAppTheme.Splash"/>

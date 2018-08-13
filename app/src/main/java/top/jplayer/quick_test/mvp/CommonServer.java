@@ -1,5 +1,7 @@
 package top.jplayer.quick_test.mvp;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -13,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 import top.jplayer.baseprolibrary.BaseInitApplication;
@@ -20,6 +23,7 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
+import top.jplayer.quick_test.mvp.model.bean.LoginBean;
 import top.jplayer.quick_test.mvp.model.bean.RetrofitPostBean;
 import top.jplayer.quick_test.mvp.model.bean.VersionBean;
 
@@ -84,4 +88,20 @@ public interface CommonServer {
     @Streaming //IO 大文件下载处理
     @GET
     Observable<ResponseBody> apk(@Url String url);
+
+
+    @POST("user/login?")
+    Observable<LoginBean> login(@Query("phone") String phone, @Query("password") String password);
+
+    @POST("user/smcode?")
+    Observable<LoginBean> sendSms(@QueryMap() Map<String, String> map);
+
+    @POST("user/verfiysmcode?")
+    Observable<LoginBean> verfiySms(@Query("phone") String phone, @Query("smCode") String password);
+
+    @POST("user/register?")
+    Observable<BaseBean> register(@QueryMap() Map<String, String> map);
+
+    @POST("user/resetpw?")
+    Observable<BaseBean> forget(@QueryMap() Map<String, String> map);
 }

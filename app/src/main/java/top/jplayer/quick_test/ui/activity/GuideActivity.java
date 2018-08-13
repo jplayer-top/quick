@@ -24,7 +24,7 @@ import top.jplayer.quick_test.R;
  * github : https://github.com/oblivion0001
  */
 
-public class LoginGuideActivity extends SuperBaseActivity {
+public class GuideActivity extends SuperBaseActivity {
     @Override
     protected int initRootLayout() {
         return R.layout.activity_guide;

@@ -257,7 +257,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
     }
 
     /**
-     * 是否检查关闭软键盘
+     * 是否检查点击空白处关闭软键盘
      */
     protected boolean isCheckKeyboard = true;
 

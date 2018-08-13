@@ -118,6 +118,14 @@ public class StringUtils {
         }
     }
 
+    public boolean tipEditTextLength(EditText edit, int mixLen, int maxLen) {
+        int length = edit.getText().toString().trim().length();
+        if (length > mixLen && length < maxLen) {
+            return false;
+        }
+        return true;
+    }
+
     public void copyString(Context context, String copy) {
         //获取剪贴板管理器：
         ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
