@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.widgets;
+package top.jplayer.baseprolibrary.widgets.sidebar;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,7 +15,7 @@ import android.view.View;
  * 字典排序
  */
 
-public class QuckieIndexView extends View {
+public class QuickerIndexView extends View {
     /**
      * 字母单元格宽度
      */
@@ -42,11 +42,11 @@ public class QuckieIndexView extends View {
     private int finalCellIndex = -1;
     private OnIndexChangeListener monOnIndexChangeListener;
 
-    public QuckieIndexView(Context context, AttributeSet attrs) {
+    public QuickerIndexView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public QuckieIndexView(Context context) {
+    public QuickerIndexView(Context context) {
         this(context, null);
     }
 

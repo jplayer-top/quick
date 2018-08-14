@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/white"
               android:orientation="vertical">
-
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activity.ActivityContact">
-
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-
-        <top.jplayer.baseprolibrary.widgets.sidebar.WaveSideBarView
-            android:id="@+id/side_view"
+            android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+
+        <top.jplayer.baseprolibrary.widgets.sidebar.QuickerIndexView
+            android:id="@+id/qiv_items"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="100dp"
+            android:background="#00000000"/>
+
+
+        <TextView
+            android:id="@+id/tv_show"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="@color/color55grey"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:visibility="gone"/>
     </RelativeLayout>
+
+
 </LinearLayout>

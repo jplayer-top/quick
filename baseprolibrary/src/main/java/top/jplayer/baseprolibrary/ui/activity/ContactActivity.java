@@ -1,91 +1,86 @@
 package top.jplayer.baseprolibrary.ui.activity;
 
-import android.content.Intent;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import top.jplayer.baseprolibrary.R;
-import top.jplayer.baseprolibrary.mvp.model.bean.ModelContactCity;
-import top.jplayer.baseprolibrary.ui.adapter.ContactCityAdapter;
-import top.jplayer.baseprolibrary.utils.ComparatorLetter;
-import top.jplayer.baseprolibrary.widgets.sidebar.PinnedHeaderDecoration;
-import top.jplayer.baseprolibrary.widgets.sidebar.WaveSideBarView;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
+import top.jplayer.baseprolibrary.ui.adapter.ContactAdapter;
+import top.jplayer.baseprolibrary.utils.ContactUtils;
+import top.jplayer.baseprolibrary.widgets.sidebar.QuickerIndexView;
 
 /**
- * 城市（联系人）列表
+ * Created by Obl on 2018/8/14.
+ * top.jplayer.baseprolibrary.ui.activity
+ * call me : jplayer_top@163.com
+ * github : https://github.com/oblivion0001
  */
-public class ContactActivity extends SuperBaseActivity {
 
-    RecyclerView mRecyclerView;
-    WaveSideBarView mSideBarView;
-    public static final int DEF_RESULT = 1;
+public class ContactActivity extends CommonToolBarActivity {
 
-    private ContactCityAdapter mAdapterContactCity;
+    private RecyclerView mRecycleView;
+    QuickerIndexView mQivItems;
+    private Map<String, String> mMap;
+    TextView tvShow;
+    private ContactAdapter mAdapter;
 
     @Override
-    protected int initRootLayout() {
-        return  R.layout.activity_contact;
+    public int initAddLayout() {
+        return R.layout.activity_contact;
     }
 
     @Override
-    public void initRootData(View view) {
-        mSideBarView = view.findViewById(R.id.side_view);
-        mRecyclerView = view.findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        final PinnedHeaderDecoration decoration = new PinnedHeaderDecoration();
-        decoration.registerTypePinnedHeader(1, (parent, adapterPosition) -> true);
-        mRecyclerView.addItemDecoration(decoration);
+    public void initAddView(FrameLayout rootView) {
+        super.initAddView(rootView);
+        mMap = new HashMap<>();
+        mRecycleView = rootView.findViewById(R.id.recycleView);
+        mQivItems = rootView.findViewById(R.id.qiv_items);
+        tvShow = rootView.findViewById(R.id.tv_show);
+        readContact();
+    }
 
-        Observable.just(1).subscribeOn(Schedulers.io())
-                .map(o -> {
-                    Type listType = new TypeToken<ArrayList<ModelContactCity>>() {
-                    }.getType();
-                    Gson gson = new Gson();
-                    final List<ModelContactCity> list = gson.fromJson(ModelContactCity.DATA, listType);
-                    Collections.sort(list, new ComparatorLetter());
-                    ModelContactCity cityHeard = new ModelContactCity("定位", "#", 1);
-                    ModelContactCity cityItem = new ModelContactCity("烟台", "#", 2);
-                    list.add(0, cityHeard);
-                    list.add(1, cityItem);
-                    return list;
-                }).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(modelContactCities -> {
-                    mAdapterContactCity = new ContactCityAdapter(modelContactCities);
-                    mRecyclerView.setAdapter(mAdapterContactCity);
-                    mAdapterContactCity.setOnItemClickListener((adapter, v, position) -> {
-                        ModelContactCity contactCity = mAdapterContactCity.getData().get(position);
-                        if (contactCity.type != ModelContactCity.HEARD) {
-                            Intent i = new Intent();
-                            i.putExtra("city", contactCity.name);
-                            setResult(DEF_RESULT, i);
-                            finish();
-                        }
-                    });
-                });
+    private void readContact() {
 
-        mSideBarView.setOnTouchLetterChangeListener(letter -> {
-            int pos = mAdapterContactCity.getLetterPosition(letter);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycleView.setLayoutManager(manager);
 
-            if (pos != -1) {
-                mRecyclerView.scrollToPosition(pos);
-                LinearLayoutManager mLayoutManager =
-                        (LinearLayoutManager) mRecyclerView.getLayoutManager();
-                mLayoutManager.scrollToPositionWithOffset(pos, 0);
+        ContactUtils.load(this);
+
+        List<ContactUtils.ContactsInfoBean> list = ContactUtils.list;
+        Collections.sort(list);
+        mAdapter = new ContactAdapter(list, this);
+        for (int i = 0; i < list.size(); i++) {
+            String sortKey = list.get(i).sortKey;
+            if (!mMap.containsKey(sortKey)) {
+                mMap.put(sortKey, i + "");
+            }
+        }
+        mRecycleView.setAdapter(mAdapter);
+        mQivItems.setOnIndexChangeListener((cellIndex, showIndex) -> {
+            tvShow.setVisibility(View.VISIBLE);
+            tvShow.setText(showIndex);
+            Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
+                if (tvShow != null) {
+                    tvShow.setVisibility(View.GONE);
+                }
+            });
+            if (mMap.containsKey(showIndex)) {
+                int parseInt = Integer.parseInt(mMap.get(showIndex));
+                System.out.println(parseInt);
+                mRecycleView.scrollToPosition(parseInt);
             }
         });
     }
+
 }

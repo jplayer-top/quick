@@ -71,7 +71,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     api rootProject.ext.supportLibs
     //网络请求
     api rootProject.ext.networkLibs
@@ -79,7 +78,6 @@ dependencies {
     api rootProject.ext.rxJavaLibs
     //皮肤修改
     api rootProject.ext.skinLibs
-
     //RecyclerView Help
     api rootProject.ext.baserecyclerviewadapterhelper
     //辅助库(包含：刷新，glide,沉浸式bar,动画库,Toast,PickerView,权限2.00,加载器,二维码,polygon,侧滑,ticker)
@@ -99,5 +97,5 @@ dependencies {
         exclude group: 'glide-parent'
     }
     annotationProcessor rootProject.ext.annotationProcessorLibs
-
+    implementation files('libs/jpinyin-1.0.jar')
 }

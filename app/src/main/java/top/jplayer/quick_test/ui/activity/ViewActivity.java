@@ -23,8 +23,11 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
+import top.jplayer.baseprolibrary.ui.activity.CityActivity;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.ui.activity.ContactActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogCard;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.NumAnimUtil;
 import top.jplayer.baseprolibrary.widgets.nineimageview.NineGridImageView;
 import top.jplayer.baseprolibrary.widgets.nineimageview.NineGridImageViewAdapter;
@@ -46,6 +49,10 @@ public class ViewActivity extends CommonToolBarActivity {
     Button mBtn01;
     @BindView(R.id.nineGridImage)
     NineGridImageView mNineGridImage;
+    @BindView(R.id.btn02)
+    Button mBtn02;
+    @BindView(R.id.btn03)
+    Button mBtn03;
     private Unbinder mUnbinder;
     protected static final Random RANDOM = new Random(System.currentTimeMillis());
     private Disposable mSubscribe;
@@ -93,6 +100,12 @@ public class ViewActivity extends CommonToolBarActivity {
             }
         });
         mNineGridImage.setImagesData(list);
+        mBtn02.setOnClickListener(v -> {
+            ActivityUtils.init().start(this, CityActivity.class, "城市定位");
+        });
+        mBtn03.setOnClickListener(v -> {
+            ActivityUtils.init().start(this, ContactActivity.class, "联系人");
+        });
     }
 
     protected String getRandomNumber(int digits) {
@@ -109,6 +122,7 @@ public class ViewActivity extends CommonToolBarActivity {
             mSubscribe.dispose();
         }
     }
+
 
     public class StrList implements Parcelable {
 
