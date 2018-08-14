@@ -15,21 +15,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--<Button-->
-        <!--android:id="@+id/btn01"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:background="@drawable/select_btn_rect_5_white"-->
-        <!--android:text="引导页"/>-->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:tag="header">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:background="@drawable/two_level_pic"
                 android:scaleType="centerCrop"
@@ -71,6 +64,55 @@
                 android:text="0.00"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/btn01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/select_btn_rect_5_white"
+                android:text="Card Swipe"/>
+
+            <top.jplayer.baseprolibrary.widgets.nineimageview.NineGridImageView
+                android:id="@+id/nineGridImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                app:imgGap="@dimen/dp_4"
+                app:showStyle="grid"
+                app:singleImgSize="@dimen/dp_40"/>
+
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/select_btn_rect_5_white"
+                android:text="引导页"/>
+
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/select_btn_rect_5_white"
+                android:text="引导页"/>
+
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/select_btn_rect_5_white"
+                android:text="引导页"/>
+
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/select_btn_rect_5_white"
+                android:text="引导页"/>
         </LinearLayout>
     </LinearLayout>
 
