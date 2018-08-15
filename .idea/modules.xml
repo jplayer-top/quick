@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baseprolibrary/baseprolibrary.iml" filepath="$PROJECT_DIR$/baseprolibrary/baseprolibrary.iml" />
-      <module fileurl="file://C:\Users\newone\Desktop\work\quick\commonlib\commonmodule.iml" filepath="C:\Users\newone\Desktop\work\quick\commonlib\commonmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/quick.iml" filepath="$PROJECT_DIR$/quick.iml" />
     </modules>
   </component>

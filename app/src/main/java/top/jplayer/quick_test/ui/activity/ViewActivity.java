@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.robinhood.ticker.TickerView;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -104,7 +106,13 @@ public class ViewActivity extends CommonToolBarActivity {
             ActivityUtils.init().start(this, CityActivity.class, "城市定位");
         });
         mBtn03.setOnClickListener(v -> {
-            ActivityUtils.init().start(this, ContactActivity.class, "联系人");
+            AndPermission.with(this)
+                    .permission(Permission.READ_CONTACTS)
+                    .onGranted(permissions -> {
+                        ActivityUtils.init().start(this, ContactActivity.class, "联系人");
+                    })
+                    .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
+                    .start();
         });
     }
 
