@@ -4,9 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,9 +34,15 @@ import top.jplayer.baseprolibrary.ui.activity.ContactActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogCard;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.NumAnimUtil;
+import top.jplayer.baseprolibrary.utils.ScreenUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
+import top.jplayer.baseprolibrary.widgets.CardTransformer;
+import top.jplayer.baseprolibrary.widgets.ShSwitchView;
+import top.jplayer.baseprolibrary.widgets.SlidingButtonView;
 import top.jplayer.baseprolibrary.widgets.nineimageview.NineGridImageView;
 import top.jplayer.baseprolibrary.widgets.nineimageview.NineGridImageViewAdapter;
 import top.jplayer.quick_test.R;
+import top.jplayer.quick_test.ui.adapter.AdapterCardInfo;
 
 /**
  * Created by Obl on 2018/8/8.
@@ -55,9 +64,20 @@ public class ViewActivity extends CommonToolBarActivity {
     Button mBtn02;
     @BindView(R.id.btn03)
     Button mBtn03;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+    @BindView(R.id.tv_delete)
+    TextView mTvDelete;
+    @BindView(R.id.layout_content)
+    RelativeLayout mLayoutContent;
+    @BindView(R.id.slideButton)
+    SlidingButtonView mSlideButton;
+    @BindView(R.id.switchView)
+    ShSwitchView mSwitchView;
     private Unbinder mUnbinder;
     protected static final Random RANDOM = new Random(System.currentTimeMillis());
     private Disposable mSubscribe;
+    private AdapterCardInfo mViewPagerAdapter;
 
     @Override
     public int initAddLayout() {
@@ -114,7 +134,39 @@ public class ViewActivity extends CommonToolBarActivity {
                     .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
                     .start();
         });
+        mViewPager.setPageTransformer(true, new CardTransformer(30));
+        ArrayList<NoticesBean> listNotice = new ArrayList<>();
+        listNotice.add(new NoticesBean(0));
+        listNotice.add(new NoticesBean(1));
+        listNotice.add(new NoticesBean(1));
+        listNotice.add(new NoticesBean(0));
+        mViewPagerAdapter = new AdapterCardInfo(listNotice);
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
+        mLayoutContent.getLayoutParams().width = ScreenUtils.getScreenWidth();
+        mSlideButton.setSlidingButtonListener(new SlidingButtonView.IonSlidingButtonListener() {
+            @Override
+            public void onMenuIsOpen(View view) {
+                mMenu = (SlidingButtonView) view;
+            }
+
+            @Override
+            public void onDownOrMove(SlidingButtonView slidingButtonView) {
+                if (mMenu != null && mMenu != slidingButtonView) {
+                    mMenu.closeMenu();
+                    mMenu = null;
+                }
+            }
+        });
+        if (mMenu != null) {
+            mSlideButton.closeMenu();
+        }
+        mSwitchView.setOnSwitchStateChangeListener((shSwitchView, isOn) -> {
+            ToastUtils.init().showQuickToast(isOn + "");
+        });
     }
+
+    private SlidingButtonView mMenu = null;
 
     protected String getRandomNumber(int digits) {
         final int digitsInPowerOf10 = (int) Math.pow(10, digits);
@@ -131,6 +183,28 @@ public class ViewActivity extends CommonToolBarActivity {
         }
     }
 
+
+    public static class NoticesBean {
+
+        public String content;
+        public int type;
+
+        public NoticesBean(int type) {
+            this.type = type;
+        }
+
+        public static final int INT_NOTICE = 0;
+        public static final int INT_OTHER = 1;
+
+        public int getType() {
+            if (type == INT_NOTICE) {
+                return INT_NOTICE;
+            } else {
+                return INT_OTHER; //不受控制的类型《过滤》
+
+            }
+        }
+    }
 
     public class StrList implements Parcelable {
 

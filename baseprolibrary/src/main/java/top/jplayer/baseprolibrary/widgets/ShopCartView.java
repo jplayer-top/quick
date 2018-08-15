@@ -12,10 +12,10 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,9 +23,9 @@ import java.util.Collection;
 import top.jplayer.baseprolibrary.R;
 
 /**
- * @author  Vondear on 16/7/10 17:59
+ * @author Vondear on 16/7/10 17:59
  */
-public class RxShoppingView extends View {
+public class ShopCartView extends AppCompatTextView {
 
     private final static int STATE_NONE = 0;
     private final static int STATE_MOVE = 1;
@@ -62,15 +62,15 @@ public class RxShoppingView extends View {
 
     private ShoppingClickListener mShoppingClickListener;
 
-    public RxShoppingView(Context context) {
+    public ShopCartView(Context context) {
         this(context, null);
     }
 
-    public RxShoppingView(Context context, AttributeSet attrs) {
+    public ShopCartView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RxShoppingView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ShopCartView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }

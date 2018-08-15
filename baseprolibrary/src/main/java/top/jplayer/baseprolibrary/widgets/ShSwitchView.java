@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -20,8 +21,9 @@ import top.jplayer.baseprolibrary.R;
 
 /**
  * Created by 7heaven on 15/3/14.
+ * switch view
  */
-public class SwitchView extends View {
+public class ShSwitchView extends AppCompatTextView {
 
     private static final long commonDuration = 300L;
 
@@ -83,8 +85,8 @@ public class SwitchView extends View {
             knobExpandAnimator.setFloatValues(knobExpandRate, 0.0F);
             knobExpandAnimator.start();
 
-            if (SwitchView.this.onSwitchStateChangeListener != null && isOn != preIsOn) {
-                SwitchView.this.onSwitchStateChangeListener.onSwitchStateChange(SwitchView.this, isOn);
+            if (ShSwitchView.this.onSwitchStateChangeListener != null && isOn != preIsOn) {
+                ShSwitchView.this.onSwitchStateChangeListener.onSwitchStateChange(ShSwitchView.this, isOn);
             }
 
             return true;
@@ -169,20 +171,20 @@ public class SwitchView extends View {
     private boolean isAttachedToWindow = false;
 
     public interface OnSwitchStateChangeListener {
-        void onSwitchStateChange(SwitchView switchView, boolean isOn);
+        void onSwitchStateChange(ShSwitchView shSwitchView, boolean isOn);
     }
 
     private OnSwitchStateChangeListener onSwitchStateChangeListener;
 
-    public SwitchView(Context context) {
+    public ShSwitchView(Context context) {
         this(context, null);
     }
 
-    public SwitchView(Context context, AttributeSet attrs) {
+    public ShSwitchView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SwitchView(Context context, AttributeSet attrs, int defStyle) {
+    public ShSwitchView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ShSwitchView);
@@ -391,8 +393,8 @@ public class SwitchView extends View {
 
                 isOn = knobState;
 
-                if (SwitchView.this.onSwitchStateChangeListener != null && isOn != preIsOn) {
-                    SwitchView.this.onSwitchStateChangeListener.onSwitchStateChange(this, isOn);
+                if (ShSwitchView.this.onSwitchStateChangeListener != null && isOn != preIsOn) {
+                    ShSwitchView.this.onSwitchStateChangeListener.onSwitchStateChange(this, isOn);
                 }
 
                 break;

@@ -2,6 +2,7 @@ package top.jplayer.baseprolibrary.widgets;
 
 /**
  * Created by MJJ on 2015/7/25.
+ * slide btn
  */
 
 import android.content.Context;
