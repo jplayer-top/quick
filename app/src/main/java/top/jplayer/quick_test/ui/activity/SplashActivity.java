@@ -6,7 +6,6 @@ import com.github.florent37.viewanimator.ViewAnimator;
 
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
-import top.jplayer.quick_test.MainActivity;
 import top.jplayer.quick_test.R;
 
 /**
@@ -29,7 +28,7 @@ public class SplashActivity extends SuperBaseActivity {
                 .fadeOut()
                 .duration(1500)
                 .onStop(() -> {
-                    ActivityUtils.init().start(this, MainActivity.class);
+                    ActivityUtils.init().start(this, FragmentActivity.class);
                     finish();
                 })
                 .start();

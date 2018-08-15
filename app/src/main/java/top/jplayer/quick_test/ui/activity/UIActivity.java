@@ -24,6 +24,8 @@ public class UIActivity extends CommonToolBarActivity {
     Button mBtn01;
     @BindView(R.id.btn02)
     Button mBtn02;
+    @BindView(R.id.btn03)
+    Button mBtn03;
     private Unbinder mUnbinder;
 
     @Override
@@ -37,6 +39,7 @@ public class UIActivity extends CommonToolBarActivity {
         mUnbinder = ButterKnife.bind(this, rootView);
         mBtn01.setOnClickListener(v -> ActivityUtils.init().start(this, GuideActivity.class));
         mBtn02.setOnClickListener(v -> ActivityUtils.init().start(this, LoginActivity.class));
+        mBtn03.setOnClickListener(v -> ActivityUtils.init().start(this, NavigationMainActivity.class));
     }
 
     @Override

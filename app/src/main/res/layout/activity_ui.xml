@@ -20,4 +20,12 @@
         android:background="@drawable/select_btn_rect_5_white"
         android:text="登录注册"/>
 
+    <Button
+        android:id="@+id/btn03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="底部栏布局"/>
+
 </LinearLayout>

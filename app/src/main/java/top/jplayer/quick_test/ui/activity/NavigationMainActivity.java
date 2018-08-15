@@ -1,4 +1,4 @@
-package top.jplayer.quick_test;
+package top.jplayer.quick_test.ui.activity;
 
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -10,10 +10,11 @@ import devlight.io.library.ntb.NavigationTabBar;
 import top.jplayer.baseprolibrary.ui.fragment.TestFragment;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.QuickNavigationBar;
+import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.ui.fragment.FuncFragment;
 import top.jplayer.quick_test.ui.fragment.HomeFragment;
 
-public class MainActivity extends SuperBaseActivity {
+public class NavigationMainActivity extends SuperBaseActivity {
 
 
     @Override

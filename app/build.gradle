@@ -46,7 +46,14 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //greenDao
     implementation rootProject.ext.greendao
-    debugImplementation ('com.amitshekhar.android:debug-db:1.0.4'){
-        exclude module: 'gson'
-    }
+    //数据库实时查看
+//    buildTypes {
+//
+//        debug {
+//            resValue("string", "PORT_NUMBER", "9898")
+//        }
+//    }
+//    debugImplementation ('com.amitshekhar.android:debug-db:1.0.4'){
+//        exclude module: 'gson'
+//    }
 }

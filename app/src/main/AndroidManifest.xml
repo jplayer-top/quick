@@ -36,7 +36,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.FragmentActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/OblAppTheme.Splash"/>
+        <activity
+            android:name=".ui.activity.NavigationMainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/OblAppTheme.Splash"/>
