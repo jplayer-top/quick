@@ -183,6 +183,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"/>
 
+
+            <ViewFlipper
+                android:id="@+id/viewFlipper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoStart="true"
+                android:flipInterval="3000"
+                android:inAnimation="@anim/slide_in_bottom"
+                android:outAnimation="@anim/slide_out_top"/>
         </LinearLayout>
     </LinearLayout>
 

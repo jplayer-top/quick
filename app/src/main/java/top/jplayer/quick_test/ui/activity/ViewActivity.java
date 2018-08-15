@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.robinhood.ticker.TickerView;
@@ -18,6 +19,7 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -74,6 +76,9 @@ public class ViewActivity extends CommonToolBarActivity {
     SlidingButtonView mSlideButton;
     @BindView(R.id.switchView)
     ShSwitchView mSwitchView;
+
+    @BindView(R.id.viewFlipper)
+    ViewFlipper mViewFlipper;
     private Unbinder mUnbinder;
     protected static final Random RANDOM = new Random(System.currentTimeMillis());
     private Disposable mSubscribe;
@@ -164,6 +169,22 @@ public class ViewActivity extends CommonToolBarActivity {
         mSwitchView.setOnSwitchStateChangeListener((shSwitchView, isOn) -> {
             ToastUtils.init().showQuickToast(isOn + "");
         });
+        List<String> info = new ArrayList<>();
+        info.add("大家好，我是Oblivion。");
+        info.add("欢迎大家关注我哦！");
+        info.add("GitHub帐号：oblivion0001");
+        info.add("个人博客：jplayet.top");
+        mViewFlipper.addView(getTextImageView(info.get(0)));
+        mViewFlipper.addView(getTextImageView(info.get(1)));
+        mViewFlipper.addView(getTextImageView(info.get(2)));
+        mViewFlipper.addView(getTextImageView(info.get(3)));
+    }
+
+    private View getTextImageView(String s) {
+        View view = View.inflate(this, R.layout.layout_marquee_text_image, null);
+        TextView tvTitle = view.findViewById(R.id.tvTitle);
+        tvTitle.setText(s);
+        return view;
     }
 
     private SlidingButtonView mMenu = null;
@@ -182,7 +203,6 @@ public class ViewActivity extends CommonToolBarActivity {
             mSubscribe.dispose();
         }
     }
-
 
     public static class NoticesBean {
 
