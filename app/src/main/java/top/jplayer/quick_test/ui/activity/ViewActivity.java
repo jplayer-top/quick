@@ -112,14 +112,7 @@ public class ViewActivity extends CommonToolBarActivity {
         });
         mTvNum.setOnClickListener(v -> NumAnimUtil.startAnim(mTvNum, 9.99f, "9.99"));
         ArrayList<String> list = new ArrayList<>();
-        list.add("http://file.jplayer.top/image/1.jpg");
-        list.add("http://file.jplayer.top/image/2.jpg");
-        list.add("http://file.jplayer.top/image/3.png");
-        list.add("http://file.jplayer.top/image/4.jpg");
-        list.add("http://file.jplayer.top/image/1.jpg");
-        list.add("http://file.jplayer.top/image/2.jpg");
-        list.add("http://file.jplayer.top/image/3.png");
-        list.add("http://file.jplayer.top/image/4.jpg");
+
         mNineGridImage.setAdapter(new NineGridImageViewAdapter<String>() {
             @Override
             protected void onDisplayImage(Context context, ImageView imageView, String s) {
