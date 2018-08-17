@@ -1,9 +1,11 @@
 package top.jplayer.quick_test.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
@@ -66,6 +68,8 @@ public class ViewActivity extends CommonToolBarActivity {
     Button mBtn02;
     @BindView(R.id.btn03)
     Button mBtn03;
+    @BindView(R.id.btn04)
+    Button mBtn04;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
     @BindView(R.id.tv_delete)
@@ -171,6 +175,11 @@ public class ViewActivity extends CommonToolBarActivity {
         mViewFlipper.addView(getTextImageView(info.get(1)));
         mViewFlipper.addView(getTextImageView(info.get(2)));
         mViewFlipper.addView(getTextImageView(info.get(3)));
+        mBtn04.setOnClickListener(v -> {
+            Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+            startActivity(intent);
+            ActivityUtils.init().startOutActivity(this, "com.alibaba.android.rimet", "com.alibaba.android.rimet.biz.SplashActivity");
+        });
     }
 
     private View getTextImageView(String s) {

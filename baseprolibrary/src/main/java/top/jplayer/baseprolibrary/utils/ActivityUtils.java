@@ -3,6 +3,7 @@ package top.jplayer.baseprolibrary.utils;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -48,6 +49,34 @@ public class ActivityUtils {
             if (title != null) i.putExtra("title", title);
             if (bundle != null) i.putExtra("bundle", bundle);
             activity.startActivity(i);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtils.init().showQuickToast("无法查找Activity");
+        }
+    }
+
+    public void startOutActivity(Activity activity, String sPkg, String tClass) {
+        try {
+            ComponentName cn = new ComponentName(sPkg, tClass);
+            Intent i = new Intent();
+            i.setComponent(cn);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(i);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtils.init().showQuickToast("无法查找Activity");
+        }
+    }
+
+    public void startOutActivity(Activity activity, String sPkg) {
+        try {
+            // 获取启动的intent
+            PackageManager manager = activity.getPackageManager();
+            Intent intent = manager.getLaunchIntentForPackage("com.sankuai.meituan");
+            if (intent != null) {
+                // 每次启动美团应用时，但是以重新启动应用的形式打开
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             ToastUtils.init().showQuickToast("无法查找Activity");

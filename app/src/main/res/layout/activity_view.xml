@@ -125,6 +125,14 @@
                 android:background="@drawable/select_btn_rect_5_white"
                 android:text="联系人列表"/>
 
+            <Button
+                android:id="@+id/btn04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/select_btn_rect_5_white"
+                android:text="模拟按键"/>
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
@@ -193,6 +201,7 @@
                 android:inAnimation="@anim/slide_in_bottom"
                 android:outAnimation="@anim/slide_out_top"/>
         </LinearLayout>
+
     </LinearLayout>
 
 </top.jplayer.baseprolibrary.widgets.PullZoomView>
