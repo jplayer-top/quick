@@ -21,6 +21,7 @@ import retrofit2.http.Url;
 import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
+import top.jplayer.baseprolibrary.mvp.model.bean.LocationBean;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
 import top.jplayer.quick_test.mvp.model.bean.HomeBean;
 import top.jplayer.quick_test.mvp.model.bean.LoginBean;
@@ -89,6 +90,9 @@ public interface CommonServer {
     @GET
     Observable<ResponseBody> apk(@Url String url);
 
+    @Headers(TOP)
+    @GET("location.php")
+    Observable<LocationBean> getLocation();
 
     @POST("user/login?")
     Observable<LoginBean> login(@Query("phone") String phone, @Query("password") String password);

@@ -10,7 +10,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/select_btn_rect_5_white"
-        android:text="基站定位"/>
+        android:text="原生定位"/>
+
+    <Button
+        android:id="@+id/btn_02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/select_btn_rect_5_white"
+        android:text="IP定位"/>
 
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
 import top.jplayer.baseprolibrary.mvp.model.bean.CartBean;
+import top.jplayer.baseprolibrary.mvp.model.bean.LocationBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.quick_test.mvp.CommonServer;
 import top.jplayer.quick_test.mvp.model.bean.FuncBean;
@@ -38,6 +39,11 @@ public class FuncModel extends BaseModel<CommonServer> {
 
     public Observable<ResponseBody> requestApk(String url) {
         return mServer.apk(url)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<LocationBean> requestLocation() {
+        return mServer.getLocation()
                 .compose(new IoMainSchedule<>());
     }
 }

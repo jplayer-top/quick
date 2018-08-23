@@ -21,10 +21,15 @@ import com.yanzhenjie.permission.Permission;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.mvp.model.bean.LocationBean;
+import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
+import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.quick_test.R;
+import top.jplayer.quick_test.mvp.CommonServer;
+import top.jplayer.quick_test.mvp.model.FuncModel;
 
 /**
  * Created by Obl on 2018/8/22.
@@ -36,6 +41,8 @@ import top.jplayer.quick_test.R;
 public class LocationActivity extends CommonToolBarActivity {
     @BindView(R.id.btn_01)
     Button mBtn01;
+    @BindView(R.id.btn_02)
+    Button mBtn02;
     private Unbinder mUnbinder;
     private LocationManager mLocationManager;
 
@@ -88,6 +95,19 @@ public class LocationActivity extends CommonToolBarActivity {
                     .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
                     .start();
         });
+        mBtn02.setOnClickListener(v -> new FuncModel(CommonServer.class).requestLocation()
+                .subscribe(new NetCallBackObserver<LocationBean>(new GetImplTip(this)) {
+                    @Override
+                    public void responseSuccess(LocationBean locationBean) {
+                        ToastUtils.init().showQuickToast(mActivity, "IP：" + locationBean.ip + "\n" +
+                                "x:" + locationBean.response.content.point.x + "\n" +
+                                "y:" + locationBean.response.content.point.y);
+                    }
+                    @Override
+                    public void responseFail(LocationBean locationBean) {
+
+                    }
+                }));
     }
 
     private void openGPSSettings(LocationManager manager) {
