@@ -101,8 +101,10 @@ public class LocationActivity extends CommonToolBarActivity {
                     public void responseSuccess(LocationBean locationBean) {
                         ToastUtils.init().showQuickToast(mActivity, "IP：" + locationBean.ip + "\n" +
                                 "x:" + locationBean.response.content.point.x + "\n" +
-                                "y:" + locationBean.response.content.point.y);
+                                "y:" + locationBean.response.content.point.y + "\n" +
+                                "城市：" + locationBean.response.address);
                     }
+
                     @Override
                     public void responseFail(LocationBean locationBean) {
 
