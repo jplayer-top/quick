@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import devlight.io.library.ntb.NavigationTabBar;
-import top.jplayer.baseprolibrary.ui.fragment.TestFragment;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.QuickNavigationBar;
 import top.jplayer.quick_test.R;
 import top.jplayer.quick_test.ui.fragment.FuncFragment;
 import top.jplayer.quick_test.ui.fragment.HomeFragment;
+import top.jplayer.quick_test.ui.fragment.MeFragment;
 
 public class NavigationMainActivity extends SuperBaseActivity {
 
@@ -42,7 +42,7 @@ public class NavigationMainActivity extends SuperBaseActivity {
         List<QuickNavigationBar.NavihationInfo> list = new ArrayList<>();
         list.add(new QuickNavigationBar.NavihationInfo("首页", R.drawable.main_home, new HomeFragment()));
         list.add(new QuickNavigationBar.NavihationInfo("发现", R.drawable.main_find, new FuncFragment()));
-        list.add(new QuickNavigationBar.NavihationInfo("我的", R.drawable.main_me, new TestFragment()));
+        list.add(new QuickNavigationBar.NavihationInfo("我的", R.drawable.main_me, new MeFragment()));
         return list;
     }
 

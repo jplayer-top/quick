@@ -60,9 +60,9 @@ ext {
     ]
     //RecyclerView 适配器
     baserecyclerviewadapterhelper = 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.3'
-    //V-layout
+    //V-layout 淘宝多状态布局
     v_layout = 'com.alibaba.android:vlayout:1.2.9@aar'
-    //ViewPager
+    //ViewPager Bga Viewpager
     bga_banner = 'cn.bingoogolapple:bga-banner:2.2.3@aar'
     //底部栏
     navigationbar = "devlight.io:navigationtabbar:1.2.5"
@@ -70,7 +70,7 @@ ext {
     barlibrary = 'com.gyf.barlibrary:barlibrary:2.3.0'
     //动画封装库
     viewanimator = 'com.github.florent37:viewanimator:1.0.5'
-    // 下拉刷新
+    //下拉刷新
     smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-11'
     //特殊头部，看情况添加
     smartrefresh_heard = 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-11'
@@ -88,6 +88,8 @@ ext {
     permission = 'com.yanzhenjie:permission:2.0.0-rc4'
     //二维码
     qcode = 'cn.yipianfengye.android:zxing-library:2.2'
+    //图片选择器
+    imagespickers =  'com.jaikydota.imagespickers:imagespickers:1.0.6'
     //多边形图+图片滤镜
     polygon = 'com.kingja.magicmirror:magicmirror:1.2.0'
     //数据库 实时增删改查
@@ -126,7 +128,8 @@ ext {
                  qcode,
                  polygon,
                  swipebacklayout,
-                 ticker]
+                 ticker,
+                 imagespickers]
     annotationProcessorLibs = [glideCompiler]
 
 }
