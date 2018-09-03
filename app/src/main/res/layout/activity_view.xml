@@ -38,6 +38,20 @@
                 android:textColor="@color/white"/>
         </FrameLayout>
 
+        <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="5"
+            android:theme="@style/RatingBar"
+            app:layout_constraintStart_toEndOf="@+id/ivSrc"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopTitle"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
