@@ -26,6 +26,10 @@ public class UIActivity extends CommonToolBarActivity {
     Button mBtn02;
     @BindView(R.id.btn03)
     Button mBtn03;
+    @BindView(R.id.btn04)
+    Button mBtn04;
+    @BindView(R.id.btn05)
+    Button mBtn05;
     private Unbinder mUnbinder;
 
     @Override
@@ -40,6 +44,8 @@ public class UIActivity extends CommonToolBarActivity {
         mBtn01.setOnClickListener(v -> ActivityUtils.init().start(this, GuideActivity.class));
         mBtn02.setOnClickListener(v -> ActivityUtils.init().start(this, LoginActivity.class));
         mBtn03.setOnClickListener(v -> ActivityUtils.init().start(this, NavigationMainActivity.class));
+        mBtn04.setOnClickListener(v -> ActivityUtils.init().start(this, ViewPagerTabActivity.class, "ViewPager+Tab"));
+        mBtn05.setOnClickListener(v -> ActivityUtils.init().start(this, CollapsingActivity.class, "Collapsing"));
     }
 
     @Override
