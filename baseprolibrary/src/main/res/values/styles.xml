@@ -31,6 +31,7 @@
     <style name="OblAppTheme.Splash" parent="OblAppTheme">
         <!--<item name="android:windowIsTranslucent">false</item>-->
         <!--<item name="android:windowDisablePreview">true</item>-->
+        <!--<item name="android:windowBackground">@mipmap/imageselector_photo</item>   //闪屏页图片-->
         <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
     </style>
 
