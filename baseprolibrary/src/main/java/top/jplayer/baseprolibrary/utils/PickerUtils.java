@@ -2,6 +2,7 @@ package top.jplayer.baseprolibrary.utils;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 
@@ -29,7 +30,10 @@ public class PickerUtils {
         //时间选择器
         pvTime = new TimePickerView.Builder(context, (date, v) -> {//选中事件回调
             // 这里回调过来的v,就是show()方法里面所添加的 View 参数，如果show的时候没有添加参数，v则为null
-            /*btn_Time.setText(getTime(date));*/
+            if (v != null) {
+                TextView textView = (TextView) v;
+                textView.setText(getTime(date));
+            }
         })
                 //年月日时分秒 的显示与否，不设置则默认全部显示
                 .setType(new boolean[]{true, true, true, false, false, false})
