@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -53,4 +55,30 @@ public class PickerUtils {
         return format.format(date);
     }
 
+    private void initStringPicker(final ArrayList<String> optionsItems, int
+            position, Context context) {
+        OptionsPickerView optionsPickerView = new OptionsPickerView.Builder(context, (options1, options2,
+                                                                                         options3, v)
+                -> {
+            String value = optionsItems.get(options1);
+            if (v != null) {
+                TextView textView = (TextView) v;
+                textView.setText(value);
+            }
+
+        })
+                .setSubmitText("确定")//确定按钮文字
+                .setCancelText("取消")//取消按钮文字
+                .setSubCalSize(18)//确定和取消文字大小
+                .setContentTextSize(21)//滚轮文字大小
+                .setDividerColor(Color.DKGRAY)
+                .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(position)  //设置默认选中项
+                .setOutSideCancelable(false)//点击外部dismiss default true
+                .build();
+        optionsPickerView.setPicker(optionsItems);//添加数据源
+        if (!optionsPickerView.isShowing()) {
+            optionsPickerView.show();
+        }
+    }
 }

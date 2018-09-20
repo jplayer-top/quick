@@ -134,7 +134,7 @@ public class DialogActivity extends CommonToolBarActivity implements IContract.I
         mBtn08.setOnClickListener(v -> new DialogShare(this).show());
         mBtn09.setOnClickListener(v -> new DialogSign(this).show());
         mBtn10.setOnClickListener(v -> new DialogSubmitSure(this).show());
-        mBtn12.setOnClickListener(v -> ActivityUtils.init().start(this, PopupActivity.class,"Popup"));
+        mBtn12.setOnClickListener(v -> ActivityUtils.init().start(this, PopupActivity.class, "Popup"));
         mBtn11.setOnClickListener(v -> {
             //具体使用请查看：https://github.com/Bigkoo/Android-PickerView
             PickerUtils pickerUtils = new PickerUtils();
