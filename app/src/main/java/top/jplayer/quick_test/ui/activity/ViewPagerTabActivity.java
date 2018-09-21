@@ -1,18 +1,19 @@
 package top.jplayer.quick_test.ui.activity;
 
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.ArrayMap;
 import android.widget.FrameLayout;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerFragmentAdapter;
+import top.jplayer.baseprolibrary.ui.fragment.TestFragment;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.quick_test.R;
-import top.jplayer.quick_test.ui.adapter.AdapterPagerTab;
 
 /**
  * Created by Obl on 2018/9/4.
@@ -38,12 +39,11 @@ public class ViewPagerTabActivity extends CommonToolBarActivity {
         super.initAddView(rootView);
         mBind = ButterKnife.bind(this, rootView);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("待付款");
-        strings.add("已付款");
-        strings.add("已完成");
-        AdapterPagerTab adapterPagerTab = new AdapterPagerTab(getSupportFragmentManager(), strings);
-        mViewPager.setAdapter(adapterPagerTab);
+        ArrayMap<String, Fragment> map = new ArrayMap<>();
+        map.put("待付款", new TestFragment());
+        map.put("已付款", new TestFragment());
+        map.put("已完成", new TestFragment());
+        mViewPager.setAdapter(new BaseViewPagerFragmentAdapter<>(getSupportFragmentManager(), map));
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
