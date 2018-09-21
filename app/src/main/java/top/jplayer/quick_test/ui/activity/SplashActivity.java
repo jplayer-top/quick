@@ -25,7 +25,7 @@ public class SplashActivity extends SuperBaseActivity {
     public void initRootData(View view) {
         super.initRootData(view);
         ViewAnimator.animate(view.findViewById(R.id.image))
-                .fadeOut()
+                .scale(1f, 1.1f)
                 .duration(1000)
                 .onStop(() -> {
                     ActivityUtils.init().start(this, FragmentActivity.class);
