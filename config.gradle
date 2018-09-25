@@ -20,6 +20,14 @@ ext {
             "debug"  : "https://app.modiwu.com/",
             "release": "https://app.modiwu.com/",
     ]
+
+    key_store = [
+            "keyAlias"     : "oblivion",
+            "keyPassword"  : "lj011200",
+            "storeFile"    : "../oblivion.jks",
+            "storePassword": "lj011200"
+    ]
+
     key_rong = [
             "debug"  : "x18ywvqfxndcc",
             "release": "x18ywvqfxndcc"
@@ -89,7 +97,7 @@ ext {
     //二维码
     qcode = 'cn.yipianfengye.android:zxing-library:2.2'
     //图片选择器
-    imagespickers =  'com.jaikydota.imagespickers:imagespickers:1.0.6'
+    imagespickers = 'com.jaikydota.imagespickers:imagespickers:1.0.6'
     //多边形图+图片滤镜
     polygon = 'com.kingja.magicmirror:magicmirror:1.2.0'
     //数据库 实时增删改查

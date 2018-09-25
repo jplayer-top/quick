@@ -20,25 +20,24 @@ android {
     }
 
     signingConfigs {
-        config {
-            keyAlias "obl"
-            keyPassword "lj011200"
-            storeFile file("../obl.jks")
-            storePassword "lj011200"
-        }
-
+        def store = rootProject.ext.key_store
         debug {
-            keyAlias "obl"
-            keyPassword "lj011200"
-            storeFile file("../obl.jks")
-            storePassword "lj011200"
-
+            keyAlias store["keyAlias"]
+            keyPassword store["keyPassword"]
+            storeFile file(store["storeFile"])
+            storePassword store["storePassword"]
         }
         release {
-            keyAlias "obl"
-            keyPassword "lj011200"
-            storeFile file("../obl.jks")
-            storePassword "lj011200"
+            keyAlias store["keyAlias"]
+            keyPassword store["keyPassword"]
+            storeFile file(store["storeFile"])
+            storePassword store["storePassword"]
+        }
+        config {
+            keyAlias store["keyAlias"]
+            keyPassword store["keyPassword"]
+            storeFile file(store["storeFile"])
+            storePassword store["storePassword"]
         }
     }
     buildTypes {

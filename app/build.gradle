@@ -13,14 +13,44 @@ android {
         multiDexEnabled true
 
     }
-
-    buildTypes {
+    signingConfigs {
+        def store = rootProject.ext.key_store
+        debug {
+            keyAlias store["keyAlias"]
+            keyPassword store["keyPassword"]
+            storeFile file(store["storeFile"])
+            storePassword store["storePassword"]
+        }
         release {
-            minifyEnabled false
+            keyAlias store["keyAlias"]
+            keyPassword store["keyPassword"]
+            storeFile file(store["storeFile"])
+            storePassword store["storePassword"]
+        }
+        config {
+            keyAlias store["keyAlias"]
+            keyPassword store["keyPassword"]
+            storeFile file(store["storeFile"])
+            storePassword store["storePassword"]
+        }
+    }
+    buildTypes {
+        def url = rootProject.ext.url
+        def key_rong = rootProject.ext.key_rong
+        release {
+            buildConfigField "String", "HOST", "\"${url["release"]}\""
+            minifyEnabled false // 开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [RONG_KEY: "\"${key_rong["release"]}\"", CHANNEL_NAME: "dev"]
+            signingConfig signingConfigs.config
         }
         debug {
-            resValue("string", "PORT_NUMBER", "9898")
+            buildConfigField "String", "HOST", "\"${url["debug"]}\""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [RONG_KEY: "\"${key_rong["debug"]}\"", CHANNEL_NAME: "dev"]
+            signingConfig signingConfigs.config
+//            resValue("string", "PORT_NUMBER", "9898")
         }
     }
     compileOptions {
