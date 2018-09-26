@@ -4,7 +4,7 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "top.jplayer.quick_test"
+        applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -59,7 +59,7 @@ android {
     }
     greendao {
         schemaVersion 1//数据库版本号
-        daoPackage 'top.jplayer.quick_test.greendao'//设置DaoMaster、DaoSession、Dao包名
+        daoPackage rootProject.ext.android.applicationId + '.greendao'//设置DaoMaster、DaoSession、Dao包名
         targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
         //targetGenDirTest：设置生成单元测试目录
         //generateTests：设置自动生成单元测试用例
