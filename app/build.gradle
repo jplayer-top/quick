@@ -11,7 +11,10 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+        resConfigs "en", "zh-rCN"
     }
     signingConfigs {
         def store = rootProject.ext.key_store
@@ -38,19 +41,19 @@ android {
         def url = rootProject.ext.url
         def key_rong = rootProject.ext.key_rong
         release {
-            buildConfigField "String", "HOST", "\"${url["release"]}\""
+            buildConfigField "String", "HOST", "\"${url[" release "]}\""
             minifyEnabled false // 开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "\"${key_rong["release"]}\"", CHANNEL_NAME: "dev"]
+            manifestPlaceholders = [RONG_KEY: key_rong["release"], CHANNEL_NAME: "dev"]
             signingConfig signingConfigs.config
         }
         debug {
-            buildConfigField "String", "HOST", "\"${url["debug"]}\""
+            buildConfigField "String", "HOST", "\"${url[" debug "]}\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "\"${key_rong["debug"]}\"", CHANNEL_NAME: "dev"]
+            manifestPlaceholders = [RONG_KEY: key_rong["debug"], CHANNEL_NAME: "dev"]
             signingConfig signingConfigs.config
-//            resValue("string", "PORT_NUMBER", "9898")
+//          resValue("string", "TEST", "Test")//在资源文件中添加String key value
         }
     }
     compileOptions {
@@ -58,11 +61,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     greendao {
-        schemaVersion 1//数据库版本号
-        daoPackage rootProject.ext.android.applicationId + '.greendao'//设置DaoMaster、DaoSession、Dao包名
-        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
-        //targetGenDirTest：设置生成单元测试目录
-        //generateTests：设置自动生成单元测试用例
+        schemaVersion rootProject.ext.greendao.schemaVersion//数据库版本号
+        daoPackage rootProject.ext.greendao.daoPackage + ".greendao"//设置DaoMaster、DaoSession、Dao包名
+        targetGenDir rootProject.ext.greendao.targetGenDir//设置DaoMaster、DaoSession、Dao目录
     }
 }
 
@@ -75,7 +76,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //greenDao
-    implementation rootProject.ext.greendao
+    implementation rootProject.ext.greendao.greendao
     //数据库实时查看
 //    buildTypes {
 //

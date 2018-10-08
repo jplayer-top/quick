@@ -1,7 +1,7 @@
 ext {
 
     android = [
-            appapplicationId : "top.jplayer.quick_test",
+            applicationId    : "top.jplayer.quick_test",
             compileSdkVersion: 27,
             buildToolsVersion: "27.0.0",
             minSdkVersion    : 19,
@@ -17,6 +17,7 @@ ext {
             rxJava                  : "2.1.5",
             rxAndroid               : "2.0.1"
     ]
+
     url = [
             "debug"  : "https://app.modiwu.com/",
             "release": "https://app.modiwu.com/",
@@ -33,6 +34,13 @@ ext {
             "debug"  : "x18ywvqfxndcc",
             "release": "x18ywvqfxndcc"
     ]
+    greendao = [
+            "greendao"     : 'org.greenrobot:greendao:3.2.2',
+            "schemaVersion": 1,
+            "daoPackage"   : "$android.applicationId",
+            "targetGenDir" : "src/main/java",
+    ]
+
     supportDeps = [
             //--------  support  -------
             supportv4  : "com.android.support:support-v4:$dependVersion.androidSupportSdkVersion",
@@ -83,8 +91,7 @@ ext {
     smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-11'
     //特殊头部，看情况添加
     smartrefresh_heard = 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-11'
-    //本地数据库
-    greendao = 'org.greenrobot:greendao:3.2.2'
+
     //自定义Toast
     toasty = 'com.github.GrenderG:Toasty:1.1.4'
     //流布局
