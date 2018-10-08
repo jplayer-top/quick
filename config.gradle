@@ -1,7 +1,7 @@
 ext {
 
     android = [
-            applicationId    : "top.jplayer.quick_test",
+            applicationId    : "top.jplayer.quick_test1",
             compileSdkVersion: 27,
             buildToolsVersion: "27.0.0",
             minSdkVersion    : 19,
@@ -37,7 +37,8 @@ ext {
     greendao = [
             "greendao"     : 'org.greenrobot:greendao:3.2.2',
             "schemaVersion": 1,
-            "daoPackage"   : "$android.applicationId",
+//            "daoPackage"   : "$android.applicationId",
+            "daoPackage"   : "top.jplayer.quick_test.greendao",
             "targetGenDir" : "src/main/java",
     ]
 

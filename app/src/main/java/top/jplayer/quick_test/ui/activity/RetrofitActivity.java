@@ -5,10 +5,12 @@ import android.net.Uri;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.google.gson.Gson;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
 import java.io.File;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,7 +60,10 @@ public class RetrofitActivity extends CommonToolBarActivity {
         mBtnGet.setOnClickListener(v -> mPresenter.requestGet("rerwer"));
         mBtnPost.setOnClickListener(v -> mPresenter.requestPost("17600001111", "123456"));
         mBtnFileDown.setOnClickListener(v -> mPresenter.requestFileDown("123456"));
-        mBtnLookDB.setOnClickListener(v -> ToastUtils.init().showQuickToast("浏览器 打开当前手机IP:9898"));
+        mBtnLookDB.setOnClickListener(v -> {
+            UserDaoModel model = new UserDaoModel(this);
+            ToastUtils.init().showQuickToast(new Gson().toJson(model.queryAllbean()));
+        });
         mBtnFileUp.setOnClickListener(v -> {
             AndPermission.with(this)
                     .permission(Permission.WRITE_EXTERNAL_STORAGE)
@@ -73,7 +78,7 @@ public class RetrofitActivity extends CommonToolBarActivity {
         });
         mBtnGreen.setOnClickListener(v -> {
             UserDaoModel model = new UserDaoModel(this);
-            UserBean userBean = new UserBean(null, "Obl", 25);
+            UserBean userBean = new UserBean(null, "Obl", new Random().nextInt(100));
             model.insertUser(userBean);
             ToastUtils.init().showQuickToast("插入成功");
         });

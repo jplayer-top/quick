@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/select_btn_rect_5_white"
-        android:text="Green Dao数据库"/>
+        android:text="Green Dao插入数据"/>
 
     <Button
         android:id="@+id/btnLookDB"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/select_btn_rect_5_white"
-        android:text="浏览器查看数据库"/>
+        android:text="浏览查看数据库"/>
 
     <Button
         android:id="@+id/btnFileUp"
