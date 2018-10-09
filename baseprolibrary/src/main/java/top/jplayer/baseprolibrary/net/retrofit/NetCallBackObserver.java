@@ -28,6 +28,12 @@ public abstract class NetCallBackObserver<T extends BaseBean> implements Observe
         }
     }
 
+    public NetCallBackObserver() {
+        if (mProgress == null) {
+            mProgress = new NullTip();
+        }
+    }
+
     @Override
     public void onSubscribe(Disposable d) {
         this.mDisposable = d;
