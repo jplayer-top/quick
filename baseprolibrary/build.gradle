@@ -40,6 +40,12 @@ android {
             storePassword store["storePassword"]
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['assets']
+        }
+    }
     buildTypes {
         def url = rootProject.ext.url
         def key_rong = rootProject.ext.key_rong
@@ -47,14 +53,14 @@ android {
             buildConfigField "String", "HOST", "\"${url["release"]}\""
             minifyEnabled false // 开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "\"${key_rong["release"]}\"", CHANNEL_NAME: "dev"]
+            manifestPlaceholders = [RONG_KEY: key_rong["release"], CHANNEL_NAME: "dev"]
             signingConfig signingConfigs.config
         }
         debug {
             buildConfigField "String", "HOST", "\"${url["debug"]}\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "\"${key_rong["debug"]}\"", CHANNEL_NAME: "dev"]
+            manifestPlaceholders = [RONG_KEY: key_rong["debug"], CHANNEL_NAME: "dev"]
             signingConfig signingConfigs.config
         }
     }
