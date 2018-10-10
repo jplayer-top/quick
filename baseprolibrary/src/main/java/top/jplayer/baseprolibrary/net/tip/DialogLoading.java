@@ -4,8 +4,11 @@ import android.content.Context;
 import android.view.View;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.R;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
 
 /**
@@ -37,7 +40,15 @@ public class DialogLoading extends BaseCustomDialog {
     @Override
     public void dismiss() {
         if (isShowing()) {
-            super.dismiss();
+            long aftTime = mDate.getTime();
+            long l = aftTime - mPreTime;
+            Observable.timer(l < 1000 ? 1000 - l : 0, TimeUnit.MILLISECONDS)
+                    .compose(new IoMainSchedule<>())
+                    .subscribe(aLong -> {
+                        if (isShowing()) {
+                            super.dismiss();
+                        }
+                    });
         }
     }
 
