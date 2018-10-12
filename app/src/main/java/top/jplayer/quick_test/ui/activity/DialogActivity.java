@@ -21,6 +21,7 @@ import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogEdit;
 import top.jplayer.baseprolibrary.ui.dialog.DialogEditBottom;
 import top.jplayer.baseprolibrary.ui.dialog.DialogFragmentFilter;
+import top.jplayer.baseprolibrary.ui.dialog.DialogFragmentIncludeFragment;
 import top.jplayer.baseprolibrary.ui.dialog.DialogFragmentOrder;
 import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.ui.dialog.DialogNoviceGuide;
@@ -69,6 +70,8 @@ public class DialogActivity extends CommonToolBarActivity implements IContract.I
     Button mBtn11;
     @BindView(R.id.btn_12)
     Button mBtn12;
+    @BindView(R.id.btn_13)
+    Button mBtn13;
     private Unbinder mUnbinder;
 
     @Override
@@ -134,6 +137,7 @@ public class DialogActivity extends CommonToolBarActivity implements IContract.I
         mBtn08.setOnClickListener(v -> new DialogShare(this).show());
         mBtn09.setOnClickListener(v -> new DialogSign(this).show());
         mBtn10.setOnClickListener(v -> new DialogSubmitSure(this).show());
+        mBtn13.setOnClickListener(v -> new DialogFragmentIncludeFragment().show(getSupportFragmentManager(), ""));
         mBtn12.setOnClickListener(v -> ActivityUtils.init().start(this, PopupActivity.class, "Popup"));
         mBtn11.setOnClickListener(v -> {
             //具体使用请查看：https://github.com/Bigkoo/Android-PickerView

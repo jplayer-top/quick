@@ -45,6 +45,12 @@ public abstract class BaseCustomDialogFragment extends DialogFragment {
         return dialog;
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return contentView();
+    }
+
     private View contentView() {
         mContentView = LayoutInflater.from(getContext()).inflate(initLayout(), null);
         return mContentView;
