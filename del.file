@@ -1,0 +1,2 @@
+Error:Execution failed for task ':app:transformClassesWithDesugarForRelease'.
+> com.android.build.api.transform.TransformException: java.io.IOException: Could not delete path'C:\Users\newone\Desktop\work\suoyi\app\build\intermediates\transforms\desugar\release'.
