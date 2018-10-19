@@ -62,7 +62,7 @@ public class WebViewActivity extends CommonToolBarActivity {
 //        webPath = getIntent().getStringExtra("URL");
 //        webPath = RxConstants.URL_BAIDU_SEARCH;//加载的URL
         if (webPath.equals("")) {
-            webPath = "http://3d.fuwo.com/pano/single/da105118b68311e8b66a00163e01117a/";
+            webPath = "http://www.baidu.com";
         }
         WebSettings webSettings = webBase.getSettings();
         if (Build.VERSION.SDK_INT >= 19) {
