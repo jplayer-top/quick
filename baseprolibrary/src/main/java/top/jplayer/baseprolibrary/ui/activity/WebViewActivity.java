@@ -3,19 +3,21 @@ package top.jplayer.baseprolibrary.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.utils.LogUtil;
@@ -38,6 +40,7 @@ public class WebViewActivity extends CommonToolBarActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);
         pbWebBase = rootView.findViewById(R.id.pb_web_base);
         webBase = rootView.findViewById(R.id.web_base);
         tooColor(true, R.color.trans);
@@ -59,7 +62,7 @@ public class WebViewActivity extends CommonToolBarActivity {
 //        webPath = getIntent().getStringExtra("URL");
 //        webPath = RxConstants.URL_BAIDU_SEARCH;//加载的URL
         if (webPath.equals("")) {
-            webPath = "https://github.com/oblivion0001";
+            webPath = "http://3d.fuwo.com/pano/single/da105118b68311e8b66a00163e01117a/";
         }
         WebSettings webSettings = webBase.getSettings();
         if (Build.VERSION.SDK_INT >= 19) {
@@ -71,11 +74,11 @@ public class WebViewActivity extends CommonToolBarActivity {
         } else {
             webSettings.setLoadsImagesAutomatically(false);//图片自动缩放 关闭
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            webBase.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//软件解码
-        }
-        webBase.setLayerType(View.LAYER_TYPE_HARDWARE, null);//硬件解码
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//            webBase.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//软件解码
+//        }
+//        webBase.setLayerType(View.LAYER_TYPE_HARDWARE, null);//硬件解码
 
 //        webSettings.setAllowContentAccess(true);
 //        webSettings.setAllowFileAccessFromFileURLs(true);
