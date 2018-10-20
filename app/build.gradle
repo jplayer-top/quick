@@ -69,6 +69,14 @@ android {
         daoPackage rootProject.ext.greendao.daoPackage//设置DaoMaster、DaoSession、Dao包名
         targetGenDir rootProject.ext.greendao.targetGenDir//设置DaoMaster、DaoSession、Dao目录
     }
+    afterEvaluate {
+        tasks.matching {
+            it.name.contains("preBuild")
+        }.each { task ->
+            task.dependsOn(rootProject.tasks.delTask)  // 任务依赖：执行task之前需要执行dependsOn指定的任务
+        }
+
+    }
 }
 
 dependencies {
