@@ -30,6 +30,7 @@ import top.jplayer.baseprolibrary.ui.dialog.DialogShare;
 import top.jplayer.baseprolibrary.ui.dialog.DialogSign;
 import top.jplayer.baseprolibrary.ui.dialog.DialogSubmitSure;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.PickerUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.quick_test.R;
@@ -72,7 +73,10 @@ public class DialogActivity extends CommonToolBarActivity implements IContract.I
     Button mBtn12;
     @BindView(R.id.btn_13)
     Button mBtn13;
+    @BindView(R.id.btn_14)
+    Button mBtn14;
     private Unbinder mUnbinder;
+    private PickerUtils mPickerUtils;
 
     @Override
     public int initAddLayout() {
@@ -82,6 +86,7 @@ public class DialogActivity extends CommonToolBarActivity implements IContract.I
     @Override
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
+        mPickerUtils = new PickerUtils();
         mUnbinder = ButterKnife.bind(this, rootView);
         mIvToolRight.setVisibility(View.INVISIBLE);
         mBtn00.setOnClickListener(v -> {
@@ -141,9 +146,17 @@ public class DialogActivity extends CommonToolBarActivity implements IContract.I
         mBtn12.setOnClickListener(v -> ActivityUtils.init().start(this, PopupActivity.class, "Popup"));
         mBtn11.setOnClickListener(v -> {
             //具体使用请查看：https://github.com/Bigkoo/Android-PickerView
-            PickerUtils pickerUtils = new PickerUtils();
-            pickerUtils.initTimePicker(this);
-            pickerUtils.pvTime.show();
+
+            mPickerUtils.initTimePicker(this, (date, pattern) -> {
+                ToastUtils.init().showQuickToast(pattern);
+            });
+            mPickerUtils.timeShow();
+        });
+        mBtn14.setOnClickListener(v -> {
+        });
+        mBtn14.setOnClickListener(v -> {
+            mPickerUtils.initLocalPicker(this, LogUtil::str);
+            mPickerUtils.localShow(this);
         });
     }
 
