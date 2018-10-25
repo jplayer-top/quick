@@ -66,7 +66,7 @@ public class WebViewActivity extends CommonToolBarActivity {
         }
         WebSettings webSettings = webBase.getSettings();
         if (Build.VERSION.SDK_INT >= 19) {
-            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//加载缓存否则网络
+            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);//加载缓存否则网络
         }
 
         if (Build.VERSION.SDK_INT >= 19) {
