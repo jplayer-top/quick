@@ -65,7 +65,7 @@ public abstract class CommonToolBarActivity extends SuperBaseActivity {
         mTvToolTitle = view.findViewById(R.id.tvToolTitle);
         mTvToolTitle.setText(StringUtils.init().fixNullStr(getIntent().getStringExtra("title")));
         mIvToolRightLeft = view.findViewById(R.id.ivToolRightLeft);
-        tooColor(false, color(R.color.whiteF8));
+        toolColor(false, color(R.color.whiteF8));
     }
 
     /**
@@ -74,7 +74,7 @@ public abstract class CommonToolBarActivity extends SuperBaseActivity {
      * @param backIsWhite 返回按钮是否是白色调
      * @param barColor    toolBar 的颜色
      */
-    public void tooColor(boolean backIsWhite, int barColor) {
+    public void toolColor(boolean backIsWhite, int barColor) {
         mToolBar.setBackgroundColor(barColor);
         if (backIsWhite) {
             mIvToolLeft.setImageResource(R.drawable.white_left_arrow);

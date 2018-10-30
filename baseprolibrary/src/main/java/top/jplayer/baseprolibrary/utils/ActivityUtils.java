@@ -41,7 +41,7 @@ public class ActivityUtils {
         start(activity, tClass, title, null);
     }
 
-    public void start(Activity activity, String tClass, String title, String bundle) {
+    public void start(Activity activity, String tClass, String title, Bundle bundle) {
         try {
             ComponentName cn = new ComponentName(activity, tClass);
             Intent i = new Intent();

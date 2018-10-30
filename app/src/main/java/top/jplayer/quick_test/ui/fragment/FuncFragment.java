@@ -1,5 +1,6 @@
 package top.jplayer.quick_test.ui.fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -81,7 +82,13 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
                     SkinCompatManager.getInstance().restoreDefaultTheme();
                 }
             } else {
-                ActivityUtils.init().start(mActivity, typeBean.typeClass, typeBean.typeTitle);
+                if (typeBean.typeTitle.equals("WebView")) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", "https://vr.justeasy.cn/Pano/Vr/dealvr/id/3980435.html");
+                    ActivityUtils.init().start(mActivity, typeBean.typeClass, typeBean.typeTitle, bundle);
+                } else {
+                    ActivityUtils.init().start(mActivity, typeBean.typeClass, typeBean.typeTitle);
+                }
             }
         });
         mPresenter = new FuncPresenter(this);

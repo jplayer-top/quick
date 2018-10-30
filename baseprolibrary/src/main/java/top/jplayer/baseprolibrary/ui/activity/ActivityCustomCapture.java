@@ -42,7 +42,7 @@ public class ActivityCustomCapture extends CommonToolBarActivity {
         super.initAddView(rootView);
         toolRightVisible(mTvToolRight, "相册");
 //        mRootView.setBackgroundColor(color(R.color.trans));
-        tooColor(true, R.color.trans);
+        toolColor(true, R.color.trans);
         Observable.timer(100, TimeUnit.MILLISECONDS).subscribe(aLong -> refresh());
     }
 

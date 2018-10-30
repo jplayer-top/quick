@@ -3,7 +3,6 @@ package top.jplayer.baseprolibrary.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,10 +39,10 @@ public class WebViewActivity extends CommonToolBarActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        getWindow().setFormat(PixelFormat.TRANSLUCENT);
         pbWebBase = rootView.findViewById(R.id.pb_web_base);
         webBase = rootView.findViewById(R.id.web_base);
-        tooColor(true, R.color.trans);
+        toolColor(true, R.color.colorPrimary);
+        webPath = mBundle.getString("url");
         initData();// 初始化控件的数据及监听事件
     }
 
@@ -59,10 +58,9 @@ public class WebViewActivity extends CommonToolBarActivity {
 
     private void initData() {
         pbWebBase.setMax(100);//设置加载进度最大值
-//        webPath = getIntent().getStringExtra("URL");
-//        webPath = RxConstants.URL_BAIDU_SEARCH;//加载的URL
+
         if (webPath.equals("")) {
-            webPath = "http://www.baidu.com";
+            webPath = "https://github.com/oblivion0001";
         }
         WebSettings webSettings = webBase.getSettings();
         if (Build.VERSION.SDK_INT >= 19) {
