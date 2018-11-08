@@ -2,6 +2,9 @@ package top.jplayer.quick_test.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -37,6 +40,7 @@ import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.activity.ContactActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogCard;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.NumAnimUtil;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -180,6 +184,28 @@ public class ViewActivity extends CommonToolBarActivity {
             startActivity(intent);
             ActivityUtils.init().startOutActivity(this, "com.alibaba.android.rimet", "com.alibaba.android.rimet.biz.SplashActivity");
         });
+        String address = getConnectedWifiMacAddress(this);
+        LogUtil.str("-------WIFI mac地址----------" + address);
+    }
+
+    public static String getConnectedWifiMacAddress(Context context) {
+        String connectedWifiMacAddress = null;
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        List<ScanResult> wifiList;
+
+        if (wifiManager != null) {
+            wifiList = wifiManager.getScanResults();
+            WifiInfo info = wifiManager.getConnectionInfo();
+            if (wifiList != null && info != null) {
+                for (int i = 0; i < wifiList.size(); i++) {
+                    ScanResult result = wifiList.get(i);
+                    if (info.getBSSID().equals(result.BSSID)) {
+                        connectedWifiMacAddress = result.BSSID;
+                    }
+                }
+            }
+        }
+        return connectedWifiMacAddress;
     }
 
     private View getTextImageView(String s) {

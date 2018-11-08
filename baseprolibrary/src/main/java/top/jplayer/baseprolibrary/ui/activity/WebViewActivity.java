@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
@@ -23,12 +21,9 @@ import top.jplayer.baseprolibrary.utils.LogUtil;
 
 public class WebViewActivity extends CommonToolBarActivity {
 
-    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     ProgressBar pbWebBase;
     WebView webBase;
-    ImageView ivFinish;
     private String webPath = "";
-    private long mBackPressed;
 
     @Override
     public int initAddLayout() {
@@ -176,19 +171,45 @@ public class WebViewActivity extends CommonToolBarActivity {
 
     @Override
     public void onBackPressed() {
-
         if (webBase.canGoBack()) {
             webBase.goBack();
         } else {
-            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-                super.onBackPressed();
-                return;
-            } else {
-                Toast.makeText(getBaseContext(), "再次点击返回键退出", Toast.LENGTH_SHORT).show();
-            }
-            mBackPressed = System.currentTimeMillis();
+            super.onBackPressed();
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (webBase != null) {
+            webBase.onResume();
+            webBase.resumeTimers();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (webBase != null) {
+            webBase.onPause();
+            webBase.pauseTimers();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRootView.removeAllViews();
+        if (webBase != null) {
+            webBase.stopLoading();
+            webBase.clearHistory();
+            webBase.clearCache(true);
+            webBase.loadUrl("about:blank");
+            webBase.setVisibility(View.GONE);
+            webBase.destroy();
+            webBase = null;
+        }
+
+    }
 }
 
