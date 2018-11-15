@@ -80,8 +80,13 @@
         <service
             android:name=".alive.service.WhiteService"
             android:enabled="true"
-            android:exported="false"
-            android:process=":white"/>
+            android:process=":white"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="top.jplayer.baseprolibrary" />
+            </intent-filter>
+        </service>
+
         <!-- end -->
     </application>
 </manifest>

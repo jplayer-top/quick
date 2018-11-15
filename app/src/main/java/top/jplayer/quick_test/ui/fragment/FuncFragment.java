@@ -94,13 +94,30 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
         mPresenter = new FuncPresenter(this);
         mPresenter.requestFunc("111");
         showLoading();
+//        Observable.timer(2, TimeUnit.SECONDS)
+//                .subscribe(aLong -> {
+//            // 可以不用在 Activity 中增加任何处理，各 Activity 都可以响应
+//            try {
+//                Instrumentation inst = new Instrumentation();
+//                inst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+//                        MotionEvent.ACTION_DOWN, 1000, 1000, 0));
+//                inst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+//                        MotionEvent.ACTION_UP, 1000, 1000, 0));
+//                Log.d("点击位置", 1000 + "," + 1000);
+//            } catch (Exception e) {
+//                LogUtil.str("---+----" + e);
+//            }
+//        });
+
     }
+
 
     @Override
     public void refreshStart() {
         super.refreshStart();
         mPresenter.requestFunc("111");
     }
+
 
     @Override
     protected void initImmersionBar() {
@@ -123,6 +140,7 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
     @Override
     public void update(CustomObservable o, Object arg) {
         LogUtil.e(arg);
+
         HomeBean.ResponseBean.TypeBean bean = (HomeBean.ResponseBean.TypeBean) arg;
         ToastUtils.init().showQuickToast(bean.typeUrl);
     }

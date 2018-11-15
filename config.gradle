@@ -164,10 +164,12 @@ tasks {
                         list.add(it.substring(pre, aft))
                     }
                 }
-                File fileDel = new File(list.get(0))
-                println(">>>>>> 要删除的文件夹路径：" + fileDel.getAbsolutePath())
-                def isDel = fileDel.deleteDir()
-                println(">>>>>> 文件夹是否删除：" + isDel)
+                if (list.size() > 0) {
+                    File fileDel = new File(list.get(0))
+                    println(">>>>>> 要删除的文件夹路径：" + fileDel.getAbsolutePath())
+                    def isDel = fileDel.deleteDir()
+                    println(">>>>>> 文件夹是否删除：" + isDel)
+                }
             }
         }
     }
