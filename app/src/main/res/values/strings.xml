@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">quick_test</string>
+    <string name="app_name">模拟打卡</string>
+    <string name="text">点击按钮前往开启无障碍服务\n将应用后台执行即可，请勿关闭应用</string>
 </resources>
