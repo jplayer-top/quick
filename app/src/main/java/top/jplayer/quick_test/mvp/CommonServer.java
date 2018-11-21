@@ -49,7 +49,7 @@ public interface CommonServer {
     String VERSION = BaseInitApplication.urlHeardHost + ":" + KEY_VERSION;
 
     String KEY_TOP = "top";
-    String VALUE_TOP = "http://www.jplayer.top/";
+    String VALUE_TOP = "https://jplayer.top/";
     String TOP = BaseInitApplication.urlHeardHost + ":" + KEY_TOP;
 
     @Headers(TEST)
