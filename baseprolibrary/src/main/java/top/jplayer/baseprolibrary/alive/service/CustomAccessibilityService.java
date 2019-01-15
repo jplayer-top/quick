@@ -111,6 +111,7 @@ public class CustomAccessibilityService extends AccessibilityService {
             }
             CharSequence text = ac0.getText();
             if (text != null && "考勤打卡".equals(text)) {
+                LogUtil.str(  "----------what");
                 ac0.getParent().performAction(AccessibilityNodeInfo.ACTION_CLICK);
             }
         }
