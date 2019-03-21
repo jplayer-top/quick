@@ -92,7 +92,8 @@ ext {
     smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-11'
     //特殊头部，看情况添加
     smartrefresh_heard = 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-11'
-
+    //适配方案
+    autosize = 'me.jessyan:autosize:1.1.2'
     //自定义Toast
     toasty = 'com.github.GrenderG:Toasty:1.1.4'
     //流布局
@@ -146,6 +147,7 @@ ext {
                  polygon,
                  swipebacklayout,
                  ticker,
+                 autosize,
                  imagespickers]
     annotationProcessorLibs = [glideCompiler]
 
