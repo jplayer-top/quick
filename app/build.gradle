@@ -89,6 +89,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //greenDao
     implementation rootProject.ext.greendao.greendao
+
     //数据库实时查看
 //    buildTypes {
 //
