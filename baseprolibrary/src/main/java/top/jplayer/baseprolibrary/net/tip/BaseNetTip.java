@@ -19,7 +19,7 @@ public abstract class BaseNetTip implements INetTip {
 
     public BaseNetTip(Context cxt) {
         WeakReference<Context> weakReference = new WeakReference<>(cxt);
-        this.mContext = weakReference.get();
+        this.mContext = cxt;
     }
 
     @Override
