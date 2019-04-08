@@ -22,6 +22,7 @@ import skin.support.SkinCompatManager;
 import skin.support.app.SkinCardViewInflater;
 import skin.support.constraint.app.SkinConstraintViewInflater;
 import skin.support.design.app.SkinMaterialViewInflater;
+import top.jplayer.baseprolibrary.klog.KLog;
 import top.jplayer.baseprolibrary.listener.SampleApplicationLifecycleCallbacks;
 import top.jplayer.baseprolibrary.listener.observer.CustomObserver;
 import top.jplayer.baseprolibrary.net.retrofit.RetrofitManager;
@@ -88,6 +89,11 @@ public class BaseInitApplication {
 
     public Application getApplication() {
         return mWeakReference.get();
+    }
+
+    public BaseInitApplication klog(boolean b) {
+        KLog.init(b, "Obl");
+        return this;
     }
 
     /**

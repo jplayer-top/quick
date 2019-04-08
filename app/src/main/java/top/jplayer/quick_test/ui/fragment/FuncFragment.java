@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import skin.support.SkinCompatManager;
 import top.jplayer.baseprolibrary.BaseInitApplication;
+import top.jplayer.baseprolibrary.klog.KLog;
 import top.jplayer.baseprolibrary.listener.observer.CustomObservable;
 import top.jplayer.baseprolibrary.listener.observer.CustomObserver;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
@@ -108,6 +109,7 @@ public class FuncFragment extends SuperBaseFragment implements IContract.IView, 
 //                LogUtil.str("---+----" + e);
 //            }
 //        });
+        KLog.e("------------asdasdasda");
 
     }
 

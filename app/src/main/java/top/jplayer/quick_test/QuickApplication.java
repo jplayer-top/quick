@@ -27,7 +27,8 @@ public class QuickApplication extends MultiDexApplication {
                 .swipeBack()
                 .zxing()
                 .skin()
-                .fixFileProvide();
+                .fixFileProvide()
+                .klog(BuildConfig.DEBUG);
         QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
 
             @Override
@@ -43,7 +44,7 @@ public class QuickApplication extends MultiDexApplication {
             }
         };
         //x5内核初始化接口
-        QbSdk.initX5Environment(getApplicationContext(),  cb);
+        QbSdk.initX5Environment(getApplicationContext(), cb);
 
     }
 }
