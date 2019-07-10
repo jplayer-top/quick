@@ -62,7 +62,7 @@ public class EventActivity extends CommonToolBarActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         mReceiver = new CustomReceiver();
         registerReceiver(mReceiver, new IntentFilter(getPackageName() + ".custom"));
@@ -70,7 +70,7 @@ public class EventActivity extends CommonToolBarActivity {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         if (mReceiver != null) {
             unregisterReceiver(mReceiver);

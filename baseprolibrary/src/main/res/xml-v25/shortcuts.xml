@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/qcode"
+        android:shortcutDisabledMessage="@string/quick_shortcutDisabledMessage"
+        android:shortcutId="qcode"
+        android:shortcutLongLabel="@string/quick_shortcutLongLabel"
+        android:shortcutShortLabel="@string/quick_shortcutShortLabel">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="content://com.wmtc.wmt/qcode/shortcut"
+            android:targetClass="com.wmtc.wmt.appoint.activity.ActivityCustomCapture"
+            android:targetPackage="com.wmtc.wmt" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>

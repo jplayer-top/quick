@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
+import top.jplayer.baseprolibrary.BuildConfig;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
@@ -32,7 +33,7 @@ import top.jplayer.baseprolibrary.utils.ToastUtils;
  * github : https://github.com/oblivion0001
  */
 
-public abstract class DownloadByManager {
+public class DownloadByManager {
 
     private WeakReference<Activity> weakReference;
     private DownloadManager mDownloadManager;
@@ -66,10 +67,6 @@ public abstract class DownloadByManager {
     }
 
 
-    public void listener(OnUpdateListener mUpdateListener) {
-        this.mUpdateListener = mUpdateListener;
-    }
-
     public DownloadByManager download() {
 
         Uri uri = Uri.parse(verUrl);
@@ -79,7 +76,7 @@ public abstract class DownloadByManager {
         File apkFile = new File(weakReference.get().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), mApkName);
         if (check(apkFile)) return this;
         DownloadManager.Request req = new DownloadManager.Request(uri);
-         /*
+        /*
          * 设置允许使用的网络类型, 可选值:
          *     NETWORK_MOBILE:      移动网络
          *     NETWORK_WIFI:        WIFI网络
@@ -168,6 +165,7 @@ public abstract class DownloadByManager {
         if (mUpdateListener != null) {
             mUpdateListener.update(bytesAndStatus[0], bytesAndStatus[1]);
         }
+        onProgressListener(bytesAndStatus[0], bytesAndStatus[1]);
     }
 
     class DownloadChangeObserver extends ContentObserver {
@@ -197,12 +195,20 @@ public abstract class DownloadByManager {
                     long progress = intent.getLongExtra("progress", 0L);
                     long total = intent.getLongExtra("total", 0L);
                     onProgressListener(progress, total);
+                    if (mUpdateListener != null) {
+                        mUpdateListener.update((int) progress, (int) total);
+                    }
                 }
             }
         }
     }
 
-    public abstract void onProgressListener(long progress, long total);
+    public  void onProgressListener(long progress, long total){};
+
+    public void listener(OnUpdateListener mUpdateListener) {
+        this.mUpdateListener = mUpdateListener;
+    }
+
 
     public class DownloadReceiver extends BroadcastReceiver {
 
@@ -288,7 +294,7 @@ public abstract class DownloadByManager {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
         } else {//Android7.0之后获取uri要用contentProvider
-            uri = FileProvider.getUriForFile(context, "top.jplayer.baseprolibrary.fileprovider", apk);
+            uri = FileProvider.getUriForFile(context, BuildConfig.APPID + ".fileProvider", apk);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             intent.setDataAndType(uri, "application/vnd.android.package-archive");
         }
@@ -312,7 +318,7 @@ public abstract class DownloadByManager {
                 uri = Uri.fromFile(apkFile);
             } else { // Android 7.0 以上
                 File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), mApkName);
-                uri = FileProvider.getUriForFile(context, "top.jplayer.baseprolibrary.fileprovider", file);
+                uri = FileProvider.getUriForFile(context, BuildConfig.APPID + ".fileProvider", file);
                 intentInstall.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             }
             // 安装应用

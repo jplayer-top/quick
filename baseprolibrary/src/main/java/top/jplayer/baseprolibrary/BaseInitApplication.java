@@ -16,13 +16,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import cat.ereza.customactivityoncrash.activity.DefaultErrorActivity;
+import cat.ereza.customactivityoncrash.config.CaocConfig;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import okhttp3.Interceptor;
 import skin.support.SkinCompatManager;
 import skin.support.app.SkinCardViewInflater;
 import skin.support.constraint.app.SkinConstraintViewInflater;
 import skin.support.design.app.SkinMaterialViewInflater;
-import top.jplayer.baseprolibrary.klog.KLog;
 import top.jplayer.baseprolibrary.listener.SampleApplicationLifecycleCallbacks;
 import top.jplayer.baseprolibrary.listener.observer.CustomObserver;
 import top.jplayer.baseprolibrary.net.retrofit.RetrofitManager;
@@ -38,6 +39,7 @@ public class BaseInitApplication {
     private static BaseInitApplication mInit;
     public static WeakReference<Application> mWeakReference;
     public static Map<String, String> mUrlMap;
+    public static Map<String, String> mHeardMap;
     public static final String urlHeardHost = "url_header_host";
     public static final Long TIME_OUT = 30L;
     public static List<Activity> sActivityList;
@@ -46,6 +48,7 @@ public class BaseInitApplication {
     private BaseInitApplication(Application application) {
         mWeakReference = new WeakReference<>(application);
         mUrlMap = new ArrayMap<>();
+        mHeardMap = new ArrayMap<>();
         sActivityList = new LinkedList<>();
         mObserverMap = new ArrayMap<>();
     }
@@ -60,6 +63,20 @@ public class BaseInitApplication {
             }
         }
         return mInit;
+    }
+
+    public BaseInitApplication crash(boolean debug) {
+        CaocConfig.Builder.create()
+                .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
+                .enabled(true) //default: true
+                .showErrorDetails(debug) //default: true
+                .showRestartButton(true) //default: true
+                .logErrorOnRestart(false) //default: true
+                .trackActivities(true) //default: false
+                .errorActivity(DefaultErrorActivity.class)
+                .minTimeBetweenCrashesMs(2000) //default: 3000
+                .apply();
+        return this;
     }
 
     /**
@@ -89,11 +106,6 @@ public class BaseInitApplication {
 
     public Application getApplication() {
         return mWeakReference.get();
-    }
-
-    public BaseInitApplication klog(boolean b) {
-        KLog.init(b, "Obl");
-        return this;
     }
 
     /**

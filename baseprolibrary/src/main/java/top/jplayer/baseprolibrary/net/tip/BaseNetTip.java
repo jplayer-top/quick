@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.lang.ref.WeakReference;
 
+import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.R;
 
 /**

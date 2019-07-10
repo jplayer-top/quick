@@ -2,6 +2,7 @@ package top.jplayer.baseprolibrary.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -41,13 +42,33 @@ public class CameraUtil {
                 // 开启单选   （默认为多选）
                 .singleSelect()
                 .crop(1, 1, 200, 200)
+                .showCamera()
+                .filePath("/" + activity.getPackageName() + "/")
+                .requestCode(1)
+                .build();
+        ImageSelector.open(activity, imageConfig);   // 开启图片选择器
+    }
+
+    /**
+     * 打开相册
+     */
+    public void openSingalCamer4Fragment(Fragment fragment) {
+        ImageConfig imageConfig
+                = new ImageConfig.Builder(new GlideLoader())
+                .steepToolBarColor(fragment.getResources().getColor(R.color.colorPrimary))
+                .titleBgColor(fragment.getResources().getColor(R.color.colorPrimary))
+                .titleSubmitTextColor(fragment.getResources().getColor(R.color.white))
+                .titleTextColor(fragment.getResources().getColor(R.color.white))
+                // 开启单选   （默认为多选）
+                .singleSelect()
+                .crop(1, 1, 200, 200)
                 // 开启拍照功能 （默认关闭）
                 .showCamera()
                 // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
                 .filePath("/ImageSelector/Pictures")
                 .requestCode(1)
                 .build();
-        ImageSelector.open(activity, imageConfig);   // 开启图片选择器
+        ImageSelector.open(fragment,imageConfig);   // 开启图片选择器
     }
 
     /**
@@ -72,7 +93,7 @@ public class CameraUtil {
                 // 开启拍照功能 （默认关闭）
                 .showCamera()
                 // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
-                .filePath("/ImageSelector/Pictures")
+                .filePath("/" + activity.getPackageName() + "/")
                 .requestCode(code)
                 .build();
         ImageSelector.open(activity, imageConfig);   // 开启图片选择器
@@ -124,5 +145,24 @@ public class CameraUtil {
                     .apply(GlideUtils.init().options(com.jaiky.imagespickers.R.drawable.global_img_default))
                     .into(imageView);
         }
+    }
+
+    /**
+     * 打开图库选择照片
+     */
+    public void openCameraWithSize(Activity activity, int size) {
+        ImageConfig imageConfig
+                = new ImageConfig.Builder(new GlideLoader())
+                .steepToolBarColor(activity.getResources().getColor(R.color.colorPrimary))
+                .titleBgColor(activity.getResources().getColor(R.color.colorPrimary))
+                .titleSubmitTextColor(activity.getResources().getColor(R.color.white))
+                .titleTextColor(activity.getResources().getColor(R.color.white))
+                .mutiSelect()
+                .mutiSelectMaxSize(size)
+                .showCamera()
+                .filePath("/" + activity.getPackageName() + "/")
+                .requestCode(1)
+                .build();
+        ImageSelector.open(activity, imageConfig);   // 开启图片选择器
     }
 }

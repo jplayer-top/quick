@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,40 +10,48 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
         android:background="@color/white">
 
 
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="确认退出吗"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:gravity="center_vertical"
+            android:text="您确认退出吗"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tvSubTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:gravity="center_vertical"
             android:text="退出将无法接收到新消息"
             android:textSize="13sp"
-            app:layout_constraintTop_toTopOf="@id/tvTitle"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
 
         <Button
             android:id="@+id/btnSure"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/shape_left_bottom"
-            android:text="确认"
+            android:background="@color/colorPrimaryRed"
+            android:text="更新"
             android:textColor="@color/white"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintRight_toLeftOf="@id/btnCancel"
+            app:layout_constraintEnd_toStartOf="@id/btnCancel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSubTitle"/>
 
@@ -56,7 +63,7 @@
             android:background="@drawable/shape_right_bottom"
             android:text="取消"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/btnSure"
+            app:layout_constraintStart_toEndOf="@id/btnSure"
             app:layout_constraintTop_toBottomOf="@id/tvSubTitle"/>
 
     </android.support.constraint.ConstraintLayout>
@@ -64,6 +71,5 @@
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_launcher_round"/>
+        android:layout_gravity="center_horizontal"/>
 </android.support.v7.widget.CardView>

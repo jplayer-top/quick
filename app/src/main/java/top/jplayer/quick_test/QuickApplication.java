@@ -27,8 +27,7 @@ public class QuickApplication extends MultiDexApplication {
                 .swipeBack()
                 .zxing()
                 .skin()
-                .fixFileProvide()
-                .klog(BuildConfig.DEBUG);
+                .fixFileProvide();
         QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
 
             @Override

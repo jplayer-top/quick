@@ -1,8 +1,10 @@
 package top.jplayer.baseprolibrary.glide;
 
+import android.content.Context;
 import android.support.annotation.DrawableRes;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import top.jplayer.baseprolibrary.R;
 
@@ -43,5 +45,20 @@ public class GlideUtils {
     public GlideOptions optionsSkip(@DrawableRes int res) {
         return new GlideOptions().placeholder(res).error(res)
                 .skipMemoryCache(true);
+    }
+
+    public RequestOptions roundTransFrom(Context context, int size) {
+        return new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.placeholder)
+                .transform(new GlideRoundTransform(context, size))
+                .error(R.drawable.placeholder);
+    }
+
+    public RequestOptions roundTransFrom(Context context, int size, @DrawableRes int res) {
+        return new RequestOptions()
+                .placeholder(res)
+                .error(res)
+                .transform(new GlideRoundTransform(context, size));
     }
 }

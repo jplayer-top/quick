@@ -7,7 +7,7 @@
     app:srlEnablePreviewInEditMode="true"
     app:srlPrimaryColor="@color/white">
 
-    <com.scwang.smartrefresh.layout.header.bezierradar.RippleView
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -24,7 +24,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/whitesmoke"/>
+            android:background="@color/white"/>
     </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
 
     <com.scwang.smartrefresh.layout.footer.ClassicsFooter

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="side">20dp</dimen>
     <dimen name="generalTextViewSize">14sp</dimen>
     <dimen name="textSize_sidebar">10sp</dimen>
     <dimen name="large_textSize_sidebar">32sp</dimen>

@@ -12,18 +12,21 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Hashtable;
 
 import top.jplayer.baseprolibrary.BaseInitApplication;
 
@@ -37,6 +40,42 @@ import top.jplayer.baseprolibrary.BaseInitApplication;
 public class BitmapUtil {
     private static final String TAG = BitmapUtil.class.getSimpleName();
 
+
+    public static Bitmap getVideoThumb(String filePath) {
+        Bitmap bitmap = null;
+        LogUtil.e(filePath);
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        try {
+            if (filePath.startsWith("http://")
+                    || filePath.startsWith("https://")
+                    || filePath.startsWith("widevine://")) {
+                retriever.setDataSource(filePath, new Hashtable<>());
+            } else {
+                retriever.setDataSource(filePath);
+            }
+            bitmap = retriever.getFrameAtTime();
+        } catch (IllegalArgumentException ex) {
+            // Assume this is a corrupt video file
+            ex.printStackTrace();
+        } catch (RuntimeException ex) {
+            // Assume this is a corrupt video file.
+            ex.printStackTrace();
+        } finally {
+            try {
+                retriever.release();
+            } catch (RuntimeException ex) {
+                // Ignore failures while cleaning up.
+                ex.printStackTrace();
+            }
+        }
+
+        if (bitmap == null) {
+            return null;
+        }
+        byte[] bytes = compressByQuality(bitmap, 250 * 1024, true);
+        return byteToBitmap(bytes);
+    }
+
     /**
      * convert Bitmap to byte array
      */
@@ -44,6 +83,18 @@ public class BitmapUtil {
         ByteArrayOutputStream o = new ByteArrayOutputStream();
         b.compress(Bitmap.CompressFormat.PNG, 100, o);
         return o.toByteArray();
+    }
+
+    /**
+     * 使用View的缓存功能，截取指定区域的View
+     */
+    public static Bitmap screenShotView(View view) {
+        //开启缓存功能
+        view.setDrawingCacheEnabled(true);
+        //创建缓存
+        view.buildDrawingCache();
+        //获取缓存Bitmap
+        return Bitmap.createBitmap(view.getDrawingCache());
     }
 
     /**
@@ -154,6 +205,7 @@ public class BitmapUtil {
         bm = BitmapFactory.decodeFile(absolutePath, opt);
         return bm;
     }  //ab
+
     public static Bitmap createBitmapThumbnail(Bitmap bitMap, boolean needRecycle, int newHeight, int newWidth) {
         int width = bitMap.getWidth();
         int height = bitMap.getHeight();
@@ -168,6 +220,21 @@ public class BitmapUtil {
         if (needRecycle)
             bitMap.recycle();
         return newBitMap;
+    }
+
+    public static String saveBitmap(Bitmap bitmap) {
+        File file = new File(BaseInitApplication.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                "share.png");
+        saveBitmap(bitmap, file);
+        return file.getAbsolutePath();
+    }
+
+
+    public static String saveBitmap(String name, Bitmap bitmap) {
+        File file = new File(BaseInitApplication.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                name);
+        saveBitmap(bitmap, file);
+        return file.getAbsolutePath();
     }
 
     public static boolean saveBitmap(Bitmap bitmap, File file) {
@@ -284,23 +351,31 @@ public class BitmapUtil {
         baos.reset();
         return bytes;
     }
+
     /**
      * 压缩图片（质量压缩）
      */
     public static File compressImage(File filePre) {
-        Bitmap bitmap = BitmapUtil.adjustBitmap(filePre.getAbsolutePath());
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options = 100;
-        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
-            baos.reset();//重置baos即清空baos
-            options -= 10;//每次都减少10
-            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
-            long length = baos.toByteArray().length;
-        }
-        String filename = String.valueOf(System.currentTimeMillis());
-        File file = new File(Environment.getExternalStorageDirectory(), filename + ".png");
+        return compressImage(filePre, String.valueOf(System.currentTimeMillis()));
+    }
+
+    /**
+     * 压缩图片（质量压缩）
+     */
+    public static File compressImage(File filePre, String fileName) {
+        Bitmap bitmap = null;
+        File file = new File(Environment.getExternalStorageDirectory(), fileName + ".png");
         try {
+            bitmap = BitmapUtil.adjustBitmap(filePre.getAbsolutePath());
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+            int options = 100;
+            while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
+                baos.reset();//重置baos即清空baos
+                options -= 10;//每次都减少10
+                bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+                long length = baos.toByteArray().length;
+            }
             FileOutputStream fos = new FileOutputStream(file);
             try {
                 fos.write(baos.toByteArray());
@@ -309,12 +384,15 @@ public class BitmapUtil {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            ToastUtils.init().showQuickToast("图片加载失败，请稍后重试");
+        } finally {
+            recycleBitmap(bitmap);
         }
-        recycleBitmap(bitmap);
         return file;
     }
+
     public static void recycleBitmap(Bitmap... bitmaps) {
         if (bitmaps == null) {
             return;
@@ -375,6 +453,7 @@ public class BitmapUtil {
     public byte[] compressBitmapQuiklySmallTo(String filePath, int maxLenth) {
         return compressBitmapSmallTo(filePath, 480, 800, maxLenth);
     }
+
     /**
      * 将本地图片文件转换成可解码二维码的 Bitmap。为了避免图片太大，这里对图片进行了压缩。感谢 https://github.com/devilsen 提的 PR
      *

@@ -2,6 +2,9 @@ package top.jplayer.baseprolibrary;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -17,6 +20,40 @@ public class ExampleUnitTest {
             String s = String.format(Locale.CHINA, "<dimen name=\"dimen_%ddp\">%ddp</dimen>", i, i);
             System.out.println(s);
         }
+    }
+
+    @Test
+    public void getTime() {
+        String input = "12:20";
+        int iInput = Integer.parseInt(input.replace(":", ""));
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = iInput; i <= 2400; i += 10) {
+            String str;
+            if (i % 100 >= 60) {
+                continue;
+            }
+            if (i < 10) {
+                str = "00:0" + i;
+            } else if (i < 100) {
+                str = "00:" + i;
+            } else if (i < 1000) {
+                int i1 = i % 100;
+                if (i1 == 0) {
+                    str = "0" + i / 100 + ":0" + i1;
+                } else {
+                    str = "0" + i / 100 + ":" + i1;
+                }
+            } else {
+                int i1 = i % 100;
+                if (i1 == 0) {
+                    str = i / 100 + ":0" + i1;
+                } else {
+                    str = i / 100 + ":" + i1;
+                }
+            }
+            list.add(str);
+        }
+        System.out.println(list.toString());
     }
 
     @Test

@@ -15,7 +15,7 @@ android {
         }
         ndk {
             //APP的build.gradle设置支持的SO库架构
-            abiFilters 'armeabi-v7a', 'x86'
+            abiFilters 'armeabi-v7a'
         }
     }
 
@@ -43,24 +43,31 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-            assets.srcDirs = ['assets']
+            assets.srcDirs = ['assets', 'src/main/assets', 'src/main/assets/']
         }
     }
     buildTypes {
         def url = rootProject.ext.url
         def key_rong = rootProject.ext.key_rong
+        def android = rootProject.ext.android
         release {
             buildConfigField "String", "HOST", "\"${url["release"]}\""
+            buildConfigField("String", "APPID", "\"${android["applicationId"]}\"")
             minifyEnabled false // 开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: key_rong["release"], CHANNEL_NAME: "dev"]
+            manifestPlaceholders = [RONG_KEY: key_rong["release"],
+                                    CHANNEL_NAME: "dev",
+                                    PROVIDER_NAME: android["applicationId"]]
             signingConfig signingConfigs.config
         }
         debug {
             buildConfigField "String", "HOST", "\"${url["debug"]}\""
+            buildConfigField("String", "APPID", "\"${android["applicationId"]}\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: key_rong["debug"], CHANNEL_NAME: "dev"]
+            manifestPlaceholders = [RONG_KEY: key_rong["debug"],
+                                    CHANNEL_NAME: "dev",
+                                    PROVIDER_NAME: android["applicationId"]]
             signingConfig signingConfigs.config
         }
     }
@@ -74,8 +81,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     api rootProject.ext.supportLibs
     //网络请求
     api rootProject.ext.networkLibs
@@ -104,5 +111,6 @@ dependencies {
     annotationProcessor rootProject.ext.annotationProcessorLibs
     implementation files('libs/jpinyin-1.0.jar')
     api files('libs/tbs.jar')
-}
 
+
+}

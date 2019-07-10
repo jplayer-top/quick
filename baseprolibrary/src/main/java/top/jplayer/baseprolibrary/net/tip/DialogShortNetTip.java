@@ -1,5 +1,6 @@
 package top.jplayer.baseprolibrary.net.tip;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -58,9 +59,10 @@ public class DialogShortNetTip extends BaseCustomDialog {
     @Override
     public void show() {
         super.show();
-        dismissDelay(1500);
+        dismissDelay(1000);
     }
 
+    @SuppressLint("CheckResult")
     private void dismissDelay(int seconds) {
         Observable.timer(seconds, TimeUnit.MILLISECONDS).subscribe(aLong -> {
             if (isShowing()) {

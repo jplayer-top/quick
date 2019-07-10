@@ -1,8 +1,6 @@
-package top.jplayer.baseprolibrary.klog;
+package top.jplayer.baseprolibrary.utils.klog;
 
 import android.util.Log;
-
-
 
 import java.io.StringReader;
 import java.io.StringWriter;

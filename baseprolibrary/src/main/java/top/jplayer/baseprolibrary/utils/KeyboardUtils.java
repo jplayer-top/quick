@@ -2,8 +2,17 @@ package top.jplayer.baseprolibrary.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.support.annotation.NonNull;
+import android.view.Display;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -31,6 +40,31 @@ public class KeyboardUtils {
             mKeyboardUtils = new KeyboardUtils();
         }
         return mKeyboardUtils;
+    }
+    /**
+     * 判断虚拟导航栏是否显示
+     *
+     * @param context 上下文对象
+     * @param window  当前窗口
+     * @return true(显示虚拟导航栏)，false(不显示或不支持虚拟导航栏)
+     */
+    public static boolean checkNavigationBarShow(@NonNull Context context, @NonNull Window window) {
+        boolean show;
+        Display display = window.getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getRealSize(point);
+
+        View decorView = window.getDecorView();
+        Configuration conf = context.getResources().getConfiguration();
+        if (Configuration.ORIENTATION_LANDSCAPE == conf.orientation) {
+            View contentView = decorView.findViewById(android.R.id.content);
+            show = (point.x != contentView.getWidth());
+        } else {
+            Rect rect = new Rect();
+            decorView.getWindowVisibleDisplayFrame(rect);
+            show = (rect.bottom != point.y);
+        }
+        return show;
     }
 
     /**

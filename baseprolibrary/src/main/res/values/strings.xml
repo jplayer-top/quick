@@ -7,5 +7,8 @@
     <string name="empty_view_hint">暂时木有内容呀~~</string>
     <string name="digits">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
     <string name="save">保存</string>
-    <string name="accessibility">模拟打卡</string>
+    <string name="accessibility">唯美淘</string>
+    <string name="quick_shortcutDisabledMessage">桌面快捷方式被禁用</string>
+    <string name="quick_shortcutLongLabel">领取今日抵扣红包，快捷线下支付</string>
+    <string name="quick_shortcutShortLabel">扫一扫</string>
 </resources>

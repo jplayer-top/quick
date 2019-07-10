@@ -44,6 +44,10 @@ public class DialogEditBottom extends BaseCustomDialog {
         Observable.interval(300, TimeUnit.MILLISECONDS).subscribe(aLong -> super.cancel());
     }
 
+    public void setInputHint(String hint) {
+        mEdInput.setHint(hint);
+    }
+
     @Override
     public void setSureListener(SureListener listener) {
         listener.onSure(mEdInput);

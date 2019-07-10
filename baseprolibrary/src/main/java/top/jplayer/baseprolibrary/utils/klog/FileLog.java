@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.klog;
+package top.jplayer.baseprolibrary.utils.klog;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

@@ -5,31 +5,33 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.ArrayMap;
 
+import java.util.LinkedHashMap;
+
 /**
  * Created by Obl on 2018/1/23.
  * top.jplayer.baseprolibrary.ui.adapter
  */
 
 public class BaseViewPagerFragmentAdapter<T extends String, R extends Fragment> extends FragmentPagerAdapter {
-    protected ArrayMap<T, R> mTRMap;
+    public LinkedHashMap<T, R> mLinkedHashMap;
 
-    public BaseViewPagerFragmentAdapter(FragmentManager fm, ArrayMap<T, R> map) {
+    public BaseViewPagerFragmentAdapter(FragmentManager fm, LinkedHashMap<T, R> map) {
         super(fm);
-        this.mTRMap = map;
+        this.mLinkedHashMap = map;
     }
 
     @Override
     public int getCount() {
-        return mTRMap.size();
+        return mLinkedHashMap.size();
     }
 
     @Override
     public Fragment getItem(int position) {
-        return mTRMap.valueAt(position);
+        return (Fragment) mLinkedHashMap.values().toArray()[position];
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTRMap.keyAt(position);
+        return (CharSequence) mLinkedHashMap.keySet().toArray()[position];
     }
 }

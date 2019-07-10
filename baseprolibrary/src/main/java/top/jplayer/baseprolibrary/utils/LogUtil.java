@@ -4,6 +4,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.util.Arrays;
+import java.util.List;
+
 import top.jplayer.baseprolibrary.BuildConfig;
 
 /**
@@ -30,6 +33,21 @@ public class LogUtil {
                 return;
             }
             Log.e("Obl-Log", new Gson().toJson(o));
+        }
+    }
+
+    public static void e(Object... o) {
+
+        if (BuildConfig.DEBUG) {
+            List<Object> objects = Arrays.asList(o);
+            Log.e("Obl-Log", new Gson().toJson(objects));
+        }
+    }
+
+    public static void o(Object o) {
+
+        if (BuildConfig.DEBUG) {
+            Log.e("Obl-Log", o.toString());
         }
     }
 

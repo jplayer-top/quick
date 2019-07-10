@@ -1,9 +1,9 @@
 ext {
 
     android = [
-            applicationId    : "top.jplayer.quick_test1",
+            applicationId    : "top.jplayer.quick_test",
             compileSdkVersion: 28,
-            buildToolsVersion: "28.0.3",
+            buildToolsVersion: "28.0.0",
             minSdkVersion    : 19,
             targetSdkVersion : 28,
             versionCode      : 1,
@@ -13,14 +13,14 @@ ext {
     dependVersion = [
             androidSupportSdkVersion: "28.0.0",
             retrofitSdkVersion      : "2.3.0",
-            glideSdkVersion         : "4.0.0",
+            glideSdkVersion         : "4.3.1",
             rxJava                  : "2.1.5",
             rxAndroid               : "2.0.1"
     ]
 
     url = [
-            "debug"  : "https://app.modiwu.com/",
-            "release": "https://app.modiwu.com/",
+            "debug"  : "http://192.168.1.200:8804/",
+            "release": "https://app.weimeitao.net/",
     ]
 
     key_store = [
@@ -78,6 +78,7 @@ ext {
     ]
     //RecyclerView 适配器
     baserecyclerviewadapterhelper = 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.3'
+    itemdecoration = 'com.yanyusong.y_divideritemdecoration:y_divideritemdecoration:2.0'
     //V-layout 淘宝多状态布局
     v_layout = 'com.alibaba.android:vlayout:1.2.9@aar'
     //ViewPager Bga Viewpager
@@ -98,12 +99,21 @@ ext {
     toasty = 'com.github.GrenderG:Toasty:1.1.4'
     //流布局
     flowlayout = 'com.zhy:flowlayout-lib:1.0.3'
+    //侧滑删除
+    easySwipeMenuLayout = 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
+    //FlycoTabLayout
+    tablayout = 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    // 自定义Crash
+    customactivityoncrash = 'cat.ereza:customactivityoncrash:2.2.0'
     // 加载
     spinkit = 'com.github.ybq:Android-SpinKit:1.1.0'
     //PickerView
     pickerview = 'com.contrarywind:Android-PickerView:3.2.7'
     //权限申请
     permission = 'com.yanzhenjie:permission:2.0.0-rc4'
+
+    YcShareElement = 'com.github.yellowcath:YcShareElement:1.3.1'
+
     //二维码
     qcode = 'cn.yipianfengye.android:zxing-library:2.2'
     //图片选择器
@@ -113,7 +123,7 @@ ext {
     //数据库 实时增删改查
     debugDB = 'com.amitshekhar.android:debug-db:1.0.4'
     // 字体工具 ticker
-    ticker = 'com.robinhood.ticker:ticker:2.0.0'
+    ticker = 'com.robinhood.ticker:ticker:2.0.1'
     //仿微信滑动返回
     swipebacklayout = 'cn.bingoogolapple:bga-swipebacklayout:1.1.8@aar'
     //毛玻璃效果
@@ -137,6 +147,7 @@ ext {
                  glide,
                  smartrefresh,
                  smartrefresh_heard,
+                 itemdecoration,
                  viewanimator,
                  toasty,
                  pickerview,
@@ -144,12 +155,16 @@ ext {
                  permission,
                  spinkit,
                  qcode,
+                 tablayout,
                  polygon,
                  swipebacklayout,
                  ticker,
                  autosize,
-                 imagespickers]
+                 customactivityoncrash,
+                 imagespickers,
+                 easySwipeMenuLayout]
     annotationProcessorLibs = [glideCompiler]
+
 
 }
 

@@ -144,14 +144,14 @@ public class UpdateActivity extends CommonToolBarActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         if (mDownloadByManager != null)
             mDownloadByManager.onResume();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         if (mDownloadByManager != null)
             mDownloadByManager.onPause();

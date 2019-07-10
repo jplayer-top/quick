@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 
 import top.jplayer.baseprolibrary.R;
+import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 
@@ -26,7 +27,7 @@ import top.jplayer.baseprolibrary.utils.StringUtils;
  * d
  */
 
-public abstract class BaseCustomDialog extends AlertDialog {
+public abstract class BaseCustomDialog extends AlertDialog implements IContract.IView {
 
     public WeakReference<Context> mWeakReference;
     public View mContentView;
@@ -68,7 +69,7 @@ public abstract class BaseCustomDialog extends AlertDialog {
     }
 
     public void bindText(String title, int id) {
-        if (StringUtils.init().isEmpty(title)) {
+        if (StringUtils.isEmpty(title)) {
             throw new RuntimeException("文本数据 不能为空");
         }
         TextView tv = mContentView.findViewById(id);
@@ -124,5 +125,21 @@ public abstract class BaseCustomDialog extends AlertDialog {
     @Override
     public void show() {
         super.show();
+    }
+
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
     }
 }

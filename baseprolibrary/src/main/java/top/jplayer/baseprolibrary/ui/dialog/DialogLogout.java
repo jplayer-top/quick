@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.View;
 
 import top.jplayer.baseprolibrary.R;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
 
 /**
@@ -14,13 +15,16 @@ import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
 
 public class DialogLogout extends BaseCustomDialog {
 
+    private View mCancel;
+
     public DialogLogout(Context context) {
         super(context);
     }
 
     @Override
     protected void initView(View view) {
-        view.findViewById(R.id.btnCancel).setOnClickListener(v -> cancel());
+        mCancel = view.findViewById(R.id.btnCancel);
+        mCancel.setOnClickListener(v -> cancel());
     }
 
     public DialogLogout setTitle(String title) {
@@ -31,6 +35,22 @@ public class DialogLogout extends BaseCustomDialog {
     public DialogLogout setSubTitle(String title) {
         bindText(title, R.id.tvSubTitle);
         return this;
+    }
+
+    @Override
+    public void setCanceledOnTouchOutside(boolean cancel) {
+        super.setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    public void setCancelable(boolean flag) {
+        super.setCancelable(false);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        LogUtil.e("不让你点");
     }
 
     @Override
@@ -51,5 +71,10 @@ public class DialogLogout extends BaseCustomDialog {
     @Override
     public int initLayout() {
         return R.layout.dialog_logout;
+    }
+
+    public DialogLogout setForce(boolean force) {
+        mCancel.setVisibility(force ? View.GONE : View.VISIBLE);
+        return this;
     }
 }

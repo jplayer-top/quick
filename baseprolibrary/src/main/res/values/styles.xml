@@ -16,11 +16,10 @@
         <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
         <item name="toolbarStyle">@style/Obl.AppBarOverlay</item>
     </style>
-    <!--Animation.Translucent 自定义Activity开启关闭样式-->
-    <!--Animation.Activity 系统定义Activity开启关闭样式-->
-    <style name="Animation.Activity.Translucent.Style" parent="@android:style/Animation.Translucent">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+
+    <style name="Animation.Activity.Translucent.Style" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right</item>
     </style>
 
     <style name="Obl.AppBarOverlay" parent="Widget.AppCompat.Toolbar">
@@ -29,24 +28,29 @@
     </style>
 
     <style name="OblAppTheme.Splash" parent="OblAppTheme">
-        <!--<item name="android:windowIsTranslucent">false</item>-->
-        <!--<item name="android:windowDisablePreview">true</item>-->
-        <!--<item name="android:windowBackground">@mipmap/imageselector_photo</item>   //闪屏页图片-->
         <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
     </style>
+    <!--避免多次点击，透明到可以看到桌面-->
+    <style name="OblAppTheme.Main" parent="OblAppTheme">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
 
-    <!--<style name="FadeAnimationStyle" parent="@android:style/Animation.Activity">-->
-    <!--<item name="android:activityOpenEnterAnimation">@anim/fade_in</item>-->
-    <!--<item name="android:activityOpenExitAnimation">@anim/fade_out</item>-->
-    <!--<item name="android:activityCloseEnterAnimation">@anim/fade_in</item>-->
-    <!--<item name="android:activityCloseExitAnimation">@anim/fade_out</item>-->
-    <!--</style>-->
+    <style name="OblAppTheme.BottomTop" parent="OblAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/trans</item>
+        <item name="android:windowAnimationStyle">@style/BTAnimationStyle</item>
+    </style>
 
-    <style name="FadeAnimationStyle" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
-        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+    <style name="FadeAnimationStyle" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="BTAnimationStyle" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/bt_in</item>
+        <item name="android:windowExitAnimation">@anim/bt_out</item>
+
     </style>
     <!--Activity 转场动画预设-->
     <style name="noAnimTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -57,6 +61,7 @@
     </style>
 
     <style name="OblAppTheme.TextView">
+        <item name="android:textColorHint">@color/color999</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorBlackGold</item>
         <!--字母 true 全大写-->

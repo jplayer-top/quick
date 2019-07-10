@@ -630,6 +630,7 @@ public class DateUtils {
     public static long dateToStamp(String s) {
         try {
             String res;
+
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
             Date date = null;
             date = simpleDateFormat.parse(s);

@@ -1,5 +1,6 @@
 package top.jplayer.baseprolibrary.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
@@ -119,6 +120,7 @@ public class FeedBackUtil {
      * @param integers
      * @return
      */
+    @SuppressLint("CheckResult")
     public List<Integer> loadSoundPool(@RawRes List<Integer> integers) {
         List<Integer> soundIdList = new ArrayList<>();
         sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
@@ -129,6 +131,7 @@ public class FeedBackUtil {
         return soundIdList;
     }
 
+    @SuppressLint("CheckResult")
     public List<Integer> playSoundPool(List<Integer> integers) {
         List<Integer> streamIdList = new ArrayList<>();
         Observable.fromIterable(integers).subscribe(integer -> {

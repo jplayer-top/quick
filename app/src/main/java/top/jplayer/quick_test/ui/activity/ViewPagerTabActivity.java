@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.util.ArrayMap;
 import android.widget.FrameLayout;
 
+import java.util.LinkedHashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -39,7 +41,7 @@ public class ViewPagerTabActivity extends CommonToolBarActivity {
         super.initAddView(rootView);
         mBind = ButterKnife.bind(this, rootView);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-        ArrayMap<String, Fragment> map = new ArrayMap<>();
+        LinkedHashMap<String, Fragment> map = new LinkedHashMap<>();
         map.put("待付款", new TestFragment());
         map.put("已付款", new TestFragment());
         map.put("已完成", new TestFragment());

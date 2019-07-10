@@ -7,55 +7,63 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import com.tencent.smtt.sdk.CookieManager;
+import com.tencent.smtt.sdk.CookieSyncManager;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 import top.jplayer.baseprolibrary.R;
+import top.jplayer.baseprolibrary.listener.observer.CustomObservable;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.StringUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
-public class WebViewActivity extends CommonToolBarActivity {
+public class WebViewActivity extends SuperBaseActivity {
 
     ProgressBar pbWebBase;
     WebView webBase;
     private String webPath = "";
+    private ViewGroup mRootView;
+    private CustomObservable mObservable;
 
     @Override
-    public int initAddLayout() {
+    protected int initRootLayout() {
         return R.layout.activity_web;
     }
 
     @Override
-    public void initAddView(FrameLayout rootView) {
-        super.initAddView(rootView);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        pbWebBase = rootView.findViewById(R.id.pb_web_base);
-        webBase = rootView.findViewById(R.id.web_base);
-        toolColor(true, R.color.colorPrimary);
-        webPath = mBundle.getString("url");
-        initData();// 初始化控件的数据及监听事件
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.keyboardEnable(true).init();
     }
 
     @Override
-    public void toolLeftBtn(View v) {
-        super.toolLeftBtn(v);
-        if (webBase.canGoBack()) {
-            webBase.goBack();
-        } else {
-            finish();
-        }
+    public void initRootData(View rootView) {
+        super.initRootData(rootView);
+        mRootView = (ViewGroup) rootView;
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        pbWebBase = rootView.findViewById(R.id.pb_web_base);
+        webBase = rootView.findViewById(R.id.web_base);
+        rootView.findViewById(R.id.tvBack).setOnClickListener(v -> finish());
+        webPath = mBundle.getString("url");
+        initData();// 初始化控件的数据及监听事件
+        mObservable = new CustomObservable();
+        mObservable.addObserver("func");
     }
 
     private void initData() {
         pbWebBase.setMax(100);//设置加载进度最大值
 
         if (webPath.equals("")) {
-            webPath = "https://github.com/oblivion0001";
+            webPath = "";
+            ToastUtils.init().showInfoToast(mActivity, "外部链接错误");
+            finish();
         }
         WebSettings webSettings = webBase.getSettings();
         if (Build.VERSION.SDK_INT >= 19) {
@@ -79,7 +87,6 @@ public class WebViewActivity extends CommonToolBarActivity {
    /*     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }*/
-
 
         // setMediaPlaybackRequiresUserGesture(boolean require) //是否需要用户手势来播放Media，默认true
 
@@ -106,7 +113,7 @@ public class WebViewActivity extends CommonToolBarActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                mTvToolTitle.setText(title);
+//                mTvToolTitle.setText(title);
             }
 
             @Override
@@ -158,16 +165,34 @@ public class WebViewActivity extends CommonToolBarActivity {
             intent.setData(Uri.parse(paramAnonymousString1));
             startActivity(intent);
         });
-
+        syncCookie();
         webBase.loadUrl(webPath);
         LogUtil.e("帮助类完整连接" + webPath);
 //        webBase.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,webBase.getHeight()));
+    }
+
+    public void syncCookie() {
+        if (mBundle != null) {
+            String cookie = mBundle.getString("cookie");
+            if (StringUtils.isNotBlank(cookie)) {
+                CookieManager cookieManager = CookieManager.getInstance();
+                String url = "http://wx.weimeitao.net";
+                cookieManager.setCookie(url, cookie);
+                String newCookie = cookieManager.getCookie(url);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    CookieSyncManager cookieSyncManager = CookieSyncManager.createInstance(mActivity);
+                    cookieSyncManager.sync();
+                }
+                LogUtil.e(newCookie);
+            }
+        }
     }
 
     protected void onSaveInstanceState(Bundle paramBundle) {
         super.onSaveInstanceState(paramBundle);
         paramBundle.putString("url", webBase.getUrl());
     }
+
 
     @Override
     public void onBackPressed() {
@@ -179,7 +204,7 @@ public class WebViewActivity extends CommonToolBarActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         if (webBase != null) {
             webBase.onResume();
@@ -188,7 +213,7 @@ public class WebViewActivity extends CommonToolBarActivity {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         if (webBase != null) {
             webBase.onPause();
@@ -209,7 +234,10 @@ public class WebViewActivity extends CommonToolBarActivity {
             webBase.destroy();
             webBase = null;
         }
-
+        if (mObservable != null) {
+            mObservable.change("destory");
+            mObservable.deleteObservers();
+        }
     }
 }
 

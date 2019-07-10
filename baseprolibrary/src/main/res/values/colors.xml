@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#229f83</color>
+    <color name="colorPrimaryRed">#FF5B61</color>
     <color name="colorPrimary_night">#313335</color>
     <color name="colorPrimary_orange">#ffa500</color>
 
@@ -44,7 +45,7 @@
     <color name="slategrey">#708090</color><!--灰石色 -->
     <color name="lightslategrey">#778899</color><!--亮蓝灰 -->
     <color name="darkslategrey">#2f4f4f</color><!--暗瓦灰色 -->
-    <color name="silver">#c0c0c0</color><!--银色 -->
+    <color name="silver">#f6f6f6</color><!--银色 -->
 
     <color name="red">#d81e06</color><!--红色 -->
     <color name="darkred">#8b0000</color><!--暗红色 -->
@@ -172,4 +173,18 @@
     <color name="color999">#999</color><!--中粉紫色 -->
     <color name="colorTran666">#55666666</color>
     <color name="color55grey">#ff424242</color>
+
+
+    <color name="color222222">#222222</color>
+    <color name="color666666">#666666</color>
+    <color name="color999999">#999999</color>
+    <color name="line">#f3f5f7</color>
+    <color name="them_green">#368900</color>
+    <color name="bg_gay">#D6D6D6</color>
+
+    <color name="color000000">#000000</color>
+    <color name="them_pink">#FF5B61</color>
+    <color name="new_lin">#F0F0F0</color>
+
+
 </resources>

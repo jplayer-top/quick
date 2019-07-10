@@ -1,5 +1,6 @@
 package top.jplayer.baseprolibrary.net.retrofit;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
@@ -19,6 +20,7 @@ import top.jplayer.baseprolibrary.net.cookie.CookieJarImpl;
 import top.jplayer.baseprolibrary.net.cookie.OKhttpCookieChange;
 import top.jplayer.baseprolibrary.net.interceptor.CommentHearderInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.CommentQueryInterceptor;
+import top.jplayer.baseprolibrary.net.interceptor.CookieInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.JsonFixInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.LoggerInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.ProgressRequestInterceptor;
@@ -26,6 +28,8 @@ import top.jplayer.baseprolibrary.net.interceptor.ProgressResponseInterceptor;
 import top.jplayer.baseprolibrary.net.interceptor.ResetUrlInterceptor;
 import top.jplayer.baseprolibrary.utils.GsonUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.klog.KLog;
+import top.jplayer.baseprolibrary.utils.klog.KLogUtil;
 
 /**
  * Created by Obl on 2018/1/12.
@@ -77,6 +81,7 @@ public class RetrofitManager {
         return this;
     }
 
+    @SuppressLint("CheckResult")
     @NonNull
     public RetrofitManager client(Context context, Long timeOut, List<Interceptor> interceptors) {
         mBuilder = new OkHttpClient.Builder().connectTimeout(timeOut, TimeUnit.SECONDS)
@@ -98,10 +103,11 @@ public class RetrofitManager {
         List<Interceptor> list = new ArrayList<>();
         list.add(new CommentQueryInterceptor());
         list.add(new CommentHearderInterceptor());
-        list.add(new LoggerInterceptor(LogUtil::net, BuildConfig.DEBUG));
+        list.add(new LoggerInterceptor(KLog::e, BuildConfig.DEBUG));
         list.add(new ProgressRequestInterceptor());
         list.add(new JsonFixInterceptor());
         list.add(new ResetUrlInterceptor());
+        list.add(new CookieInterceptor());
         list.add(new ProgressResponseInterceptor());
         return list;
     }

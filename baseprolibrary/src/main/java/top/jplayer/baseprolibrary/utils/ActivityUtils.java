@@ -2,6 +2,7 @@ package top.jplayer.baseprolibrary.utils;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -90,6 +91,20 @@ public class ActivityUtils {
         activity.startActivity(i);
     }
 
+    public void start(Activity activity, Class tClass, Bundle bundle) {
+        Intent i = new Intent(activity, tClass);
+        if (bundle != null) i.putExtra("bundle", bundle);
+        activity.startActivity(i);
+    }
+
+    public void startWithTask(Context context, Class tClass, String title, Bundle bundle) {
+        Intent i = new Intent(context, tClass);
+        if (title != null) i.putExtra("title", title);
+        if (bundle != null) i.putExtra("bundle", bundle);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
+
     /**
      * 融云 聊天开启
      *
@@ -154,5 +169,11 @@ public class ActivityUtils {
      */
     public void startForResult(Activity activity, Class tClass) {
         startForResult(activity, tClass, null, null, 1);
+    }
+
+    public void startForResult(Activity activity, Class tClass, Bundle bundle, int requestCode) {
+        Intent i = new Intent(activity, tClass);
+        if (bundle != null) i.putExtra("bundle", bundle);
+        activity.startActivityForResult(i, requestCode);
     }
 }

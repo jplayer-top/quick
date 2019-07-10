@@ -1,6 +1,8 @@
 package top.jplayer.baseprolibrary.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -22,7 +24,9 @@ import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.utils.KeyboardUtils;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
@@ -44,15 +48,32 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
 
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {
+        initPreCreate();
         super.onCreate(savedInstanceState);
+        mActivity = this;
         initRootBundle(savedInstanceState);
         superRootView = initRootView();
-        mActivity = this;
         setContentView(superRootView);
         initRootData(superRootView);
         initInject(superRootView);
         initImmersionBar();
         initSaveInstanceState(savedInstanceState);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+    public void initPreCreate() {
+        // todo 8.0 问题 不适配 screenOrientation 与 windowIsTranslucent 公用
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
 
     protected void initSaveInstanceState(@Nullable Bundle savedInstanceState) {
@@ -163,12 +184,15 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
         // 设置触发释放后自动滑动返回的阈值，默认值为 0.3f
         mSwipeBackHelper.setSwipeBackThreshold(0.3f);
         // 设置底部导航条是否悬浮在内容上，默认值为 false
-        mSwipeBackHelper.setIsNavigationBarOverlap(false);
+        boolean navigationBarOverlap = KeyboardUtils.checkNavigationBarShow(mActivity, getWindow());
+        LogUtil.e("--------------navigationBarOverlap-----------------------" + navigationBarOverlap);
+        mSwipeBackHelper.setIsNavigationBarOverlap(navigationBarOverlap);
     }
 
     private int doubleBack = 0;
     public boolean isOpenDoubleBack = false;
 
+    @SuppressLint("CheckResult")
     @Override
     public void onBackPressed() {
         // 正在滑动返回的时候取消返回按钮事件
@@ -176,12 +200,15 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
             return;
         } else {
             if (isOpenDoubleBack) {
-                if (doubleBack > 1) {
+                if (doubleBack >= 1) {
                     super.onBackPressed();
                 } else {
                     ToastUtils.init().showQuickToast("再按一次退出应用");
+                    ++doubleBack;
                 }
-                Observable.timer(500, TimeUnit.MICROSECONDS).subscribe(aLong -> ++doubleBack);
+                Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
+                    doubleBack = 0;
+                });
             } else {
                 super.onBackPressed();
             }
@@ -217,10 +244,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
      */
     @Override
     public boolean isSupportSwipeBack() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // TODO: 2018/7/27  : 8.0 问题 不适配 screenOrientation 与 windowIsTranslucent 公用
-            return false;
-        }
+
         return true;
     }
 
@@ -259,7 +283,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
     /**
      * 是否检查点击空白处关闭软键盘
      */
-    protected boolean isCheckKeyboard = true;
+    protected boolean isCheckKeyboard = false;
 
     /**
      * 点击空白处关闭软键盘

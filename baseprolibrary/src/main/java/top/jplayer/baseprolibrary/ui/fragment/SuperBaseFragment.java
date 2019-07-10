@@ -158,4 +158,5 @@ public abstract class SuperBaseFragment extends Fragment implements IContract.IV
             mSmartRefreshLayout.finishRefresh();
         }
     }
+
 }
